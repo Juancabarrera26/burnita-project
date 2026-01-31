@@ -1,7 +1,7 @@
 /**
- * Newsletter Component - Burnita Shop
- * Design: Salmon background with email subscription
- * Features: Email input, subscribe button, legal text
+ * Newsletter Component - BURNITA
+ * Brandbook: Fondo Crema Vitrina, CTA Guayaba Pop
+ * Tipografía: Manrope para títulos, Inter para texto
  */
 
 import { useState } from "react";
@@ -21,7 +21,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="newsletter" className="py-20 md:py-28 bg-salmon">
+    <section id="newsletter" className="py-20 md:py-28 bg-crema">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -30,12 +30,15 @@ export default function Newsletter() {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mx-auto text-center"
         >
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-brown-dark italic mb-4">
-            Join the Inner Circle
+          {/* Title - Manrope */}
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal tracking-brand-tight mb-4">
+            Únete al Círculo
           </h2>
-          <p className="font-sans text-base md:text-lg text-brown-dark/70 mb-8 max-w-lg mx-auto">
-            Subscribe to receive updates, access to exclusive deals, and more.
-            Plus, get 10% off your first order when you sign up.
+          
+          {/* Description - Inter */}
+          <p className="font-body text-base md:text-lg text-charcoal/70 mb-8 max-w-lg mx-auto">
+            Suscríbete para recibir actualizaciones, acceso a ofertas exclusivas y más.
+            Además, obtén un 10% de descuento en tu primer pedido.
           </p>
 
           {/* Subscription Form */}
@@ -44,27 +47,29 @@ export default function Newsletter() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your email address"
-              className="flex-1 px-5 py-3 rounded-full border-2 border-brown-dark/20 bg-cream/50 font-sans text-brown-dark placeholder:text-brown-dark/40 focus:outline-none focus:border-gold transition-colors"
+              placeholder="Tu correo electrónico"
+              className="flex-1 px-5 py-3 rounded-full border-2 border-charcoal/20 bg-white font-body text-charcoal placeholder:text-charcoal/40 focus:outline-none focus:border-guayaba transition-colors"
               required
             />
+            {/* CTA - Guayaba Pop */}
             <Button
               type="submit"
               size="lg"
-              className="bg-cream text-brown-dark hover:bg-white font-sans font-medium rounded-full px-8 shadow-lg hover:shadow-xl transition-all"
+              className="bg-guayaba text-white hover:bg-guayaba/90 font-body font-medium rounded-full px-8 shadow-lg hover:shadow-xl transition-all"
             >
-              Subscribe
+              Suscribirse
             </Button>
           </form>
 
-          <p className="font-sans text-xs text-brown-dark/50">
-            By subscribing you agree to our{" "}
-            <a href="#" className="underline hover:text-brown-dark transition-colors">
-              Terms & Conditions
+          {/* Legal text - Inter */}
+          <p className="font-body text-xs text-charcoal/50">
+            Al suscribirte aceptas nuestros{" "}
+            <a href="#" className="underline hover:text-charcoal transition-colors">
+              Términos y Condiciones
             </a>{" "}
-            and{" "}
-            <a href="#" className="underline hover:text-brown-dark transition-colors">
-              Privacy Policy
+            y{" "}
+            <a href="#" className="underline hover:text-charcoal transition-colors">
+              Política de Privacidad
             </a>
             .
           </p>

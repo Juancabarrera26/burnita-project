@@ -1,23 +1,24 @@
 /**
- * Footer Component - Burnita Shop
- * Design: Dark brown background with organized links
- * Features: Logo, navigation columns, social links, legal
+ * Footer Component - BURNITA
+ * Brandbook: Fondo Charcoal Night, texto Crema Vitrina
+ * Acentos: Guayaba Pop para hover
+ * Tipografía: Manrope para logo, Inter para texto
  */
 
 import { Instagram, Facebook, Twitter } from "lucide-react";
 
 const shopLinks = [
-  { label: "All Candles", href: "#products" },
-  { label: "New Arrivals", href: "#products" },
-  { label: "Burnita Lab", href: "#" },
-  { label: "Gift Sets", href: "#" },
+  { label: "Todas las Velas", href: "#products" },
+  { label: "Nuevos Lanzamientos", href: "#products" },
+  { label: "BURNITA Lab", href: "#" },
+  { label: "Sets de Regalo", href: "#" },
 ];
 
 const companyLinks = [
-  { label: "Our Story", href: "#about" },
-  { label: "Sustainability", href: "#" },
-  { label: "Contact Us", href: "#newsletter" },
-  { label: "FAQ", href: "#" },
+  { label: "Nuestra Historia", href: "#about" },
+  { label: "Sostenibilidad", href: "#" },
+  { label: "Contáctanos", href: "#newsletter" },
+  { label: "Preguntas Frecuentes", href: "#" },
 ];
 
 const socialLinks = [
@@ -28,34 +29,36 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-brown-dark py-16 md:py-20">
+    <footer className="bg-charcoal py-16 md:py-20">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
+            {/* Logo - Manrope */}
             <a
               href="#"
-              className="font-serif text-2xl md:text-3xl text-cream hover:opacity-80 transition-opacity inline-block mb-4"
+              className="font-display text-2xl md:text-3xl font-extrabold text-crema tracking-brand hover:text-guayaba transition-colors inline-block mb-4"
             >
-              Burnita.
+              BURNITA
             </a>
-            <p className="font-sans text-sm text-cream/60 leading-relaxed max-w-xs">
-              Handcrafted soy candles made to illuminate your space and elevate
-              your mood.
+            {/* Description - Inter */}
+            <p className="font-body text-sm text-crema/60 leading-relaxed max-w-xs">
+              Velas artesanales de cera de soya hechas para iluminar tu espacio y
+              elevar tu estado de ánimo.
             </p>
           </div>
 
           {/* Shop Column */}
           <div>
-            <h3 className="font-sans text-sm font-semibold text-cream uppercase tracking-wider mb-4">
-              Shop
+            <h3 className="font-body text-sm font-semibold text-crema uppercase tracking-wider mb-4">
+              Tienda
             </h3>
             <ul className="space-y-3">
               {shopLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="font-sans text-sm text-cream/60 hover:text-cream transition-colors"
+                    className="font-body text-sm text-crema/60 hover:text-guayaba transition-colors"
                   >
                     {link.label}
                   </a>
@@ -66,15 +69,15 @@ export default function Footer() {
 
           {/* Company Column */}
           <div>
-            <h3 className="font-sans text-sm font-semibold text-cream uppercase tracking-wider mb-4">
-              Company
+            <h3 className="font-body text-sm font-semibold text-crema uppercase tracking-wider mb-4">
+              Compañía
             </h3>
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="font-sans text-sm text-cream/60 hover:text-cream transition-colors"
+                    className="font-body text-sm text-crema/60 hover:text-guayaba transition-colors"
                   >
                     {link.label}
                   </a>
@@ -85,15 +88,15 @@ export default function Footer() {
 
           {/* Social Column */}
           <div>
-            <h3 className="font-sans text-sm font-semibold text-cream uppercase tracking-wider mb-4">
-              Follow Us
+            <h3 className="font-body text-sm font-semibold text-crema uppercase tracking-wider mb-4">
+              Síguenos
             </h3>
             <div className="flex gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 rounded-full border border-cream/30 flex items-center justify-center text-cream/60 hover:text-cream hover:border-cream transition-colors"
+                  className="w-10 h-10 rounded-full border border-crema/30 flex items-center justify-center text-crema/60 hover:text-guayaba hover:border-guayaba transition-colors"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
@@ -104,22 +107,22 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-cream/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-sans text-xs text-cream/40">
-            © 2026 Burnita Candles. All rights reserved.
+        <div className="pt-8 border-t border-crema/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="font-body text-xs text-crema/40">
+            © 2026 BURNITA. Todos los derechos reservados.
           </p>
           <div className="flex gap-6">
             <a
               href="#"
-              className="font-sans text-xs text-cream/40 hover:text-cream/60 transition-colors"
+              className="font-body text-xs text-crema/40 hover:text-guayaba transition-colors"
             >
-              Privacy Policy
+              Política de Privacidad
             </a>
             <a
               href="#"
-              className="font-sans text-xs text-cream/40 hover:text-cream/60 transition-colors"
+              className="font-body text-xs text-crema/40 hover:text-guayaba transition-colors"
             >
-              Terms of Service
+              Términos de Servicio
             </a>
           </div>
         </div>

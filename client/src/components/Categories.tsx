@@ -1,7 +1,8 @@
 /**
- * Categories Component - Burnita Shop
- * Design: Card-style categories with playful tilt
- * Features: Playing card aesthetic, hover animations
+ * Categories Component - BURNITA
+ * Brandbook: Fondo Lavanda Nube (módulos secundarios)
+ * Cards con borde Charcoal, badge Guayaba Pop
+ * Tipografía: Manrope para títulos, Inter para texto
  */
 
 import { motion } from "framer-motion";
@@ -9,7 +10,7 @@ import { motion } from "framer-motion";
 const categories = [
   {
     id: 1,
-    name: "COCTELES",
+    name: "CÓCTELES",
     image: "/images/cocktail_candle.jpg",
     rotation: -5,
   },
@@ -35,7 +36,7 @@ const categories = [
 
 export default function Categories() {
   return (
-    <section id="categories" className="py-20 md:py-28 bg-pink-soft relative overflow-hidden">
+    <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden">
       <div className="container">
         {/* Cards Grid */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8">
@@ -54,17 +55,17 @@ export default function Categories() {
               }}
               className="group cursor-pointer"
             >
-              <div className="w-44 sm:w-48 md:w-52 lg:w-56 bg-cream rounded-xl border-2 border-brown-dark/80 shadow-lg overflow-hidden">
+              <div className="w-44 sm:w-48 md:w-52 lg:w-56 bg-white rounded-xl border-2 border-charcoal shadow-lg overflow-hidden">
                 {/* Card Header */}
-                <div className="px-3 py-2 border-b border-brown-dark/20">
-                  <p className="font-sans text-xs font-semibold text-brown-dark/60 uppercase tracking-wider">
+                <div className="px-3 py-2 border-b border-charcoal/20">
+                  <p className="font-body text-xs font-semibold text-charcoal/60 uppercase tracking-wider">
                     {category.name}
                   </p>
                 </div>
 
                 {/* Card Image */}
-                <div className="aspect-[3/4] bg-gradient-to-b from-pink-100/50 to-purple-100/30 p-3">
-                  <div className="w-full h-full rounded-lg overflow-hidden bg-white/50">
+                <div className="aspect-[3/4] bg-gradient-to-b from-lavanda/20 to-mint/10 p-3">
+                  <div className="w-full h-full rounded-lg overflow-hidden bg-crema/50">
                     <img
                       src={category.image}
                       alt={category.name}
@@ -74,8 +75,8 @@ export default function Categories() {
                 </div>
 
                 {/* Card Footer */}
-                <div className="px-3 py-3 bg-gradient-to-r from-pink-100/50 to-purple-100/50 border-t border-brown-dark/20">
-                  <p className="font-serif text-base md:text-lg text-brown-dark text-center">
+                <div className="px-3 py-3 bg-gradient-to-r from-lavanda/20 to-mint/10 border-t border-charcoal/20">
+                  <p className="font-display text-base md:text-lg font-semibold text-charcoal text-center">
                     {category.name}
                   </p>
                 </div>
@@ -84,7 +85,7 @@ export default function Categories() {
           ))}
         </div>
 
-        {/* Decorative Badge */}
+        {/* Decorative Badge - Guayaba Pop */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -92,9 +93,9 @@ export default function Categories() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="absolute bottom-8 right-8 hidden lg:block"
         >
-          <div className="w-32 h-32 rounded-full bg-gold flex items-center justify-center shadow-xl">
-            <div className="text-center text-cream">
-              <p className="font-serif text-xs uppercase tracking-wider leading-tight">
+          <div className="w-32 h-32 rounded-full bg-guayaba flex items-center justify-center shadow-xl">
+            <div className="text-center text-white">
+              <p className="font-display text-xs font-bold uppercase tracking-wider leading-tight">
                 Enciende<br />Diversión<br />Siempre
               </p>
             </div>

@@ -1,7 +1,7 @@
 /**
- * Header Component - Burnita Shop
- * Design: Warm Minimalism with Neo-Artisan touches
- * Features: Sticky navigation, transparent to solid on scroll
+ * Header Component - BURNITA
+ * Brandbook: Charcoal Night para textos/logo, Guayaba Pop para CTAs
+ * Tipografía: Manrope para logo, Inter para navegación
  */
 
 import { useState, useEffect } from "react";
@@ -10,9 +10,9 @@ import { ShoppingBag, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Shop", href: "#products" },
-  { label: "Collections", href: "#categories" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#newsletter" },
+  { label: "Colecciones", href: "#categories" },
+  { label: "Nosotros", href: "#about" },
+  { label: "Contacto", href: "#newsletter" },
 ];
 
 export default function Header() {
@@ -31,27 +31,27 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-cream/95 backdrop-blur-sm shadow-sm"
+          ? "bg-crema/95 backdrop-blur-sm shadow-sm"
           : "bg-transparent"
       }`}
     >
       <div className="container">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
+          {/* Logo - Manrope 800 */}
           <a
             href="#"
-            className="font-serif text-2xl md:text-3xl text-brown-dark hover:opacity-80 transition-opacity"
+            className="font-display text-2xl md:text-3xl font-extrabold text-charcoal tracking-brand hover:opacity-80 transition-opacity"
           >
-            Burnita.
+            BURNITA
           </a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Inter 500 */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="font-sans text-sm font-medium text-brown-dark/80 hover:text-brown-dark transition-colors"
+                className="font-body text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors"
               >
                 {link.label}
               </a>
@@ -61,24 +61,25 @@ export default function Header() {
           {/* Actions */}
           <div className="flex items-center gap-3">
             <button
-              className="p-2 text-brown-dark/80 hover:text-brown-dark transition-colors"
-              aria-label="Shopping cart"
+              className="p-2 text-charcoal/80 hover:text-charcoal transition-colors"
+              aria-label="Carrito de compras"
             >
               <ShoppingBag className="w-5 h-5" />
             </button>
+            {/* CTA Principal - Guayaba Pop */}
             <Button
               variant="default"
               size="sm"
-              className="hidden sm:flex bg-gold hover:bg-gold/90 text-white font-sans font-medium rounded-full px-5"
+              className="hidden sm:flex bg-guayaba hover:bg-guayaba/90 text-white font-body font-medium rounded-full px-5"
             >
-              Sign In
+              Iniciar Sesión
             </Button>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 text-brown-dark"
+              className="md:hidden p-2 text-charcoal"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
+              aria-label="Abrir menú"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -91,13 +92,13 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-brown-dark/10">
+          <div className="md:hidden py-4 border-t border-charcoal/10">
             <nav className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="font-sans text-base font-medium text-brown-dark/80 hover:text-brown-dark transition-colors"
+                  className="font-body text-base font-medium text-charcoal/80 hover:text-charcoal transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -106,9 +107,9 @@ export default function Header() {
               <Button
                 variant="default"
                 size="sm"
-                className="sm:hidden bg-gold hover:bg-gold/90 text-white font-sans font-medium rounded-full w-full mt-2"
+                className="sm:hidden bg-guayaba hover:bg-guayaba/90 text-white font-body font-medium rounded-full w-full mt-2"
               >
-                Sign In
+                Iniciar Sesión
               </Button>
             </nav>
           </div>

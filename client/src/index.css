@@ -1,13 +1,26 @@
+/**
+ * BURNITA - Sistema de Identidad de Marca
+ * Paleta de colores oficial del Brandbook
+ * Tipografías: Manrope (titulares) + Inter (texto/UI)
+ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
+/* ========================================
+   BURNITA BRAND COLORS (Brandbook Oficial)
+   ======================================== */
+
 @theme inline {
+  /* Border radius tokens */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  
+  /* Semantic color mappings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -27,51 +40,106 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: "DM Sans", sans-serif;
-  --font-serif: "DM Serif Display", serif;
   
-  /* Burnita Brand Colors */
-  --color-salmon: oklch(0.72 0.08 50);
-  --color-pink-soft: oklch(0.88 0.06 15);
-  --color-beige: oklch(0.82 0.05 80);
-  --color-cream: oklch(0.98 0.01 85);
-  --color-brown-dark: oklch(0.25 0.04 45);
-  --color-gold: oklch(0.65 0.12 70);
+  /* BURNITA Brand Colors */
+  --color-charcoal: oklch(0.15 0.01 260);
+  --color-crema: oklch(0.97 0.02 85);
+  --color-guayaba: oklch(0.68 0.22 350);
+  --color-mango: oklch(0.84 0.16 75);
+  --color-mint: oklch(0.80 0.14 180);
+  --color-lavanda: oklch(0.80 0.12 290);
+  
+  /* Typography */
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.98 0.01 85);
-  --foreground: oklch(0.25 0.04 45);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.25 0.04 45);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.25 0.04 45);
-  --primary: oklch(0.65 0.12 70);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.88 0.06 15);
-  --secondary-foreground: oklch(0.25 0.04 45);
-  --muted: oklch(0.95 0.02 85);
-  --muted-foreground: oklch(0.55 0.04 45);
-  --accent: oklch(0.72 0.08 50);
-  --accent-foreground: oklch(0.25 0.04 45);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.90 0.03 80);
-  --input: oklch(0.92 0.02 85);
-  --ring: oklch(0.65 0.12 70);
+  /* BURNITA Brand Palette */
+  --charcoal-night: #111318;
+  --crema-vitrina: #FFF6EA;
+  --guayaba-pop: #FF5CA8;
+  --mango-fizz: #FFC24A;
+  --mint-soda: #2ADBC9;
+  --lavanda-nube: #C7B8FF;
+  
+  /* Semantic mappings using brand colors */
+  --radius: 0.5rem;
+  --background: var(--crema-vitrina);
+  --foreground: var(--charcoal-night);
+  --card: #FFFFFF;
+  --card-foreground: var(--charcoal-night);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--charcoal-night);
+  --primary: var(--guayaba-pop);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--lavanda-nube);
+  --secondary-foreground: var(--charcoal-night);
+  --muted: var(--crema-vitrina);
+  --muted-foreground: #111318cc;
+  --accent: var(--mint-soda);
+  --accent-foreground: var(--charcoal-night);
+  --destructive: #ef4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #11131820;
+  --input: #11131815;
+  --ring: var(--guayaba-pop);
 }
+
+/* ========================================
+   TYPOGRAPHY SYSTEM (Brandbook)
+   Titulares: Manrope 600-800, tracking +4 to +8
+   Texto/UI: Inter 400-600
+   ======================================== */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground;
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
   }
+  
+  /* Titulares con Manrope */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif);
+    font-family: "Manrope", system-ui, sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: var(--charcoal-night);
   }
+  
+  h1 {
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+  }
+  
+  h2 {
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  
+  h3 {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  
+  /* Párrafos y texto */
+  p, span, li, label {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -85,7 +153,60 @@
   }
 }
 
+/* ========================================
+   UTILITY CLASSES FOR BRAND COLORS
+   ======================================== */
+
+@layer utilities {
+  /* Background colors */
+  .bg-charcoal { background-color: var(--charcoal-night); }
+  .bg-crema { background-color: var(--crema-vitrina); }
+  .bg-guayaba { background-color: var(--guayaba-pop); }
+  .bg-mango { background-color: var(--mango-fizz); }
+  .bg-mint { background-color: var(--mint-soda); }
+  .bg-lavanda { background-color: var(--lavanda-nube); }
+  
+  /* Text colors */
+  .text-charcoal { color: var(--charcoal-night); }
+  .text-crema { color: var(--crema-vitrina); }
+  .text-guayaba { color: var(--guayaba-pop); }
+  .text-mango { color: var(--mango-fizz); }
+  .text-mint { color: var(--mint-soda); }
+  .text-lavanda { color: var(--lavanda-nube); }
+  
+  /* Border colors */
+  .border-charcoal { border-color: var(--charcoal-night); }
+  .border-crema { border-color: var(--crema-vitrina); }
+  .border-guayaba { border-color: var(--guayaba-pop); }
+  .border-mango { border-color: var(--mango-fizz); }
+  .border-mint { border-color: var(--mint-soda); }
+  .border-lavanda { border-color: var(--lavanda-nube); }
+  
+  /* Typography utilities */
+  .font-display {
+    font-family: "Manrope", system-ui, sans-serif;
+  }
+  
+  .font-body {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  
+  /* Brand tracking (letter-spacing) */
+  .tracking-brand {
+    letter-spacing: 0.04em;
+  }
+  
+  .tracking-brand-tight {
+    letter-spacing: 0.02em;
+  }
+}
+
+/* ========================================
+   COMPONENT STYLES
+   ======================================== */
+
 @layer components {
+  /* Container */
   .container {
     width: 100%;
     margin-left: auto;
@@ -113,68 +234,53 @@
       max-width: 1280px;
     }
   }
-
-  /* Burnita specific styles */
-  .bg-salmon {
-    background-color: oklch(0.72 0.08 50);
+  
+  /* Primary Button - Guayaba Pop */
+  .btn-primary {
+    background-color: var(--guayaba-pop);
+    color: white;
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
   }
   
-  .bg-pink-soft {
-    background-color: oklch(0.88 0.06 15);
+  .btn-primary:hover {
+    background-color: #e8529a;
+    transform: translateY(-1px);
   }
   
-  .bg-beige {
-    background-color: oklch(0.82 0.05 80);
+  /* Secondary Button - Mint Soda */
+  .btn-secondary {
+    background-color: var(--mint-soda);
+    color: var(--charcoal-night);
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
   }
   
-  .bg-cream {
-    background-color: oklch(0.98 0.01 85);
+  .btn-secondary:hover {
+    background-color: #25c7b6;
+    transform: translateY(-1px);
   }
   
-  .bg-brown-dark {
-    background-color: oklch(0.25 0.04 45);
+  /* Outline Button */
+  .btn-outline {
+    background-color: transparent;
+    color: var(--charcoal-night);
+    font-family: "Inter", system-ui, sans-serif;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--charcoal-night);
+    border-radius: 9999px;
+    transition: all 0.2s ease;
   }
   
-  .text-brown-dark {
-    color: oklch(0.25 0.04 45);
+  .btn-outline:hover {
+    background-color: var(--charcoal-night);
+    color: var(--crema-vitrina);
   }
-  
-  .text-gold {
-    color: oklch(0.65 0.12 70);
-  }
-  
-  .bg-gold {
-    background-color: oklch(0.65 0.12 70);
-  }
-
-  .font-serif {
-    font-family: var(--font-serif);
-  }
-
-  .font-sans {
-    font-family: var(--font-sans);
-  }
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: oklch(0.95 0.02 85);
-}
-
-::-webkit-scrollbar-thumb {
-  background: oklch(0.72 0.08 50);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: oklch(0.65 0.12 70);
 }

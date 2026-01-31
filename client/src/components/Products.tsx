@@ -1,7 +1,8 @@
 /**
- * Products Component - Burnita Shop
- * Design: Product carousel with colored backgrounds
- * Features: Product cards with hover effects, navigation arrows
+ * Products Component - BURNITA
+ * Brandbook: Fondo blanco/crema, texto Charcoal Night
+ * Precios: Guayaba Pop, badges: Mango Fizz
+ * Tipografía: Manrope para títulos, Inter para texto
  */
 
 import { useState } from "react";
@@ -13,49 +14,49 @@ const products = [
   {
     id: 1,
     name: "Postre Rosado",
-    material: "Natural Soy Wax",
+    material: "Cera de Soya Natural",
     price: "$28.00",
-    bgColor: "bg-pink-200",
+    bgColor: "bg-lavanda/30",
     image: "/images/candles_product.webp",
   },
   {
     id: 2,
     name: "Cóctel Amarillo",
-    material: "Natural Soy Wax",
+    material: "Cera de Soya Natural",
     price: "$32.00",
-    bgColor: "bg-yellow-100",
+    bgColor: "bg-mango/20",
     image: "/images/candles_product.webp",
   },
   {
     id: 3,
     name: "Galleta Clásica",
-    material: "Natural Soy Wax",
+    material: "Cera de Soya Natural",
     price: "$26.00",
-    bgColor: "bg-amber-100",
+    bgColor: "bg-crema",
     image: "/images/candles_product.webp",
   },
   {
     id: 4,
     name: "Postre Rosado Intenso",
-    material: "Natural Soy Wax",
+    material: "Cera de Soya Natural",
     price: "$30.00",
-    bgColor: "bg-pink-300",
+    bgColor: "bg-guayaba/15",
     image: "/images/candles_product.webp",
   },
   {
     id: 5,
     name: "Cóctel Dorado",
-    material: "Natural Soy Wax",
+    material: "Cera de Soya Natural",
     price: "$29.00",
-    bgColor: "bg-amber-200",
+    bgColor: "bg-mango/30",
     image: "/images/candles_product.webp",
   },
   {
     id: 6,
     name: "Galleta Especial",
-    material: "Natural Soy Wax",
+    material: "Cera de Soya Natural",
     price: "$27.00",
-    bgColor: "bg-orange-100",
+    bgColor: "bg-mint/20",
     image: "/images/candles_product.webp",
   },
 ];
@@ -77,15 +78,17 @@ export default function Products() {
   };
 
   return (
-    <section id="products" className="py-20 md:py-28 bg-cream">
+    <section id="products" className="py-20 md:py-28 bg-white">
       <div className="container">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
           <div>
-            <p className="font-sans text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-3">
+            {/* Badge - Mango Fizz */}
+            <span className="inline-block px-3 py-1 bg-mango/20 text-charcoal font-body text-xs font-semibold tracking-widest uppercase rounded-full mb-3">
               Colección Especial
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-brown-dark">
+            </span>
+            {/* Title - Manrope */}
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal tracking-brand-tight">
               Velas Artesanales
             </h2>
           </div>
@@ -94,17 +97,17 @@ export default function Products() {
           <div className="flex gap-2 mt-6 md:mt-0">
             <button
               onClick={prevSlide}
-              className="w-12 h-12 rounded-full border-2 border-brown-dark/20 flex items-center justify-center hover:border-brown-dark/40 hover:bg-brown-dark/5 transition-all"
-              aria-label="Previous products"
+              className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all"
+              aria-label="Productos anteriores"
             >
-              <ChevronLeft className="w-5 h-5 text-brown-dark" />
+              <ChevronLeft className="w-5 h-5 text-charcoal" />
             </button>
             <button
               onClick={nextSlide}
-              className="w-12 h-12 rounded-full border-2 border-brown-dark/20 flex items-center justify-center hover:border-brown-dark/40 hover:bg-brown-dark/5 transition-all"
-              aria-label="Next products"
+              className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all"
+              aria-label="Siguientes productos"
             >
-              <ChevronRight className="w-5 h-5 text-brown-dark" />
+              <ChevronRight className="w-5 h-5 text-charcoal" />
             </button>
           </div>
         </div>
@@ -134,19 +137,26 @@ export default function Products() {
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  {/* NO COMESTIBLE badge */}
+                  <span className="absolute top-3 right-3 px-2 py-1 bg-charcoal text-crema font-body text-[10px] font-semibold uppercase tracking-wider rounded">
+                    No Comestible
+                  </span>
                 </div>
 
                 {/* Product Info */}
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="font-serif text-xl md:text-2xl text-brown-dark mb-1">
+                    {/* Product Name - Manrope */}
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-charcoal mb-1">
                       {product.name}
                     </h3>
-                    <p className="font-sans text-sm text-brown-dark/60">
+                    {/* Material - Inter */}
+                    <p className="font-body text-sm text-charcoal/60">
                       {product.material}
                     </p>
                   </div>
-                  <p className="font-sans text-lg font-semibold text-gold">
+                  {/* Price - Guayaba Pop */}
+                  <p className="font-body text-lg font-semibold text-guayaba">
                     {product.price}
                   </p>
                 </div>
@@ -155,14 +165,14 @@ export default function Products() {
           </motion.div>
         </div>
 
-        {/* View All Button */}
+        {/* View All Button - Outline style */}
         <div className="flex justify-center mt-12">
           <Button
             variant="outline"
             size="lg"
-            className="border-2 border-brown-dark/30 text-brown-dark hover:bg-brown-dark hover:text-cream font-sans font-medium rounded-full px-8 bg-transparent"
+            className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-crema font-body font-medium rounded-full px-8 bg-transparent"
           >
-            View All Products
+            Ver Todos los Productos
             <ArrowUpRight className="ml-2 w-4 h-4" />
           </Button>
         </div>
