@@ -1,11 +1,11 @@
 /**
  * Header Component - BURNITA
- * Brandbook: Charcoal Night para textos/logo, Guayaba Pop para CTAs
+ * Brandbook: Charcoal Night para textos/logo
  * Tipografía: Manrope para logo, Inter para navegación
+ * Navegación limpia: Logo + Links + Carrito (SIN botón de login)
  */
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { ShoppingBag, Menu, X } from "lucide-react";
 
 const navLinks = [
@@ -58,22 +58,14 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-3">
+          {/* Actions - Solo carrito e ícono de menú móvil */}
+          <div className="flex items-center gap-4">
             <button
-              className="p-2 text-charcoal/80 hover:text-charcoal transition-colors"
+              className="p-2 text-charcoal/80 hover:text-guayaba transition-colors"
               aria-label="Carrito de compras"
             >
               <ShoppingBag className="w-5 h-5" />
             </button>
-            {/* CTA Principal - Guayaba Pop */}
-            <Button
-              variant="default"
-              size="sm"
-              className="hidden sm:flex bg-guayaba hover:bg-guayaba/90 text-white font-body font-medium rounded-full px-5"
-            >
-              Iniciar Sesión
-            </Button>
 
             {/* Mobile Menu Button */}
             <button
@@ -104,13 +96,6 @@ export default function Header() {
                   {link.label}
                 </a>
               ))}
-              <Button
-                variant="default"
-                size="sm"
-                className="sm:hidden bg-guayaba hover:bg-guayaba/90 text-white font-body font-medium rounded-full w-full mt-2"
-              >
-                Iniciar Sesión
-              </Button>
             </nav>
           </div>
         )}
