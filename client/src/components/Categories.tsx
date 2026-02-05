@@ -29,7 +29,7 @@ const categories = [
   {
     id: 4,
     name: "TEMPORADA",
-    image: "/images/realistic_candles.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/kBiCBCJmtWoUPVTB.jpg",
     rotation: 5,
   },
 ];
