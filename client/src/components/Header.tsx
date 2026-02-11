@@ -37,12 +37,16 @@ export default function Header() {
     >
       <div className="container">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo - Manrope 800 */}
+          {/* Logo - Imagen Burnita */}
           <a
             href="#"
-            className="font-display text-2xl md:text-3xl font-extrabold text-charcoal tracking-brand hover:opacity-80 transition-opacity"
+            className="hover:opacity-80 transition-opacity"
           >
-            BURNITA
+            <img
+              src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lATeDrfPhZfExvMs.png"
+              alt="Burnita Logo"
+              className="h-12 md:h-16 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation - Inter 500 */}
