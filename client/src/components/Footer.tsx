@@ -34,12 +34,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            {/* Logo - Manrope */}
+            {/* Logo - Imagen Burnita */}
             <a
               href="#"
-              className="font-display text-2xl md:text-3xl font-extrabold text-crema tracking-brand hover:text-guayaba transition-colors inline-block mb-4"
+              className="inline-block mb-4 hover:opacity-80 transition-opacity"
             >
-              BURNITA
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/ZVHHNJjKALrylsDS.png"
+                alt="Burnita Logo"
+                className="h-12 md:h-16 w-auto"
+              />
             </a>
             {/* Description - Inter */}
             <p className="font-body text-sm text-crema/60 leading-relaxed max-w-xs">
