@@ -1,7 +1,7 @@
 /**
  * Hero Component - BURNITA
- * Brandbook: Video de fondo con overlay Charcoal Night
- * Overlay: 55% desktop, 65% mobile
+ * Brandbook: Video de fondo con overlay gradiente suave
+ * Overlay: Gradiente arriba-centro-abajo, 30% desktop, 38% mobile
  * Tipografía: Manrope para títulos, Inter para texto
  * Colores: Mango Fizz badge, Crema Vitrina texto, Guayaba Pop + Mint Soda CTAs
  */
@@ -24,8 +24,13 @@ export default function Hero() {
         <source src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/xqitICBbRpfooLVE.mp4" type="video/mp4" />
       </video>
 
-      {/* Overlay para contraste - Desktop 55%, Mobile 65% */}
-      <div className="absolute inset-0 bg-charcoal/[0.65] md:bg-charcoal/[0.55]" />
+      {/* Overlay Gradiente Suave - Desktop 30%, Mobile 38% */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(180deg, rgba(17,19,24,0.35) 0%, rgba(17,19,24,0.18) 50%, rgba(17,19,24,0.32) 100%)",
+        }}
+      />
 
       {/* Content */}
       <div className="container relative z-10 pt-20">
@@ -42,14 +47,14 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Main Title - Manrope 800, Crema Vitrina con text-shadow */}
+          {/* Main Title - Manrope 800, Crema Vitrina con text-shadow mejorado */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-display text-5xl md:text-7xl lg:text-8xl font-extrabold text-crema leading-[1.05] tracking-brand mb-8"
             style={{
-              textShadow: "0px 2px 12px rgba(0, 0, 0, 0.35)",
+              textShadow: "0px 4px 18px rgba(0, 0, 0, 0.35)",
             }}
           >
             Enciende la{" "}
