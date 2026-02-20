@@ -36,7 +36,7 @@ const categories = [
 
 export default function Categories() {
   return (
-    <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden">
+    <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#c7aad5'}}>
       <div className="container">
         {/* Cards Grid */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8">
@@ -93,7 +93,7 @@ export default function Categories() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="absolute bottom-8 right-8 hidden lg:block"
         >
-          <div className="w-32 h-32 rounded-full bg-guayaba flex items-center justify-center shadow-xl">
+          <div className="w-32 h-32 rounded-full bg-guayaba flex items-center justify-center shadow-xl" style={{backgroundColor: '#2adcdf', borderRadius: '0px', width: '0px', height: '0px', opacity: '0'}}>
             <div className="text-center text-white">
               <p className="font-display text-xs font-bold uppercase tracking-wider leading-tight">
                 Enciende<br />Diversión<br />Siempre

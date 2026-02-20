@@ -78,7 +78,7 @@ export default function Products() {
   };
 
   return (
-    <section id="products" className="py-20 md:py-28 bg-white">
+    <section id="products" className="py-20 md:py-28 bg-white" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">

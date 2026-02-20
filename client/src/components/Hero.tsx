@@ -47,6 +47,7 @@ export default function Hero() {
             className="font-display text-5xl md:text-7xl lg:text-8xl font-extrabold text-crema leading-[1.05] tracking-brand mb-8"
             style={{
               textShadow: "0px 2px 8px rgba(0, 0, 0, 0.25)",
+              color: '#110d09',
             }}
           >
             Enciende la{" "}
@@ -60,7 +61,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-body text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed"
             style={{
-              color: "rgba(255, 246, 234, 0.9)",
+              color: '#110d09',
               textShadow: "0px 1px 4px rgba(0, 0, 0, 0.2)",
             }}
           >
