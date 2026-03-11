@@ -57,8 +57,7 @@ export default function About() {
             
             {/* Title - Manrope */}
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal leading-[1.1] tracking-brand-tight mb-6">
-              ¿Postre o vela?<br />
-              <span className="text-guayaba">Sí.</span>
+              ¿Postre o vela?
             </h2>
 
             {/* Description - Inter */}

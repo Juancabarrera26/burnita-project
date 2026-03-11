@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Mapeo de imágenes reales del carrusel de productos
 const products = [
   {
     id: 1,
@@ -17,7 +18,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$28.00",
     bgColor: "bg-lavanda/30",
-    image: "/images/candles_product.webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/EeLNczyLkzeCIrnB.jpg",
   },
   {
     id: 2,
@@ -25,7 +26,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$32.00",
     bgColor: "bg-mango/20",
-    image: "/images/candles_product.webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/ctwdzdRBZlXGWXjM.jpg",
   },
   {
     id: 3,
@@ -33,7 +34,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$26.00",
     bgColor: "bg-crema",
-    image: "/images/candles_product.webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/tJUhXAqaaBlhuRpB.jpg",
   },
   {
     id: 4,
@@ -41,7 +42,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$30.00",
     bgColor: "bg-guayaba/15",
-    image: "/images/candles_product.webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/WtKinqWPpOLqIIaX.jpg",
   },
   {
     id: 5,
@@ -49,7 +50,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$29.00",
     bgColor: "bg-mango/30",
-    image: "/images/candles_product.webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/zLdYfdMQVOCLFKUb.jpg",
   },
   {
     id: 6,
@@ -57,7 +58,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$27.00",
     bgColor: "bg-mint/20",
-    image: "/images/candles_product.webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/gswCpGnQIxbTxfHZ.jpg",
   },
 ];
 
