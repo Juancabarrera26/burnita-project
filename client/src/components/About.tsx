@@ -35,6 +35,7 @@ export default function About() {
                   src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/yabhftobQjLntLUF.png"
                   alt="Persona disfrutando de cóctel con vela Burnita"
                   className="w-full h-full object-cover"
+                  style={{ objectPosition: "center 20%" }}
                 />
               </div>
               {/* Decorative ring - Guayaba Pop */}
