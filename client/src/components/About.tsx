@@ -32,8 +32,8 @@ export default function About() {
               {/* Circular frame */}
               <div className="aspect-square rounded-full overflow-hidden border-8 border-white/50 shadow-2xl">
                 <img
-                  src="/images/artisan_hands.webp"
-                  alt="Artesano creando velas a mano"
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/yabhftobQjLntLUF.png"
+                  alt="Persona disfrutando de cóctel con vela Burnita"
                   className="w-full h-full object-cover"
                 />
               </div>
