@@ -64,17 +64,20 @@ const products = [
 
 export default function Products() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleProducts = 3;
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  
+  // Determinar cuántos productos mostrar según el dispositivo
+  const visibleProducts = isMobile ? 1 : 3;
 
   const nextSlide = () => {
     setCurrentIndex((prev) =>
-      prev + visibleProducts >= products.length ? 0 : prev + 1
+      prev + 1 >= products.length ? 0 : prev + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? products.length - visibleProducts : prev - 1
+      prev === 0 ? products.length - 1 : prev - 1
     );
   };
 
@@ -117,7 +120,7 @@ export default function Products() {
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-6"
-            animate={{ x: `-${currentIndex * (100 / visibleProducts + 2)}%` }}
+            animate={{ x: `-${currentIndex * 100}%` }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             {products.map((product, index) => (
@@ -127,7 +130,7 @@ export default function Products() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer"
+                className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer min-w-full sm:min-w-0"
               >
                 {/* Product Image */}
                 <div
