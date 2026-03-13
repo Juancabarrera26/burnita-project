@@ -58,7 +58,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$27.00",
     bgColor: "bg-mint/20",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/gswCpGnQIxbTxfHZ.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/gDMCyxiCChklamrs.webp",
   },
 ];
 
