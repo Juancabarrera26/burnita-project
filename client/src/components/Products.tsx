@@ -140,15 +140,18 @@ export default function Products() {
         const gap = 24; // gap-6 = 24px
         const scrollAmount = cardWidth + gap;
         const { scrollLeft, scrollWidth, clientWidth } = carousel;
+        const maxScroll = scrollWidth - clientWidth;
 
-        // Si llegamos al final, volver al inicio
-        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+        // Si llegamos al final, volver suavemente al inicio
+        if (scrollLeft + clientWidth >= maxScroll - 10) {
+          // Scroll al inicio con transicion suave
           carousel.scrollBy({ left: -(scrollLeft), behavior: 'smooth' });
         } else {
+          // Desplazar una tarjeta completa
           carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
         }
       }
-    }, 3000);
+    }, 2500); // Velocidad mejorada: 2.5 segundos para movimiento mas dinamico
 
     return () => {
       if (autoplayIntervalRef.current) {
