@@ -18,7 +18,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$28.00",
     bgColor: "bg-lavanda/30",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/EeLNczyLkzeCIrnB.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/eLfUhTdnLWLCwiNF.webp",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$32.00",
     bgColor: "bg-mango/20",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/ctwdzdRBZlXGWXjM.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp",
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$26.00",
     bgColor: "bg-crema",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/tJUhXAqaaBlhuRpB.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp",
   },
   {
     id: 4,
@@ -42,7 +42,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$30.00",
     bgColor: "bg-guayaba/15",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/WtKinqWPpOLqIIaX.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/CZamKEhNVDpNpvdU.webp",
   },
   {
     id: 5,
@@ -50,7 +50,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$29.00",
     bgColor: "bg-mango/30",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/zLdYfdMQVOCLFKUb.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp",
   },
   {
     id: 6,
@@ -58,7 +58,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$27.00",
     bgColor: "bg-mint/20",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/gDMCyxiCChklamrs.webp",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/KtCXNCkEisgWrviL.webp",
   },
   {
     id: 7,
@@ -66,7 +66,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$31.00",
     bgColor: "bg-mint/30",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/akGlENVXHJSOEAlF.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
   },
   {
     id: 8,
@@ -74,7 +74,7 @@ const products = [
     material: "Cera de Soya Natural",
     price: "$33.00",
     bgColor: "bg-guayaba/20",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rWNZzQezqyqKQaSH.jpg",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/IPeSKSvvXNaAfAxq.webp",
   },
 ];
 
@@ -152,6 +152,8 @@ export default function Products() {
                   <img
                     src={product.image}
                     alt={product.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* NO COMESTIBLE badge */}
