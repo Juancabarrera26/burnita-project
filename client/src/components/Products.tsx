@@ -157,7 +157,7 @@ export default function Products() {
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-6"
-            animate={{ x: `-${currentIndex * (100 / visibleProducts + (visibleProducts === 3 ? 2 : 3))}%` }}
+            animate={{ x: `-${currentIndex * (100 / visibleProducts)}%` }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             {products.map((product, index) => (
@@ -168,7 +168,7 @@ export default function Products() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`flex-shrink-0 group cursor-pointer ${
-                  visibleProducts === 1 ? 'w-full' : visibleProducts === 2 ? 'w-[calc(50%-12px)]' : 'w-[calc(33.333%-16px)]'
+                  visibleProducts === 1 ? 'w-full' : visibleProducts === 2 ? 'w-[calc(50%-12px)]' : 'lg:w-[calc(33.333%-16px)] md:w-[calc(50%-12px)] w-full'
                 }`}
               >
                 {/* Product Image */}
