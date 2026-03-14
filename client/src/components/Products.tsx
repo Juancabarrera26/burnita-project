@@ -3,9 +3,12 @@
  * Brandbook: Fondo blanco/crema, texto Charcoal Night
  * Precios: Guayaba Pop, badges: Mango Fizz
  * Tipografía: Manrope para títulos, Inter para texto
+ * 
+ * Nuevo carrusel basado en scroll-snap con flex
+ * Sin lógica de índices ni translateX
  */
 
-import { useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -79,43 +82,34 @@ const products = [
 ];
 
 export default function Products() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleProducts, setVisibleProducts] = useState(3);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  // Detectar cambios de tamaño de pantalla
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setWindowWidth(width);
-      
-      if (width < 640) {
-        // Mobile: 1 producto
-        setVisibleProducts(1);
-      } else if (width < 1024) {
-        // Tablet: 2 productos
-        setVisibleProducts(2);
-      } else {
-        // Desktop: 3 productos
-        setVisibleProducts(3);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) =>
-      prev + 1 >= products.length ? 0 : prev + 1
-    );
+  const checkScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? products.length - 1 : prev - 1
-    );
+  const scroll = (direction: 'left' | 'right') => {
+    if (!carouselRef.current) return;
+
+    const carousel = carouselRef.current;
+    const cardWidth = carousel.querySelector('[data-product-card]')?.getBoundingClientRect().width || 0;
+    const gap = 24; // gap-6 = 24px
+    const scrollAmount = cardWidth + gap;
+
+    if (direction === 'left') {
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+
+    // Actualizar estado de botones después del scroll
+    setTimeout(checkScroll, 300);
   };
 
   return (
@@ -137,15 +131,17 @@ export default function Products() {
           {/* Navigation Arrows */}
           <div className="flex gap-2 mt-6 md:mt-0">
             <button
-              onClick={prevSlide}
-              className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all"
+              onClick={() => scroll('left')}
+              disabled={!canScrollLeft}
+              className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Productos anteriores"
             >
               <ChevronLeft className="w-5 h-5 text-charcoal" />
             </button>
             <button
-              onClick={nextSlide}
-              className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all"
+              onClick={() => scroll('right')}
+              disabled={!canScrollRight}
+              className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Siguientes productos"
             >
               <ChevronRight className="w-5 h-5 text-charcoal" />
@@ -153,61 +149,66 @@ export default function Products() {
           </div>
         </div>
 
-        {/* Products Grid */}
-        <div className="overflow-hidden">
-          <motion.div
-            className="flex gap-6"
-            animate={{ x: `-${currentIndex * (100 / visibleProducts)}%` }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          >
-            {products.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`flex-shrink-0 group cursor-pointer ${
-                  visibleProducts === 1 ? 'w-full' : visibleProducts === 2 ? 'w-[calc(50%-12px)]' : 'lg:w-[calc(33.333%-16px)] md:w-[calc(50%-12px)] w-full'
-                }`}
+        {/* Products Carousel - Scroll Snap */}
+        <div
+          ref={carouselRef}
+          className="flex gap-6 overflow-x-auto scroll-smooth"
+          style={{
+            scrollBehavior: 'smooth',
+            scrollSnapType: 'x mandatory',
+          }}
+          onScroll={checkScroll}
+        >
+          {products.map((product, index) => (
+            <motion.div
+              key={product.id}
+              data-product-card
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex-shrink-0 group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+              style={{
+                scrollSnapAlign: 'center',
+                scrollSnapStop: 'always',
+              }}
+            >
+              {/* Product Image */}
+              <div
+                className={`relative aspect-square rounded-2xl overflow-hidden mb-4 ${product.bgColor}`}
               >
-                {/* Product Image */}
-                <div
-                  className={`relative aspect-square rounded-2xl overflow-hidden mb-4 ${product.bgColor}`}
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* NO COMESTIBLE badge */}
-                  <span className="absolute top-3 right-3 px-2 py-1 bg-charcoal text-crema font-body text-[10px] font-semibold uppercase tracking-wider rounded">
-                    No Comestible
-                  </span>
-                </div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* NO COMESTIBLE badge */}
+                <span className="absolute top-3 right-3 px-2 py-1 bg-charcoal text-crema font-body text-[10px] font-semibold uppercase tracking-wider rounded">
+                  No Comestible
+                </span>
+              </div>
 
-                {/* Product Info */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    {/* Product Name - Manrope */}
-                    <h3 className="font-display text-xl md:text-2xl font-semibold text-charcoal mb-1">
-                      {product.name}
-                    </h3>
-                    {/* Material - Inter */}
-                    <p className="font-body text-sm text-charcoal/60">
-                      {product.material}
-                    </p>
-                  </div>
-                  {/* Price - Guayaba Pop */}
-                  <p className="font-body text-lg font-semibold text-guayaba">
-                    {product.price}
+              {/* Product Info */}
+              <div className="flex items-start justify-between">
+                <div>
+                  {/* Product Name - Manrope */}
+                  <h3 className="font-display text-xl md:text-2xl font-semibold text-charcoal mb-1">
+                    {product.name}
+                  </h3>
+                  {/* Material - Inter */}
+                  <p className="font-body text-sm text-charcoal/60">
+                    {product.material}
                   </p>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                {/* Price - Guayaba Pop */}
+                <p className="font-body text-lg font-semibold text-guayaba">
+                  {product.price}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* View All Button - Outline style */}
