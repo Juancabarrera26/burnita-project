@@ -8,7 +8,7 @@
  * Sin lógica de índices ni translateX
  */
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -85,6 +85,9 @@ export default function Products() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isAutoplayActive, setIsAutoplayActive] = useState(true);
+  const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const checkScroll = () => {
     if (carouselRef.current) {
@@ -112,6 +115,60 @@ export default function Products() {
     setTimeout(checkScroll, 300);
   };
 
+  const pauseAutoplay = () => {
+    setIsAutoplayActive(false);
+    
+    // Limpiar timeout anterior si existe
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
+    
+    // Reanudar autoplay después de 5 segundos sin interacción
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsAutoplayActive(true);
+    }, 5000);
+  };
+
+  // Autoplay effect
+  useEffect(() => {
+    if (!isAutoplayActive || !carouselRef.current) return;
+
+    autoplayIntervalRef.current = setInterval(() => {
+      if (carouselRef.current) {
+        const carousel = carouselRef.current;
+        const cardWidth = carousel.querySelector('[data-product-card]')?.getBoundingClientRect().width || 0;
+        const gap = 24; // gap-6 = 24px
+        const scrollAmount = cardWidth + gap;
+        const { scrollLeft, scrollWidth, clientWidth } = carousel;
+
+        // Si llegamos al final, volver al inicio
+        if (scrollLeft + clientWidth >= scrollWidth - 10) {
+          carousel.scrollBy({ left: -(scrollLeft), behavior: 'smooth' });
+        } else {
+          carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+      }
+    }, 3000);
+
+    return () => {
+      if (autoplayIntervalRef.current) {
+        clearInterval(autoplayIntervalRef.current);
+      }
+    };
+  }, [isAutoplayActive]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (autoplayIntervalRef.current) {
+        clearInterval(autoplayIntervalRef.current);
+      }
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section id="products" className="py-20 md:py-28 bg-white" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
@@ -131,7 +188,10 @@ export default function Products() {
           {/* Navigation Arrows */}
           <div className="flex gap-2 mt-6 md:mt-0">
             <button
-              onClick={() => scroll('left')}
+              onClick={() => {
+                scroll('left');
+                pauseAutoplay();
+              }}
               disabled={!canScrollLeft}
               className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Productos anteriores"
@@ -139,7 +199,10 @@ export default function Products() {
               <ChevronLeft className="w-5 h-5 text-charcoal" />
             </button>
             <button
-              onClick={() => scroll('right')}
+              onClick={() => {
+                scroll('right');
+                pauseAutoplay();
+              }}
               disabled={!canScrollRight}
               className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Siguientes productos"
@@ -158,6 +221,8 @@ export default function Products() {
             scrollSnapType: 'x mandatory',
           }}
           onScroll={checkScroll}
+          onMouseEnter={pauseAutoplay}
+          onTouchStart={pauseAutoplay}
         >
           {products.map((product, index) => (
             <motion.div
