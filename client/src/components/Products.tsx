@@ -5,7 +5,7 @@
  * Tipografía: Manrope para títulos, Inter para texto
  */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -80,17 +80,41 @@ const products = [
 
 export default function Products() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleProducts = 3;
+  const [visibleProducts, setVisibleProducts] = useState(3);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  // Detectar cambios de tamaño de pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setWindowWidth(width);
+      
+      if (width < 640) {
+        // Mobile: 1 producto
+        setVisibleProducts(1);
+      } else if (width < 1024) {
+        // Tablet: 2 productos
+        setVisibleProducts(2);
+      } else {
+        // Desktop: 3 productos
+        setVisibleProducts(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prev) =>
-      prev + visibleProducts >= products.length ? 0 : prev + 1
+      prev + 1 >= products.length ? 0 : prev + 1
     );
   };
 
   const prevSlide = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? products.length - visibleProducts : prev - 1
+      prev === 0 ? products.length - 1 : prev - 1
     );
   };
 
@@ -133,7 +157,7 @@ export default function Products() {
         <div className="overflow-hidden">
           <motion.div
             className="flex gap-6"
-            animate={{ x: `-${currentIndex * (100 / visibleProducts + 2)}%` }}
+            animate={{ x: `-${currentIndex * (100 / visibleProducts + (visibleProducts === 3 ? 2 : 3))}%` }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             {products.map((product, index) => (
@@ -143,7 +167,9 @@ export default function Products() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex-shrink-0 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group cursor-pointer"
+                className={`flex-shrink-0 group cursor-pointer ${
+                  visibleProducts === 1 ? 'w-full' : visibleProducts === 2 ? 'w-[calc(50%-12px)]' : 'w-[calc(33.333%-16px)]'
+                }`}
               >
                 {/* Product Image */}
                 <div
