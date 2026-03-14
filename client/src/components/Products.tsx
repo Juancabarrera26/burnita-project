@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 const products = [
   {
     id: 1,
-    name: "Postre Rosado",
+    name: "Nube de Fresa",
     material: "Cera de Soya Natural",
     price: "$28.00",
     bgColor: "bg-lavanda/30",
@@ -22,7 +22,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Cóctel Amarillo",
+    name: "Sandía Sunset",
     material: "Cera de Soya Natural",
     price: "$32.00",
     bgColor: "bg-mango/20",
@@ -30,7 +30,7 @@ const products = [
   },
   {
     id: 3,
-    name: "Galleta Clásica",
+    name: "Miel Dorada",
     material: "Cera de Soya Natural",
     price: "$26.00",
     bgColor: "bg-crema",
@@ -38,7 +38,7 @@ const products = [
   },
   {
     id: 4,
-    name: "Postre Rosado Intenso",
+    name: "Mojito Verde",
     material: "Cera de Soya Natural",
     price: "$30.00",
     bgColor: "bg-guayaba/15",
@@ -46,7 +46,7 @@ const products = [
   },
   {
     id: 5,
-    name: "Cóctel Dorado",
+    name: "Frutos del Bosque",
     material: "Cera de Soya Natural",
     price: "$29.00",
     bgColor: "bg-mango/30",
@@ -54,11 +54,27 @@ const products = [
   },
   {
     id: 6,
-    name: "Galleta Especial",
+    name: "Atardecer Tropical",
     material: "Cera de Soya Natural",
     price: "$27.00",
     bgColor: "bg-mint/20",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/gDMCyxiCChklamrs.webp",
+  },
+  {
+    id: 7,
+    name: "Océano Nocturno",
+    material: "Cera de Soya Natural",
+    price: "$31.00",
+    bgColor: "bg-mint/30",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/akGlENVXHJSOEAlF.jpg",
+  },
+  {
+    id: 8,
+    name: "Eclipse Dorado",
+    material: "Cera de Soya Natural",
+    price: "$33.00",
+    bgColor: "bg-guayaba/20",
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rWNZzQezqyqKQaSH.jpg",
   },
 ];
 
