@@ -4,9 +4,11 @@
  * Precios: Guayaba Pop, badges: Mango Fizz
  * Tipografía: Manrope para títulos, Inter para texto
  * 
- * Nuevo carrusel basado en scroll-snap con flex
- * Sin lógica de índices ni translateX
- * Autoplay robusto basado en scroll real del contenedor
+ * Carrusel corregido:
+ * - Sin scrollbars visibles
+ * - Autoplay responsive según productos visibles
+ * - Reinicio suave al final
+ * - Reanudación rápida (3 segundos)
  */
 
 import { useRef, useState, useEffect } from "react";
@@ -87,9 +89,27 @@ export default function Products() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isAutoplayActive, setIsAutoplayActive] = useState(true);
+  const [visibleProducts, setVisibleProducts] = useState(3); // Default desktop
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
+
+  // Detectar cantidad de productos visibles según breakpoint
+  useEffect(() => {
+    const updateVisibleProducts = () => {
+      if (window.innerWidth < 640) {
+        setVisibleProducts(1); // Mobile
+      } else if (window.innerWidth < 1024) {
+        setVisibleProducts(2); // Tablet
+      } else {
+        setVisibleProducts(3); // Desktop
+      }
+    };
+
+    updateVisibleProducts();
+    window.addEventListener('resize', updateVisibleProducts);
+    return () => window.removeEventListener('resize', updateVisibleProducts);
+  }, []);
 
   const checkScroll = () => {
     if (carouselRef.current) {
@@ -103,8 +123,12 @@ export default function Products() {
     if (!carouselRef.current || isScrollingRef.current) return;
 
     const carousel = carouselRef.current;
-    const cardWidth = carousel.querySelector('[data-product-card]')?.getBoundingClientRect().width || 0;
+    const cardElement = carousel.querySelector('[data-product-card]');
+    if (!cardElement) return;
+
+    const cardWidth = cardElement.getBoundingClientRect().width;
     const gap = 24; // gap-6 = 24px
+    // Usar 1 producto para navegación manual (más granular)
     const scrollAmount = cardWidth + gap;
 
     isScrollingRef.current = true;
@@ -130,13 +154,13 @@ export default function Products() {
       clearTimeout(pauseTimeoutRef.current);
     }
     
-    // Reanudar autoplay después de 5 segundos sin interacción
+    // Reanudar autoplay después de 3 segundos sin interacción (más rápido)
     pauseTimeoutRef.current = setTimeout(() => {
       setIsAutoplayActive(true);
-    }, 5000);
+    }, 3000);
   };
 
-  // Autoplay effect - Lógica robusta basada en scroll real
+  // Autoplay effect - Responsive según productos visibles
   useEffect(() => {
     if (!isAutoplayActive || !carouselRef.current) return;
 
@@ -150,18 +174,18 @@ export default function Products() {
 
       const cardWidth = cardElement.getBoundingClientRect().width;
       const gap = 24; // gap-6 = 24px
-      const scrollAmount = cardWidth + gap;
+      const scrollAmount = (cardWidth + gap) * visibleProducts;
       const { scrollLeft, scrollWidth, clientWidth } = carousel;
       const maxScroll = scrollWidth - clientWidth;
 
       isScrollingRef.current = true;
 
-      // Verificar si estamos cerca del final (dentro de 50px)
-      if (scrollLeft + clientWidth >= maxScroll - 50) {
-        // Reiniciar al inicio de forma suave
+      // Verificar si estamos cerca del final (dentro de 100px)
+      if (scrollLeft + clientWidth >= maxScroll - 100) {
+        // Reiniciar al inicio de forma suave sin detener
         carousel.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        // Desplazar una tarjeta completa
+        // Desplazar según cantidad de productos visibles
         carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       }
 
@@ -176,7 +200,7 @@ export default function Products() {
         clearInterval(autoplayIntervalRef.current);
       }
     };
-  }, [isAutoplayActive]);
+  }, [isAutoplayActive, visibleProducts]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -233,18 +257,27 @@ export default function Products() {
           </div>
         </div>
 
-        {/* Products Carousel - Scroll Snap */}
+        {/* Products Carousel - Scroll Snap sin scrollbars */}
         <div
           ref={carouselRef}
           className="flex gap-6 overflow-x-auto scroll-smooth"
           style={{
             scrollBehavior: 'smooth',
             scrollSnapType: 'x mandatory',
+            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none', // IE and Edge
           }}
           onScroll={checkScroll}
           onMouseEnter={pauseAutoplay}
           onTouchStart={pauseAutoplay}
         >
+          {/* Ocultar scrollbar en Chrome/Safari */}
+          <style>{`
+            [data-carousel]::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+          
           {products.map((product, index) => (
             <motion.div
               key={product.id}
