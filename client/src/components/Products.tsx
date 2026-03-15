@@ -1,15 +1,14 @@
-/**
+/*
  * Products Component - BURNITA
  * Brandbook: Fondo blanco/crema, texto Charcoal Night
  * Precios: Guayaba Pop, badges: Mango Fizz
  * Tipografía: Manrope para títulos, Inter para texto
  * 
- * Carrusel corregido:
- * - Sin scrollbars visibles
- * - Autoplay basado ÚNICAMENTE en scroll real del contenedor
- * - Sin lógica de índices
- * - Reinicio suave al final
- * - Reanudación rápida (3 segundos)
+ * Carrusel con loop visual infinito:
+ * - Clona los primeros productos al final
+ * - Reinicio invisible cuando llega a los clones
+ * - Autoplay basado en scroll real
+ * - Sin espacios vacíos
  */
 
 import { useRef, useState, useEffect } from "react";
@@ -95,6 +94,7 @@ export default function Products() {
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
   const lastScrollTimeRef = useRef(0);
+  const isResettingRef = useRef(false);
 
   // Detectar cantidad de productos visibles según breakpoint
   useEffect(() => {
@@ -164,15 +164,15 @@ export default function Products() {
     }, 3000);
   };
 
-  // Autoplay effect - Basado ÚNICAMENTE en scroll real del contenedor
+  // Autoplay effect - Con loop visual infinito
   useEffect(() => {
     if (!isAutoplayActive || !carouselRef.current) return;
 
     const carousel = carouselRef.current;
 
     autoplayIntervalRef.current = setInterval(() => {
-      // No hacer nada si el carrusel está en medio de un scroll
-      if (!carousel || isScrollingRef.current) return;
+      // No hacer nada si el carrusel está en medio de un scroll o reinicio
+      if (!carousel || isScrollingRef.current || isResettingRef.current) return;
 
       const cardElement = carousel.querySelector('[data-product-card]');
       if (!cardElement) return;
@@ -182,7 +182,7 @@ export default function Products() {
       const gap = 24; // gap-6 = 24px
       const singleCardScroll = cardWidth + gap;
       
-      // Usar el valor actual de visibleProducts (capturado en el closure)
+      // Desplazamiento según cantidad de productos visibles
       const scrollAmount = singleCardScroll * visibleProducts;
 
       // Obtener posición actual del scroll
@@ -192,22 +192,32 @@ export default function Products() {
       // Marcar como scrolling para evitar conflictos
       isScrollingRef.current = true;
 
-      // Verificar si estamos cerca del final
-      // Si scrollLeft + scrollAmount >= maxScroll, reiniciar
-      if (scrollLeft + scrollAmount >= maxScroll - 10) {
-        // Reiniciar al inicio de forma suave
-        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      // Calcular el punto de reinicio
+      // El carrusel tiene: productos originales + clones
+      // Cuando lleguemos a los clones, reiniciamos al inicio
+      const originalProductsWidth = singleCardScroll * products.length;
+      const cloneStartPosition = originalProductsWidth;
+
+      // Si estamos en la zona de clones, reiniciar invisiblemente
+      if (scrollLeft + scrollAmount >= cloneStartPosition - 10) {
+        // Reiniciar sin animación (invisible)
+        isResettingRef.current = true;
+        carousel.scrollTo({ left: 0, behavior: 'auto' });
+        
+        setTimeout(() => {
+          isResettingRef.current = false;
+          isScrollingRef.current = false;
+        }, 50);
       } else {
-        // Desplazar según cantidad de productos visibles
-        // Usar scrollTo en lugar de scrollBy para evitar que scroll-snap interfiera
+        // Desplazar normalmente
         const newScrollLeft = scrollLeft + scrollAmount;
         carousel.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
-      }
 
-      // Esperar a que termine la animación antes de permitir el siguiente scroll
-      setTimeout(() => {
-        isScrollingRef.current = false;
-      }, 600);
+        // Esperar a que termine la animación
+        setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 600);
+      }
     }, 2500); // Velocidad: 2.5 segundos
 
     return () => {
@@ -228,6 +238,13 @@ export default function Products() {
       }
     };
   }, []);
+
+  // Crear array de productos con clones al final
+  const displayProducts = [
+    ...products,
+    // Clones de los primeros 3 productos para loop visual infinito
+    ...products.slice(0, 3),
+  ];
 
   return (
     <section id="products" className="py-20 md:py-28 bg-white" style={{backgroundColor: '#fff6ea'}}>
@@ -293,14 +310,14 @@ export default function Products() {
             }
           `}</style>
           
-          {products.map((product, index) => (
+          {displayProducts.map((product, index) => (
             <motion.div
-              key={product.id}
+              key={`${product.id}-${index}`}
               data-product-card
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: (index % products.length) * 0.1 }}
               className="flex-shrink-0 group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
               style={{
                 scrollSnapAlign: 'center',
