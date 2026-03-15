@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { ShoppingBag, Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Shop", href: "#products" },
+  { label: "Shop", href: "/shop" },
   { label: "Colecciones", href: "#categories" },
   { label: "Nosotros", href: "#about" },
   { label: "Contacto", href: "#newsletter" },
@@ -39,7 +39,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo - Imagen Burnita */}
           <a
-            href="#"
+            href="/"
             className="hover:opacity-80 transition-opacity"
           >
             <img
@@ -64,12 +64,13 @@ export default function Header() {
 
           {/* Actions - Solo carrito e ícono de menú móvil */}
           <div className="flex items-center gap-4">
-            <button
+            <a
+              href="/shop"
               className="p-2 text-charcoal/80 hover:text-guayaba transition-colors"
-              aria-label="Carrito de compras"
+              aria-label="Ir a la tienda"
             >
               <ShoppingBag className="w-5 h-5" />
-            </button>
+            </a>
 
             {/* Mobile Menu Button */}
             <button

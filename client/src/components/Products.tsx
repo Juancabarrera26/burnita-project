@@ -364,14 +364,16 @@ export default function Products() {
 
         {/* View All Button - Outline style */}
         <div className="flex justify-center mt-12">
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-crema font-body font-medium rounded-full px-8 bg-transparent"
-          >
-            Ver Todos los Productos
-            <ArrowUpRight className="ml-2 w-4 h-4" />
-          </Button>
+          <a href="/shop">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-crema font-body font-medium rounded-full px-8 bg-transparent"
+            >
+              Ver Todos los Productos
+              <ArrowUpRight className="ml-2 w-4 h-4" />
+            </Button>
+          </a>
         </div>
       </div>
     </section>
