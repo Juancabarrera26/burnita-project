@@ -17,7 +17,7 @@ const colorTags = [
 
 export default function BurnitaLab() {
   return (
-    <section className="py-20 md:py-28 bg-lavanda/30 relative overflow-hidden" style={{backgroundColor: '#c7aad5'}}>
+    <section className="py-20 md:py-28 bg-lavanda/30 relative overflow-hidden" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}

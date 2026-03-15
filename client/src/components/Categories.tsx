@@ -42,7 +42,7 @@ const categories = [
 
 export default function Categories() {
   return (
-    <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#c7aad5'}}>
+    <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
         {/* Cards Grid */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
