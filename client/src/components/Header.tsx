@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { ShoppingBag, Menu, X } from "lucide-react";
 
 const navLinks = [
+  { label: "Inicio", href: "/" },
   { label: "Shop", href: "/shop" },
   { label: "Colecciones", href: "#categories" },
   { label: "Nosotros", href: "#about" },
