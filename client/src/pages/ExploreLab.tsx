@@ -1,45 +1,60 @@
 /**
  * Explore Lab Page - Burnita Shop
  * Design: Artesanía Cálida Contemporánea
- * Interactive candle customization and generation
+ * Interactive candle customization and generation with AI
  */
 
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { trpc } from "@/lib/trpc";
+import { Loader2 } from "lucide-react";
+
+type CandleType = "Cóctel" | "Postre" | "Elegante" | "Corporativa";
+type CandleAroma = "Frutal" | "Dulce" | "Cítrico" | "Especiado";
+type CandleColor = "Rosado" | "Amarillo" | "Rojo" | "Blanco";
+type CandleDecoration = "Frutas" | "Crema" | "Especias" | "Minimalista";
 
 interface CandleCustomization {
-  type: string;
-  aroma: string;
-  color: string;
-  decoration: string;
+  type: CandleType | "";
+  aroma: CandleAroma | "";
+  color: CandleColor | "";
+  decoration: CandleDecoration | "";
+}
+
+interface GeneratedCandle {
+  type: CandleType;
+  aroma: CandleAroma;
+  color: CandleColor;
+  decoration: CandleDecoration;
+  imageUrl: string;
 }
 
 const CANDLE_OPTIONS = {
   type: [
-    { label: "Cóctel", value: "coctel" },
-    { label: "Postre", value: "postre" },
-    { label: "Elegante", value: "elegante" },
-    { label: "Corporativa", value: "corporativa" },
+    { label: "Cóctel", value: "Cóctel" as CandleType },
+    { label: "Postre", value: "Postre" as CandleType },
+    { label: "Elegante", value: "Elegante" as CandleType },
+    { label: "Corporativa", value: "Corporativa" as CandleType },
   ],
   aroma: [
-    { label: "Frutal", value: "frutal" },
-    { label: "Dulce", value: "dulce" },
-    { label: "Cítrico", value: "citrico" },
-    { label: "Especiado", value: "especiado" },
+    { label: "Frutal", value: "Frutal" as CandleAroma },
+    { label: "Dulce", value: "Dulce" as CandleAroma },
+    { label: "Cítrico", value: "Cítrico" as CandleAroma },
+    { label: "Especiado", value: "Especiado" as CandleAroma },
   ],
   color: [
-    { label: "Rosado", value: "rosado" },
-    { label: "Amarillo", value: "amarillo" },
-    { label: "Rojo", value: "rojo" },
-    { label: "Blanco", value: "blanco" },
+    { label: "Rosado", value: "Rosado" as CandleColor },
+    { label: "Amarillo", value: "Amarillo" as CandleColor },
+    { label: "Rojo", value: "Rojo" as CandleColor },
+    { label: "Blanco", value: "Blanco" as CandleColor },
   ],
   decoration: [
-    { label: "Frutas", value: "frutas" },
-    { label: "Crema", value: "crema" },
-    { label: "Especias", value: "especias" },
-    { label: "Minimalista", value: "minimalista" },
+    { label: "Frutas", value: "Frutas" as CandleDecoration },
+    { label: "Crema", value: "Crema" as CandleDecoration },
+    { label: "Especias", value: "Especias" as CandleDecoration },
+    { label: "Minimalista", value: "Minimalista" as CandleDecoration },
   ],
 };
 
@@ -51,13 +66,13 @@ export default function ExploreLab() {
     decoration: "",
   });
 
-  const [generatedCandle, setGeneratedCandle] = useState<CandleCustomization | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedCandle, setGeneratedCandle] = useState<GeneratedCandle | null>(null);
+  const generateImageMutation = trpc.candles.generateImage.useMutation();
 
   const handleSelect = (category: keyof CandleCustomization, value: string) => {
     setCustomization((prev) => ({
       ...prev,
-      [category]: prev[category] === value ? "" : value,
+      [category]: prev[category] === value ? "" : (value as any),
     }));
   };
 
@@ -67,36 +82,39 @@ export default function ExploreLab() {
       return;
     }
 
-    setIsGenerating(true);
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setGeneratedCandle(customization);
-    setIsGenerating(false);
-  };
+    try {
+      const result = await generateImageMutation.mutateAsync({
+        type: customization.type,
+        aroma: customization.aroma,
+        color: customization.color,
+        decoration: customization.decoration,
+      });
 
-  const getPlaceholderImage = () => {
-    // Generate a placeholder image URL based on customization
-    // This will be replaced with actual AI image generation in the future
-    const colors: Record<string, string> = {
-      rosado: "FFB6D9",
-      amarillo: "FFE66D",
-      rojo: "FF6B6B",
-      blanco: "FFFFFF",
-    };
-
-    const bgColor = colors[customization.color] || "FFFFFF";
-    return `https://via.placeholder.com/400x500/${bgColor}/000000?text=Tu+Vela+${customization.type}`;
+      const candle: GeneratedCandle = {
+        type: customization.type as CandleType,
+        aroma: customization.aroma as CandleAroma,
+        color: customization.color as CandleColor,
+        decoration: customization.decoration as CandleDecoration,
+        imageUrl: result.imageUrl || "",
+      };
+      setGeneratedCandle(candle);
+    } catch (error) {
+      console.error("Error generating image:", error);
+      alert("Error al generar la imagen. Por favor intenta de nuevo.");
+    }
   };
 
   const getRecommendedPrice = () => {
-    const basePrice: Record<string, number> = {
-      coctel: 45000,
-      postre: 50000,
-      elegante: 55000,
-      corporativa: 60000,
+    const basePrice: Record<CandleType, number> = {
+      "Cóctel": 45000,
+      "Postre": 50000,
+      "Elegante": 55000,
+      "Corporativa": 60000,
     };
-    return basePrice[customization.type] || 45000;
+    return customization.type ? basePrice[customization.type] : 45000;
   };
+
+  const isLoading = generateImageMutation.isPending;
 
   return (
     <div className="min-h-screen bg-white">
@@ -203,10 +221,17 @@ export default function ExploreLab() {
                 {/* Generate Button */}
                 <Button
                   onClick={handleGenerate}
-                  disabled={isGenerating}
-                  className="w-full py-4 text-lg font-bold bg-[#FF5CA8] hover:bg-[#FF3D8F] text-white rounded-full transition-all"
+                  disabled={isLoading}
+                  className="w-full py-4 text-lg font-bold bg-[#FF5CA8] hover:bg-[#FF3D8F] text-white rounded-full transition-all disabled:opacity-50"
                 >
-                  {isGenerating ? "Generando tu vela..." : "Generar mi vela"}
+                  {isLoading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="animate-spin w-5 h-5" />
+                      Generando tu vela...
+                    </span>
+                  ) : (
+                    "Generar mi vela"
+                  )}
                 </Button>
               </div>
 
@@ -214,10 +239,10 @@ export default function ExploreLab() {
               <div className="flex flex-col items-center justify-center">
                 {generatedCandle ? (
                   <div className="w-full bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-100">
-                    {/* Placeholder Image */}
+                    {/* Generated Image */}
                     <div className="mb-6 rounded-xl overflow-hidden bg-gray-100 h-96 flex items-center justify-center">
                       <img
-                        src={getPlaceholderImage()}
+                        src={generatedCandle.imageUrl}
                         alt="Tu vela personalizada"
                         className="w-full h-full object-cover"
                       />
@@ -227,7 +252,7 @@ export default function ExploreLab() {
                     <div className="space-y-4">
                       <div>
                         <h3 className="text-2xl font-bold text-black mb-2">
-                          Vela {generatedCandle.type.charAt(0).toUpperCase() + generatedCandle.type.slice(1)}
+                          Vela {generatedCandle.type}
                         </h3>
                         <p className="text-gray-600">
                           Aroma: <span className="font-semibold">{generatedCandle.aroma}</span> • Color:{" "}
