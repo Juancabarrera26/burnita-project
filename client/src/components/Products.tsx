@@ -181,6 +181,8 @@ export default function Products() {
       const cardWidth = cardElement.getBoundingClientRect().width;
       const gap = 24; // gap-6 = 24px
       const singleCardScroll = cardWidth + gap;
+      
+      // Usar el valor actual de visibleProducts (capturado en el closure)
       const scrollAmount = singleCardScroll * visibleProducts;
 
       // Obtener posición actual del scroll
@@ -197,7 +199,9 @@ export default function Products() {
         carousel.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         // Desplazar según cantidad de productos visibles
-        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        // Usar scrollTo en lugar de scrollBy para evitar que scroll-snap interfiera
+        const newScrollLeft = scrollLeft + scrollAmount;
+        carousel.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
       }
 
       // Esperar a que termine la animación antes de permitir el siguiente scroll
@@ -211,7 +215,7 @@ export default function Products() {
         clearInterval(autoplayIntervalRef.current);
       }
     };
-  }, [isAutoplayActive, visibleProducts]);
+  }, [isAutoplayActive, visibleProducts, carouselRef]);
 
   // Cleanup on unmount
   useEffect(() => {
