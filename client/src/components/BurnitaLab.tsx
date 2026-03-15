@@ -8,6 +8,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 
 const colorTags = [
   { name: "Guayaba Pop", color: "bg-guayaba" },
@@ -59,13 +60,15 @@ export default function BurnitaLab() {
             </div>
 
             {/* CTA - Guayaba Pop */}
-            <Button
-              size="lg"
-              className="bg-guayaba hover:bg-guayaba/90 text-white font-body font-medium rounded-full px-8"
-            >
-              Explorar el Lab
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+            <Link href="/explore-lab">
+              <Button
+                size="lg"
+                className="bg-guayaba hover:bg-guayaba/90 text-white font-body font-medium rounded-full px-8"
+              >
+                Explorar el Lab
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </Link>
           </motion.div>
 
           {/* Image with Badge */}
