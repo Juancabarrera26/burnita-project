@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
 import BurnitaLab from "@/components/BurnitaLab";
+import CandleCreator from "@/components/CandleCreator";
 import About from "@/components/About";
 import Categories from "@/components/Categories";
 import Newsletter from "@/components/Newsletter";
@@ -21,6 +22,7 @@ export default function Home() {
         <Hero />
         <Products />
         <BurnitaLab />
+        <CandleCreator />
         <About />
         <Categories />
         <Newsletter />
