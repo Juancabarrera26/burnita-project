@@ -11,26 +11,32 @@ const categories = [
   {
     id: 1,
     name: "CÓCTELES",
-    image: "/images/cocktail_candle.jpg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/cocteles_893c54ad.jpg",
     rotation: -5,
   },
   {
     id: 2,
     name: "POSTRES",
-    image: "/images/donut_candles.jpg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/postres_2d9b2cab.jpeg",
     rotation: -2,
   },
   {
     id: 3,
     name: "RECORDATORIOS",
-    image: "/images/food_candles.jpg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/recordatorios_282e5b3c.jpeg",
     rotation: 2,
   },
   {
     id: 4,
     name: "TEMPORADA",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/kBiCBCJmtWoUPVTB.jpg",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/temporada_aedf55be.jpeg",
     rotation: 5,
+  },
+  {
+    id: 5,
+    name: "EMPRESARIAL",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/empresarial_f2ba8815.jpeg",
+    rotation: -3,
   },
 ];
 
@@ -39,7 +45,7 @@ export default function Categories() {
     <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#c7aad5'}}>
       <div className="container">
         {/* Cards Grid */}
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
