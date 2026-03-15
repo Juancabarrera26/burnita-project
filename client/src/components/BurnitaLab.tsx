@@ -10,9 +10,10 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const colorTags = [
-  { name: "Rosado Claro", color: "bg-guayaba/30" },
-  { name: "Amarillo Claro", color: "bg-mango/40" },
-  { name: "Color Galleta", color: "bg-crema" },
+  { name: "Guayaba Pop", color: "bg-guayaba" },
+  { name: "Mango Fizz", color: "bg-mango" },
+  { name: "Mint Soda", color: "bg-mint" },
+  { name: "Lavanda Nube", color: "bg-lavanda" },
 ];
 
 export default function BurnitaLab() {
