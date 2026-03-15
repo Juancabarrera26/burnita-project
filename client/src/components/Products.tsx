@@ -6,6 +6,7 @@
  * 
  * Nuevo carrusel basado en scroll-snap con flex
  * Sin lógica de índices ni translateX
+ * Autoplay robusto basado en scroll real del contenedor
  */
 
 import { useRef, useState, useEffect } from "react";
@@ -88,6 +89,7 @@ export default function Products() {
   const [isAutoplayActive, setIsAutoplayActive] = useState(true);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
 
   const checkScroll = () => {
     if (carouselRef.current) {
@@ -98,12 +100,14 @@ export default function Products() {
   };
 
   const scroll = (direction: 'left' | 'right') => {
-    if (!carouselRef.current) return;
+    if (!carouselRef.current || isScrollingRef.current) return;
 
     const carousel = carouselRef.current;
     const cardWidth = carousel.querySelector('[data-product-card]')?.getBoundingClientRect().width || 0;
     const gap = 24; // gap-6 = 24px
     const scrollAmount = cardWidth + gap;
+
+    isScrollingRef.current = true;
 
     if (direction === 'left') {
       carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
@@ -111,8 +115,11 @@ export default function Products() {
       carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
 
-    // Actualizar estado de botones después del scroll
-    setTimeout(checkScroll, 300);
+    // Permitir siguiente scroll después de que termine la animación
+    setTimeout(() => {
+      isScrollingRef.current = false;
+      checkScroll();
+    }, 600);
   };
 
   const pauseAutoplay = () => {
@@ -129,29 +136,40 @@ export default function Products() {
     }, 5000);
   };
 
-  // Autoplay effect
+  // Autoplay effect - Lógica robusta basada en scroll real
   useEffect(() => {
     if (!isAutoplayActive || !carouselRef.current) return;
 
-    autoplayIntervalRef.current = setInterval(() => {
-      if (carouselRef.current) {
-        const carousel = carouselRef.current;
-        const cardWidth = carousel.querySelector('[data-product-card]')?.getBoundingClientRect().width || 0;
-        const gap = 24; // gap-6 = 24px
-        const scrollAmount = cardWidth + gap;
-        const { scrollLeft, scrollWidth, clientWidth } = carousel;
-        const maxScroll = scrollWidth - clientWidth;
+    const carousel = carouselRef.current;
 
-        // Si llegamos al final, volver suavemente al inicio
-        if (scrollLeft + clientWidth >= maxScroll - 10) {
-          // Scroll al inicio con transicion suave
-          carousel.scrollBy({ left: -(scrollLeft), behavior: 'smooth' });
-        } else {
-          // Desplazar una tarjeta completa
-          carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-        }
+    autoplayIntervalRef.current = setInterval(() => {
+      if (!carousel || isScrollingRef.current) return;
+
+      const cardElement = carousel.querySelector('[data-product-card]');
+      if (!cardElement) return;
+
+      const cardWidth = cardElement.getBoundingClientRect().width;
+      const gap = 24; // gap-6 = 24px
+      const scrollAmount = cardWidth + gap;
+      const { scrollLeft, scrollWidth, clientWidth } = carousel;
+      const maxScroll = scrollWidth - clientWidth;
+
+      isScrollingRef.current = true;
+
+      // Verificar si estamos cerca del final (dentro de 50px)
+      if (scrollLeft + clientWidth >= maxScroll - 50) {
+        // Reiniciar al inicio de forma suave
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        // Desplazar una tarjeta completa
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       }
-    }, 2500); // Velocidad mejorada: 2.5 segundos para movimiento mas dinamico
+
+      // Esperar a que termine la animación antes de permitir el siguiente scroll
+      setTimeout(() => {
+        isScrollingRef.current = false;
+      }, 600);
+    }, 2500); // Velocidad: 2.5 segundos
 
     return () => {
       if (autoplayIntervalRef.current) {
