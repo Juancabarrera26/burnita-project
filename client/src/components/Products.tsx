@@ -6,7 +6,8 @@
  * 
  * Carrusel corregido:
  * - Sin scrollbars visibles
- * - Autoplay responsive según productos visibles
+ * - Autoplay basado ÚNICAMENTE en scroll real del contenedor
+ * - Sin lógica de índices
  * - Reinicio suave al final
  * - Reanudación rápida (3 segundos)
  */
@@ -93,6 +94,7 @@ export default function Products() {
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const isScrollingRef = useRef(false);
+  const lastScrollTimeRef = useRef(0);
 
   // Detectar cantidad de productos visibles según breakpoint
   useEffect(() => {
@@ -132,6 +134,7 @@ export default function Products() {
     const scrollAmount = cardWidth + gap;
 
     isScrollingRef.current = true;
+    lastScrollTimeRef.current = Date.now();
 
     if (direction === 'left') {
       carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
@@ -148,41 +151,49 @@ export default function Products() {
 
   const pauseAutoplay = () => {
     setIsAutoplayActive(false);
+    lastScrollTimeRef.current = Date.now();
     
     // Limpiar timeout anterior si existe
     if (pauseTimeoutRef.current) {
       clearTimeout(pauseTimeoutRef.current);
     }
     
-    // Reanudar autoplay después de 3 segundos sin interacción (más rápido)
+    // Reanudar autoplay después de 3 segundos sin interacción
     pauseTimeoutRef.current = setTimeout(() => {
       setIsAutoplayActive(true);
     }, 3000);
   };
 
-  // Autoplay effect - Responsive según productos visibles
+  // Autoplay effect - Basado ÚNICAMENTE en scroll real del contenedor
   useEffect(() => {
     if (!isAutoplayActive || !carouselRef.current) return;
 
     const carousel = carouselRef.current;
 
     autoplayIntervalRef.current = setInterval(() => {
+      // No hacer nada si el carrusel está en medio de un scroll
       if (!carousel || isScrollingRef.current) return;
 
       const cardElement = carousel.querySelector('[data-product-card]');
       if (!cardElement) return;
 
+      // Obtener medidas reales del contenedor
       const cardWidth = cardElement.getBoundingClientRect().width;
       const gap = 24; // gap-6 = 24px
-      const scrollAmount = (cardWidth + gap) * visibleProducts;
+      const singleCardScroll = cardWidth + gap;
+      const scrollAmount = singleCardScroll * visibleProducts;
+
+      // Obtener posición actual del scroll
       const { scrollLeft, scrollWidth, clientWidth } = carousel;
       const maxScroll = scrollWidth - clientWidth;
 
+      // Marcar como scrolling para evitar conflictos
       isScrollingRef.current = true;
 
-      // Verificar si estamos cerca del final (dentro de 100px)
-      if (scrollLeft + clientWidth >= maxScroll - 100) {
-        // Reiniciar al inicio de forma suave sin detener
+      // Verificar si estamos cerca del final
+      // Si scrollLeft + scrollAmount >= maxScroll, reiniciar
+      if (scrollLeft + scrollAmount >= maxScroll - 10) {
+        // Reiniciar al inicio de forma suave
         carousel.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
         // Desplazar según cantidad de productos visibles
@@ -234,8 +245,8 @@ export default function Products() {
           <div className="flex gap-2 mt-6 md:mt-0">
             <button
               onClick={() => {
-                scroll('left');
                 pauseAutoplay();
+                scroll('left');
               }}
               disabled={!canScrollLeft}
               className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -245,8 +256,8 @@ export default function Products() {
             </button>
             <button
               onClick={() => {
-                scroll('right');
                 pauseAutoplay();
+                scroll('right');
               }}
               disabled={!canScrollRight}
               className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
