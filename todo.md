@@ -36,6 +36,7 @@
 - [x] Crear tests para validación de solicitudes (9 tests passing)
 - [x] Corregir distribución de categorías con grid fijo de 3 columnas (2 filas)
 - [x] Corregir alineación de Recordatorios y Empresarial (centradas con flex)
+- [x] Reducir espaciado entre tarjetas de primera fila (Cócteles, Postres, Temporada)
 
 ## In Progress / Pending
 - [ ] Test solicitudes personalizadas en browser (manual testing)

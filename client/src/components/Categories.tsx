@@ -135,7 +135,7 @@ export default function Categories() {
         {/* Cards Container */}
         <div className="max-w-7xl mx-auto">
           {/* Desktop: First Row - 3 columns */}
-          <div className="hidden md:grid grid-cols-3 gap-6 lg:gap-8 justify-items-center mb-12">
+          <div className="hidden md:grid grid-cols-3 gap-2 lg:gap-3 justify-items-center mb-12">
             {firstRowCategories.map((category, index) => (
               <CategoryCard
                 key={category.id}
