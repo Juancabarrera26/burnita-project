@@ -44,6 +44,19 @@ export default function Categories() {
   return (
     <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16 md:mb-20"
+        >
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal leading-[1.1] tracking-brand-tight">
+            Colecciones
+          </h2>
+        </motion.div>
+
         {/* Cards Grid */}
         <div className="flex flex-wrap justify-center gap-4 md:gap-6 lg:gap-8 max-w-7xl mx-auto">
           {categories.map((category, index) => (

@@ -22,6 +22,9 @@
 - [x] Implementar tipografía responsive con clamp para tamaño medio equilibrado
 - [x] Reducir espaciado entre título y subtítulo
 - [x] Eliminar completamente el badge "HIPERREALISMO LÚDICO"
+- [x] Limpiar estilos inline conflictivos en Hero, Products, BurnitaLab, About
+- [x] Restaurar tipografía responsive con clamp() en Hero
+- [x] Agregar título "Colecciones" en sección de Categories
 
 ## In Progress / Pending
 - [ ] Test AI image generation in browser (manual testing)
