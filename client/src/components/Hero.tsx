@@ -25,8 +25,8 @@ export default function Hero() {
       </video>
 
       {/* Content - Con z-index para estar encima del video */}
-      <div className="container relative z-10 pt-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
+      <div className="container relative z-10 pt-20">
+        <div className="max-w-3xl mx-auto text-center">
           {/* Badge - Mango Fizz highlight */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -34,7 +34,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 mb-6"
           >
-            <span className="px-4 py-1.5 bg-mango text-charcoal font-body text-xs font-semibold tracking-widest uppercase rounded-full hidden">
+            <span className="px-4 py-1.5 bg-mango text-charcoal font-body text-xs font-semibold tracking-widest uppercase rounded-full">
               Hiperrealismo Lúdico
             </span>
           </motion.div>
@@ -44,7 +44,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-crema leading-[1.05] tracking-brand mb-8 mx-auto"
+            className="font-display text-5xl md:text-7xl lg:text-8xl font-extrabold text-crema leading-[1.05] tracking-brand mb-8"
             style={{
               textShadow: "0px 2px 8px rgba(0, 0, 0, 0.25)",
               color: '#110d09',
@@ -53,6 +53,21 @@ export default function Hero() {
             Enciende la{" "}
             <span className="block">Diversión.</span>
           </motion.h1>
+
+          {/* Description - Inter 400, Crema Vitrina 90% con text-shadow sutil */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="font-body text-base md:text-lg max-w-xl mx-auto mb-10 leading-relaxed"
+            style={{
+              color: '#110d09',
+              textShadow: "0px 1px 4px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            Velas lúdicas que encienden conversación. Objetos-conversación que
+            elevan cumpleaños, mesas y eventos con color, textura y humor.
+          </motion.p>
 
           {/* CTA Buttons */}
           <motion.div

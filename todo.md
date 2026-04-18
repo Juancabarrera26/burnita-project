@@ -19,9 +19,6 @@
 - [x] Implemented error handling for failed image generation
 - [x] Created unit tests for candles.generateImage endpoint (8 tests passing)
 
-- [x] Centrar título en Hero en todos los dispositivos
-- [x] Remover subtítulo descriptivo del Hero
-
 ## In Progress / Pending
 - [ ] Test AI image generation in browser (manual testing)
 - [ ] Optimize image generation prompts based on user feedback
