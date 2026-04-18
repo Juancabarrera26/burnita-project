@@ -18,6 +18,10 @@
 - [x] Added loading state with spinner during image generation
 - [x] Implemented error handling for failed image generation
 - [x] Created unit tests for candles.generateImage endpoint (8 tests passing)
+- [x] Actualizar Hero: título "Más que una vela", subtítulo "Una experiencia"
+- [x] Implementar tipografía responsive con clamp para tamaño medio equilibrado
+- [x] Reducir espaciado entre título y subtítulo
+- [x] Eliminar completamente el badge "HIPERREALISMO LÚDICO"
 
 ## In Progress / Pending
 - [ ] Test AI image generation in browser (manual testing)
