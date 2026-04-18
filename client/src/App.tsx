@@ -7,6 +7,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import ExploreLab from "./pages/ExploreLab";
+import SolicitudRecordatorios from "./pages/SolicitudRecordatorios";
+import SolicitudEmpresarial from "./pages/SolicitudEmpresarial";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -15,6 +17,8 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/shop"} component={Shop} />
       <Route path={"/explore-lab"} component={ExploreLab} />
+      <Route path={"/solicitud/recordatorios"} component={SolicitudRecordatorios} />
+      <Route path={"/solicitud/empresarial"} component={SolicitudEmpresarial} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

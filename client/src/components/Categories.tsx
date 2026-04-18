@@ -6,6 +6,7 @@
  */
 
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 
 const categories = [
   {
@@ -13,34 +14,47 @@ const categories = [
     name: "CÓCTELES",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/cocteles_893c54ad.jpg",
     rotation: -5,
+    link: null,
   },
   {
     id: 2,
     name: "POSTRES",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/postres_2d9b2cab.jpeg",
     rotation: -2,
+    link: null,
   },
   {
     id: 3,
     name: "RECORDATORIOS",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/recordatorios_282e5b3c.jpeg",
     rotation: 2,
+    link: "/solicitud/recordatorios",
   },
   {
     id: 4,
     name: "TEMPORADA",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/temporada_aedf55be.jpeg",
     rotation: 5,
+    link: null,
   },
   {
     id: 5,
     name: "EMPRESARIAL",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/empresarial_f2ba8815.jpeg",
     rotation: -3,
+    link: "/solicitud/empresarial",
   },
 ];
 
 export default function Categories() {
+  const [, navigate] = useLocation();
+
+  const handleCardClick = (link: string | null) => {
+    if (link) {
+      navigate(link);
+    }
+  };
+
   return (
     <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
@@ -72,7 +86,8 @@ export default function Categories() {
                 scale: 1.02,
                 transition: { duration: 0.3 }
               }}
-              className="group cursor-pointer"
+              className={`group ${category.link ? 'cursor-pointer' : ''}`}
+              onClick={() => handleCardClick(category.link)}
             >
               <div className="w-44 sm:w-48 md:w-52 lg:w-56 bg-white rounded-xl border-2 border-charcoal shadow-lg overflow-hidden">
                 {/* Card Header */}

@@ -26,8 +26,18 @@
 - [x] Restaurar tipografía responsive con clamp() en Hero
 - [x] Agregar título "Colecciones" en sección de Categories
 
+- [x] Crear tabla customRequests en base de datos
+- [x] Crear endpoint tRPC requests.createCustomRequest
+- [x] Crear componente CustomRequestForm reutilizable
+- [x] Crear página /solicitud/recordatorios
+- [x] Crear página /solicitud/empresarial
+- [x] Actualizar rutas en App.tsx
+- [x] Actualizar tarjetas de categorías para redirigir a solicitudes
+- [x] Crear tests para validación de solicitudes (9 tests passing)
+
 ## In Progress / Pending
-- [ ] Test AI image generation in browser (manual testing)
+- [ ] Test solicitudes personalizadas en browser (manual testing)
+- [ ] Test AI image generation en browser (manual testing)
 - [ ] Optimize image generation prompts based on user feedback
 - [ ] Add cart functionality for generated candles
 - [ ] Implement user authentication for saving custom candles

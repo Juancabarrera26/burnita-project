@@ -3,6 +3,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { generateImage } from "./_core/imageGeneration";
+import { createCustomRequest } from "./db";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -16,6 +17,64 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
+  }),
+
+  requests: router({
+    createCustomRequest: publicProcedure
+      .input(
+        z.object({
+          requestType: z.enum(["recordatorios", "empresarial"]),
+          clientName: z.string().min(1, "El nombre es requerido"),
+          clientEmail: z.string().email("Email inválido"),
+          clientPhone: z.string().min(1, "El teléfono es requerido"),
+          clientCompany: z.string().optional(),
+          clientLocation: z.string().min(1, "La ubicación es requerida"),
+          generalDescription: z.string().min(10, "La descripción debe tener al menos 10 caracteres"),
+          candleType: z.string().min(1, "El tipo de vela es requerido"),
+          quantity: z.number().min(1, "La cantidad debe ser al menos 1"),
+          message: z.string().optional(),
+          colors: z.string().optional(),
+          style: z.string().optional(),
+          references: z.string().optional(),
+          event: z.string().optional(),
+          deliveryDate: z.string().optional(),
+          budget: z.string().optional(),
+          urgency: z.enum(["normal", "urgente"]).default("normal"),
+          additionalComments: z.string().optional(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        try {
+          const result = await createCustomRequest({
+            requestType: input.requestType,
+            clientName: input.clientName,
+            clientEmail: input.clientEmail,
+            clientPhone: input.clientPhone,
+            clientCompany: input.clientCompany || null,
+            clientLocation: input.clientLocation,
+            generalDescription: input.generalDescription,
+            candleType: input.candleType,
+            quantity: input.quantity,
+            message: input.message || null,
+            colors: input.colors || null,
+            style: input.style || null,
+            references: input.references || null,
+            event: input.event || null,
+            deliveryDate: input.deliveryDate || null,
+            budget: input.budget || null,
+            urgency: input.urgency,
+            additionalComments: input.additionalComments || null,
+            status: "pendiente",
+          });
+          return {
+            success: true,
+            message: "Tu solicitud fue enviada correctamente. Nos pondremos en contacto pronto.",
+          };
+        } catch (error) {
+          console.error("[Custom Request Error]", error);
+          throw new Error("No pudimos procesar tu solicitud. Por favor intenta de nuevo.");
+        }
+      }),
   }),
 
   candles: router({

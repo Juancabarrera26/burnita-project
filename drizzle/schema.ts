@@ -26,3 +26,47 @@ export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
 // TODO: Add your tables here
+// Tabla para solicitudes personalizadas de velas
+export const customRequests = mysqlTable("customRequests", {
+  id: int("id").autoincrement().primaryKey(),
+  requestType: mysqlEnum("requestType", ["recordatorios", "empresarial"]).notNull(),
+  
+  // Datos del cliente
+  clientName: varchar("clientName", { length: 255 }).notNull(),
+  clientEmail: varchar("clientEmail", { length: 320 }).notNull(),
+  clientPhone: varchar("clientPhone", { length: 20 }).notNull(),
+  clientCompany: varchar("clientCompany", { length: 255 }),
+  clientLocation: varchar("clientLocation", { length: 255 }).notNull(),
+  
+  // Descripción general
+  generalDescription: text("generalDescription").notNull(),
+  
+  // Producto
+  candleType: varchar("candleType", { length: 255 }).notNull(),
+  quantity: int("quantity").notNull(),
+  
+  // Personalización
+  message: text("message"),
+  colors: text("colors"),
+  style: varchar("style", { length: 255 }),
+  references: text("references"),
+  
+  // Contexto
+  event: varchar("event", { length: 255 }),
+  deliveryDate: varchar("deliveryDate", { length: 255 }),
+  
+  // Presupuesto y urgencia
+  budget: varchar("budget", { length: 255 }),
+  urgency: mysqlEnum("urgency", ["normal", "urgente"]).default("normal").notNull(),
+  
+  // Comentarios adicionales
+  additionalComments: text("additionalComments"),
+  
+  // Metadata
+  status: mysqlEnum("status", ["pendiente", "revisada", "completada", "cancelada"]).default("pendiente").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type CustomRequest = typeof customRequests.$inferSelect;
+export type InsertCustomRequest = typeof customRequests.$inferInsert;
