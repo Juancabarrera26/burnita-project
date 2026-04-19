@@ -88,25 +88,42 @@ export default function Header() {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-charcoal/10">
-            <nav className="flex flex-col gap-4">
+      {/* Mobile Menu Drawer - Lateral desde la derecha */}
+      {isMobileMenuOpen && (
+        <>
+          {/* Overlay oscuro */}
+          <div
+            className="fixed inset-0 bg-black/30 z-40 md:hidden"
+            onClick={handleMobileMenuClose}
+            style={{ top: "64px" }}
+          />
+
+          {/* Drawer Menu */}
+          <div
+            className="fixed top-16 right-0 bottom-0 w-4/5 max-w-xs z-40 md:hidden transition-transform duration-300 ease-out"
+            style={{
+              backgroundColor: "#FFF6EA",
+              boxShadow: "-10px 0 30px rgba(0,0,0,0.1)",
+              transform: isMobileMenuOpen ? "translateX(0)" : "translateX(100%)",
+            }}
+          >
+            <nav className="flex flex-col gap-6 p-6 pt-8">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={handleMobileMenuClose}
-                  className="font-body text-base font-medium text-charcoal/80 hover:text-charcoal transition-colors"
+                  className="font-body text-lg font-medium text-charcoal hover:text-guayaba transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
             </nav>
           </div>
-        )}
-      </div>
+        </>
+      )}
     </header>
   );
 }

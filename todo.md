@@ -79,6 +79,12 @@
 - [x] Remover fondos blancos de secciones de categorías
 - [x] Usar fondos transparentes para que se vea el color global
 
+- [x] Corregir menú móvil: drawer lateral desde la derecha
+- [x] Aplicar fondo sólido #FFF6EA con sombra
+- [x] Agregar overlay oscuro detrás del menú
+- [x] Implementar animación suave de entrada
+- [x] Asegurar z-index correcto
+
 ## In Progress / Pending
 - [ ] Test navegación en browser (manual testing - CRÍTICO)
 - [ ] Test solicitudes personalizadas en browser (manual testing)
