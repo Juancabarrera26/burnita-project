@@ -47,7 +47,12 @@
 - [x] Mantener solo Cócteles, Postres y Temporada en tienda
 - [x] Agregar nuevamente sección Temporada a tienda
 
+- [x] Agregar funcionalidad a botones del Hero (scroll suave a secciones)
+- [x] Agregar navegación a tarjetas de categorías (links a /shop)
+- [x] Agregar IDs a secciones para scroll y navegación
+
 ## In Progress / Pending
+- [ ] Test navegación en browser (manual testing)
 - [ ] Test solicitudes personalizadas en browser (manual testing)
 - [ ] Test AI image generation en browser (manual testing)
 - [ ] Optimize image generation prompts based on user feedback

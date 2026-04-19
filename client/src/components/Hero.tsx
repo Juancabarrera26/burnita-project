@@ -9,8 +9,25 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 
 export default function Hero() {
+  const [, navigate] = useLocation();
+
+  const handleScrollToCollections = () => {
+    const collectionsSection = document.getElementById('colecciones');
+    if (collectionsSection) {
+      collectionsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollToBurnitaLab = () => {
+    const burnitaLabSection = document.getElementById('burnita-lab');
+    if (burnitaLabSection) {
+      burnitaLabSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Video Background 4K - Sin overlay oscuro */}
@@ -66,16 +83,18 @@ export default function Hero() {
           >
             {/* Primary CTA - Guayaba Pop */}
             <Button
+              onClick={handleScrollToCollections}
               size="lg"
-              className="bg-guayaba text-crema hover:bg-guayaba/90 font-body font-medium rounded-full px-8 py-6 text-base shadow-lg hover:shadow-xl transition-all"
+              className="bg-guayaba text-crema hover:bg-guayaba/90 font-body font-medium rounded-full px-8 py-6 text-base shadow-lg hover:shadow-xl transition-all cursor-pointer"
             >
               Ver Colección
               <ArrowRight className="ml-2 w-4 h-4" />
             </Button>
             {/* Secondary CTA - Mint Soda */}
             <Button
+              onClick={handleScrollToBurnitaLab}
               size="lg"
-              className="bg-mint text-charcoal hover:bg-mint/90 font-body font-medium rounded-full px-8 py-6 text-base"
+              className="bg-mint text-charcoal hover:bg-mint/90 font-body font-medium rounded-full px-8 py-6 text-base cursor-pointer"
             >
               Personaliza la tuya
             </Button>

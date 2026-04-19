@@ -169,8 +169,12 @@ function ProductCard({ product }: { product: (typeof categories[0]["products"])[
 
 // Componente CategorySection
 function CategorySection({ category }: { category: (typeof categories)[0] }) {
+  const getSectionId = (title: string) => {
+    return title.toLowerCase().replace(/\s+/g, '-');
+  };
+
   return (
-    <section className="py-16 md:py-20 px-4">
+    <section id={getSectionId(category.title)} className="py-16 md:py-20 px-4">
       <div className="container">
         {/* Título de categoría */}
         <div className="mb-12">

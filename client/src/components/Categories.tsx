@@ -14,21 +14,21 @@ const firstRowCategories = [
     name: "CÓCTELES",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/cocteles_893c54ad.jpg",
     rotation: -5,
-    link: null,
+    link: "/shop#cocteles-de-velas",
   },
   {
     id: 2,
     name: "POSTRES",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/postres_2d9b2cab.jpeg",
     rotation: -2,
-    link: null,
+    link: "/shop#postres-de-velas",
   },
   {
     id: 4,
     name: "TEMPORADA",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/temporada_aedf55be.jpeg",
     rotation: 5,
-    link: null,
+    link: "/shop#velas-de-temporada",
   },
 ];
 
@@ -112,12 +112,22 @@ export default function Categories() {
 
   const handleCardClick = (link: string | null) => {
     if (link) {
-      navigate(link);
+      if (link.startsWith('#')) {
+        // Scroll to section on current page
+        const sectionId = link.substring(1);
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to different page
+        navigate(link);
+      }
     }
   };
 
   return (
-    <section id="categories" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#fff6ea'}}>
+    <section id="colecciones" className="py-20 md:py-28 bg-lavanda/20 relative overflow-hidden" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
         {/* Section Title */}
         <motion.div
