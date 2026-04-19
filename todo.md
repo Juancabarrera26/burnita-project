@@ -41,6 +41,7 @@
 - [x] Actualizar texto en sección "¿Postre o vela?"
 - [x] Cambiar fecha de "Desde 2023" a "Desde 2025"
 - [x] Eliminar botón "Conoce nuestra historia"
+- [x] Cambiar título a "Nuestra historia"
 
 ## In Progress / Pending
 - [ ] Test solicitudes personalizadas en browser (manual testing)
