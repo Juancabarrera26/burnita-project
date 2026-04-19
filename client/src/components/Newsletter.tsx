@@ -21,7 +21,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="newsletter" className="py-20 md:py-28 bg-crema">
+    <section id="contacto" className="py-20 md:py-28 bg-crema">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

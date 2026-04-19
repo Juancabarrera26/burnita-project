@@ -4,6 +4,7 @@
  * Organización: Hero + Categorías + Grid de Productos
  */
 
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowUpRight } from "lucide-react";
@@ -169,12 +170,18 @@ function ProductCard({ product }: { product: (typeof categories[0]["products"])[
 
 // Componente CategorySection
 function CategorySection({ category }: { category: (typeof categories)[0] }) {
-  const getSectionId = (title: string) => {
-    return title.toLowerCase().replace(/\s+/g, '-');
+  const getSectionId = (categoryId: string) => {
+    // Mapear IDs de categoría a IDs de sección
+    const idMap: Record<string, string> = {
+      'cocktails': 'cocteles',
+      'desserts': 'postres',
+      'seasonal': 'temporada'
+    };
+    return idMap[categoryId] || categoryId;
   };
 
   return (
-    <section id={getSectionId(category.title)} className="py-16 md:py-20 px-4">
+    <section id={getSectionId(category.id)} className="py-16 md:py-20 px-4">
       <div className="container">
         {/* Título de categoría */}
         <div className="mb-12">
@@ -198,6 +205,20 @@ function CategorySection({ category }: { category: (typeof categories)[0] }) {
 }
 
 export default function Shop() {
+  // Scroll a la sección si hay un hash en la URL
+  useEffect(() => {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      // Esperar a que el DOM esté listo
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />

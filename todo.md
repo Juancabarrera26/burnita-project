@@ -57,6 +57,14 @@
 - [x] Actualizar Header.tsx con manejo de navegación inteligente
 - [x] Cambiar ID de about a nuestra-historia
 
+- [x] Actualizar Header.tsx con IDs correctos (inicio, colecciones, nosotros, contacto)
+- [x] Agregar ID inicio a Hero.tsx
+- [x] Cambiar ID de nuestra-historia a nosotros en About.tsx
+- [x] Cambiar ID de newsletter a contacto en Newsletter.tsx
+- [x] Actualizar links de categorías (/shop#cocteles, /shop#postres, /shop#temporada)
+- [x] Agregar IDs a secciones de Shop.tsx (cocteles, postres, temporada)
+- [x] Implementar scroll automático al hash en Shop.tsx
+
 ## In Progress / Pending
 - [ ] Test navegación en browser (manual testing)
 - [ ] Test solicitudes personalizadas en browser (manual testing)

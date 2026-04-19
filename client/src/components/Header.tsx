@@ -10,11 +10,11 @@ import { ShoppingBag, Menu, X } from "lucide-react";
 import { useLocation } from "wouter";
 
 const navLinks = [
-  { label: "Inicio", href: "/" },
+  { label: "Inicio", href: "/#inicio" },
   { label: "Shop", href: "/shop" },
   { label: "Colecciones", href: "/#colecciones" },
-  { label: "Nosotros", href: "/#nuestra-historia" },
-  { label: "Contacto", href: "/#newsletter" },
+  { label: "Nosotros", href: "/#nosotros" },
+  { label: "Contacto", href: "/#contacto" },
 ];
 
 export default function Header() {

@@ -14,21 +14,21 @@ const firstRowCategories = [
     name: "CÓCTELES",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/cocteles_893c54ad.jpg",
     rotation: -5,
-    link: "/shop#cocteles-de-velas",
+    link: "/shop#cocteles",
   },
   {
     id: 2,
     name: "POSTRES",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/postres_2d9b2cab.jpeg",
     rotation: -2,
-    link: "/shop#postres-de-velas",
+    link: "/shop#postres",
   },
   {
     id: 4,
     name: "TEMPORADA",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/temporada_aedf55be.jpeg",
     rotation: 5,
-    link: "/shop#velas-de-temporada",
+    link: "/shop#temporada",
   },
 ];
 
