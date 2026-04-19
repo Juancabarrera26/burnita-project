@@ -45,6 +45,7 @@
 
 - [x] Eliminar categorías Recordatorios y Empresarial de página /shop
 - [x] Mantener solo Cócteles, Postres y Temporada en tienda
+- [x] Agregar nuevamente sección Temporada a tienda
 
 ## In Progress / Pending
 - [ ] Test solicitudes personalizadas en browser (manual testing)

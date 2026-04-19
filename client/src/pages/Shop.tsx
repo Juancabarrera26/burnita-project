@@ -93,7 +93,47 @@ const categories = [
       },
     ],
   },
-
+  {
+    id: "seasonal",
+    name: "Temporada",
+    title: "Velas de Temporada",
+    description: "Colección especial con aromas y diseños de temporada",
+    basePrice: 42000,
+    products: [
+      {
+        id: 7,
+        name: "Océano Nocturno",
+        material: "Cera de Soya Natural",
+        price: 31000,
+        image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
+        bgColor: "bg-mint/30",
+      },
+      {
+        id: 17,
+        name: "Invierno Mágico",
+        material: "Cera de Soya Natural",
+        price: 42000,
+        image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-temporada-1.webp",
+        bgColor: "bg-mint/20",
+      },
+      {
+        id: 18,
+        name: "Primavera Floreciente",
+        material: "Cera de Soya Natural",
+        price: 40000,
+        image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-temporada-2.webp",
+        bgColor: "bg-guayaba/15",
+      },
+      {
+        id: 19,
+        name: "Verano Tropical",
+        material: "Cera de Soya Natural",
+        price: 44000,
+        image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-temporada-3.webp",
+        bgColor: "bg-mango/20",
+      },
+    ],
+  },
 ];
 
 // Componente ProductCard
