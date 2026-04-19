@@ -7,7 +7,6 @@
 
 import { useState, useEffect } from "react";
 import { ShoppingBag, Menu, X } from "lucide-react";
-import { useLocation } from "wouter";
 
 const navLinks = [
   { label: "Inicio", href: "/#inicio" },
@@ -20,7 +19,6 @@ const navLinks = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,23 +28,8 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleMobileMenuClose = () => {
     setIsMobileMenuOpen(false);
-
-    // Si el link es a una sección del home
-    if (href.startsWith("/#")) {
-      const sectionId = href.substring(2);
-
-      // Si estamos en el home, hacer scroll suave
-      if (location === "/") {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-      // Si no estamos en el home, la navegación normal llevará al home
-      // y useNavigationScroll hará scroll al top
-    }
   };
 
   return (
@@ -74,12 +57,6 @@ export default function Header() {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={(e) => {
-                  if (link.href.startsWith("/#")) {
-                    e.preventDefault();
-                    handleNavClick(link.href);
-                  }
-                }}
                 className="font-body text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors"
               >
                 {link.label}
@@ -120,14 +97,7 @@ export default function Header() {
                 <a
                   key={link.label}
                   href={link.href}
-                  onClick={(e) => {
-                    if (link.href.startsWith("/#")) {
-                      e.preventDefault();
-                      handleNavClick(link.href);
-                    } else {
-                      setIsMobileMenuOpen(false);
-                    }
-                  }}
+                  onClick={handleMobileMenuClose}
                   className="font-body text-base font-medium text-charcoal/80 hover:text-charcoal transition-colors"
                 >
                   {link.label}

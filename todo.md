@@ -65,6 +65,11 @@
 - [x] Agregar IDs a secciones de Shop.tsx (cocteles, postres, temporada)
 - [x] Implementar scroll automático al hash en Shop.tsx
 
+- [x] Eliminar preventDefault() de Header.tsx
+- [x] Implementar navegación limpia sin interceptación de clicks
+- [x] Actualizar useNavigationScroll para scroll al hash después de cambio de ruta
+- [x] Actualizar Shop.tsx para usar block: 'start' en scrollIntoView
+
 ## In Progress / Pending
 - [ ] Test navegación en browser (manual testing)
 - [ ] Test solicitudes personalizadas en browser (manual testing)

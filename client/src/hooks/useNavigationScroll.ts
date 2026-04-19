@@ -4,6 +4,7 @@ import { useLocation } from 'wouter';
 /**
  * Hook para manejar scroll al top cuando cambia la ruta
  * Asegura que cada navegación comience desde el inicio de la página
+ * Luego, si hay un hash, hace scroll a esa sección
  */
 export function useNavigationScroll() {
   const [location] = useLocation();
@@ -11,6 +12,17 @@ export function useNavigationScroll() {
   useEffect(() => {
     // Scroll al top cuando cambia la ruta
     window.scrollTo(0, 0);
+
+    // Después de cambiar de ruta, si hay un hash, hacer scroll a esa sección
+    setTimeout(() => {
+      const hash = window.location.hash.substring(1);
+      if (hash) {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }, 50);
   }, [location]);
 }
 
@@ -26,7 +38,7 @@ export function useSmoothScroll(sectionId: string | null, delay: number = 100) {
     const timer = setTimeout(() => {
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, delay);
 
@@ -49,7 +61,7 @@ export function useSmartNavigation() {
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }, 100);
     } else {
