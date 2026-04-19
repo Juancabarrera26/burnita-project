@@ -38,6 +38,10 @@
 - [x] Corregir alineación de Recordatorios y Empresarial (centradas con flex)
 - [x] Unificar espaciado entre tarjetas: primera fila ahora usa flex con gap-6 lg:gap-8 igual que segunda fila
 
+- [x] Actualizar texto en sección "¿Postre o vela?"
+- [x] Cambiar fecha de "Desde 2023" a "Desde 2025"
+- [x] Eliminar botón "Conoce nuestra historia"
+
 ## In Progress / Pending
 - [ ] Test solicitudes personalizadas en browser (manual testing)
 - [ ] Test AI image generation en browser (manual testing)

@@ -5,8 +5,6 @@
  * Tipografía: Manrope para títulos, Inter para texto
  */
 
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const stats = [
@@ -53,7 +51,7 @@ export default function About() {
           >
             {/* Badge - Mango Fizz */}
             <span className="inline-block px-3 py-1 bg-mango/30 text-charcoal font-body text-xs font-semibold tracking-widest uppercase rounded-full mb-4">
-              Desde 2023
+              Desde 2025
             </span>
             
             {/* Title - Manrope */}
@@ -64,19 +62,16 @@ export default function About() {
             {/* Description - Inter */}
             <div className="space-y-4 mb-8">
               <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
-                No hacemos velas para que pasen desapercibidas. Las hacemos para
-                despertar sonrisas. Para convertir un "gracias" en wow, un detalle
-                en recuerdo, un evento en foto obligada.
+                Todo empezó con una idea simple: reinventar la vela como un objeto que sorprende. Inspiradas en su historia... siempre presente en celebraciones y momentos especiales, decidimos darles un giro inesperado.
               </p>
               <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
-                Somos color, textura y juego. Somos artesanía con guiño foodie,
-                hiperrealismo que no se come pero se antoja. Creemos en la
-                personalización simple, en la entrega a tiempo y en empaques que
-                dicen "abréme ya".
+                Creamos piezas que juegan con la percepción: parecen postres, pero están hechas para encenderse. Un guiño divertido, cuidado al detalle, que convierte cualquier ocasión en algo memorable.
               </p>
               <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
-                Encendemos momentos que se quedan: en la mesa, en la memoria y en
-                el carrete.
+                Trabajamos desde la artesanía, con foco en la textura, el color y esos pequeños detalles que hacen toda la diferencia.
+              </p>
+              <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
+                Más que velas, son momentos que se quedan.
               </p>
             </div>
 
@@ -103,15 +98,7 @@ export default function About() {
               ))}
             </div>
 
-            {/* CTA - Outline */}
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-crema font-body font-medium rounded-full px-8 bg-transparent"
-            >
-              Conoce nuestra historia
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
+
           </motion.div>
         </div>
       </div>
