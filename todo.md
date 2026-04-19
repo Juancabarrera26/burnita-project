@@ -75,6 +75,10 @@
 - [x] Verificar que useNavigationScroll maneje correctamente el hash
 - [x] Asegurar que todos los IDs estén correctos en todas las páginas
 
+- [x] Actualizar color de fondo de /shop a #FFF6EA
+- [x] Remover fondos blancos de secciones de categorías
+- [x] Usar fondos transparentes para que se vea el color global
+
 ## In Progress / Pending
 - [ ] Test navegación en browser (manual testing - CRÍTICO)
 - [ ] Test solicitudes personalizadas en browser (manual testing)

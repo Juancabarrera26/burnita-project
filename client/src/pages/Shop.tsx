@@ -220,12 +220,12 @@ export default function Shop() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: '#FFF6EA' }}>
       <Header />
 
       <main className="pt-24 md:pt-32">
         {/* Hero de la tienda */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-guayaba/5 via-white to-mint/5">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-guayaba/5 via-transparent to-mint/5">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -245,13 +245,13 @@ export default function Shop() {
 
         {/* Secciones de categorías */}
         {categories.map((category, index) => (
-          <div key={category.id} className={index % 2 === 0 ? "bg-white" : "bg-crema/50"}>
+          <div key={category.id} className="bg-transparent">
             <CategorySection category={category} />
           </div>
         ))}
 
         {/* CTA final */}
-        <section className="py-16 md:py-24 bg-gradient-to-r from-guayaba to-mint">
+        <section className="py-16 md:py-24" style={{ background: 'linear-gradient(to right, #E8B4A8, #7ECCC4)' }}>
           <div className="container text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
               ¿No encontraste lo que buscas?
