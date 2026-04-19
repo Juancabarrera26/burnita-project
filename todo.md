@@ -70,8 +70,13 @@
 - [x] Actualizar useNavigationScroll para scroll al hash después de cambio de ruta
 - [x] Actualizar Shop.tsx para usar block: 'start' en scrollIntoView
 
+- [x] Agregar lógica de scroll al hash en Home.tsx
+- [x] Verificar que Header.tsx no tenga preventDefault
+- [x] Verificar que useNavigationScroll maneje correctamente el hash
+- [x] Asegurar que todos los IDs estén correctos en todas las páginas
+
 ## In Progress / Pending
-- [ ] Test navegación en browser (manual testing)
+- [ ] Test navegación en browser (manual testing - CRÍTICO)
 - [ ] Test solicitudes personalizadas en browser (manual testing)
 - [ ] Test AI image generation en browser (manual testing)
 - [ ] Optimize image generation prompts based on user feedback
