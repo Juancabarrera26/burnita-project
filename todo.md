@@ -43,6 +43,9 @@
 - [x] Eliminar botón "Conoce nuestra historia"
 - [x] Cambiar título a "Nuestra historia"
 
+- [x] Eliminar categorías Recordatorios y Empresarial de página /shop
+- [x] Mantener solo Cócteles, Postres y Temporada en tienda
+
 ## In Progress / Pending
 - [ ] Test solicitudes personalizadas en browser (manual testing)
 - [ ] Test AI image generation en browser (manual testing)
