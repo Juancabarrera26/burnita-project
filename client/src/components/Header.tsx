@@ -7,18 +7,20 @@
 
 import { useState, useEffect } from "react";
 import { ShoppingBag, Menu, X } from "lucide-react";
+import { useLocation } from "wouter";
 
 const navLinks = [
   { label: "Inicio", href: "/" },
   { label: "Shop", href: "/shop" },
-  { label: "Colecciones", href: "#categories" },
-  { label: "Nosotros", href: "#about" },
-  { label: "Contacto", href: "#newsletter" },
+  { label: "Colecciones", href: "/#colecciones" },
+  { label: "Nosotros", href: "/#nuestra-historia" },
+  { label: "Contacto", href: "/#newsletter" },
 ];
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +29,25 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+
+    // Si el link es a una sección del home
+    if (href.startsWith("/#")) {
+      const sectionId = href.substring(2);
+
+      // Si estamos en el home, hacer scroll suave
+      if (location === "/") {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+      // Si no estamos en el home, la navegación normal llevará al home
+      // y useNavigationScroll hará scroll al top
+    }
+  };
 
   return (
     <header
@@ -39,10 +60,7 @@ export default function Header() {
       <div className="container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo - Imagen Burnita */}
-          <a
-            href="/"
-            className="hover:opacity-80 transition-opacity"
-          >
+          <a href="/" className="hover:opacity-80 transition-opacity">
             <img
               src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/ZVHHNJjKALrylsDS.png"
               alt="Burnita Logo"
@@ -56,6 +74,12 @@ export default function Header() {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => {
+                  if (link.href.startsWith("/#")) {
+                    e.preventDefault();
+                    handleNavClick(link.href);
+                  }
+                }}
                 className="font-body text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors"
               >
                 {link.label}
@@ -96,8 +120,15 @@ export default function Header() {
                 <a
                   key={link.label}
                   href={link.href}
+                  onClick={(e) => {
+                    if (link.href.startsWith("/#")) {
+                      e.preventDefault();
+                      handleNavClick(link.href);
+                    } else {
+                      setIsMobileMenuOpen(false);
+                    }
+                  }}
                   className="font-body text-base font-medium text-charcoal/80 hover:text-charcoal transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </a>

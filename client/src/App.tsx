@@ -9,8 +9,12 @@ import Shop from "./pages/Shop";
 import ExploreLab from "./pages/ExploreLab";
 import SolicitudRecordatorios from "./pages/SolicitudRecordatorios";
 import SolicitudEmpresarial from "./pages/SolicitudEmpresarial";
+import { useNavigationScroll } from "./hooks/useNavigationScroll";
 
 function Router() {
+  // Scroll al top en cada cambio de ruta
+  useNavigationScroll();
+
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>

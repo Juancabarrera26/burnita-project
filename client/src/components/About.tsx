@@ -15,7 +15,7 @@ const stats = [
 
 export default function About() {
   return (
-    <section id="about" className="py-20 md:py-28 bg-crema">
+    <section id="nuestra-historia" className="py-20 md:py-28 bg-crema">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Image */}

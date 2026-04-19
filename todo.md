@@ -51,6 +51,12 @@
 - [x] Agregar navegación a tarjetas de categorías (links a /shop)
 - [x] Agregar IDs a secciones para scroll y navegación
 
+- [x] Crear hook useNavigationScroll para scroll al top en cambios de ruta
+- [x] Actualizar App.tsx para usar hook de scroll
+- [x] Corregir links del navbar a rutas completas (/#colecciones, /#nuestra-historia, /#newsletter)
+- [x] Actualizar Header.tsx con manejo de navegación inteligente
+- [x] Cambiar ID de about a nuestra-historia
+
 ## In Progress / Pending
 - [ ] Test navegación en browser (manual testing)
 - [ ] Test solicitudes personalizadas en browser (manual testing)
