@@ -116,3 +116,14 @@
 - [x] Cambiar textos de suscripción ("Quiero enterarme")
 - [x] Cambiar imagen de tarjeta de Cócteles en Colecciones
 - [ ] Probar envío de emails en navegador (manual testing)
+- [x] Actualizar precios en carrusel (Products.tsx)
+  - Nube de Fresa: 55.000 COP (excepción postre)
+  - Resto de cócteles: 50.000 COP
+  - Formato: "50.000 COP" (sin $)
+- [x] Actualizar precios en tienda (Shop.tsx)
+  - Cócteles: 50.000 COP
+  - Postres: 55.000 COP
+  - Temporada: 55.000 COP
+  - Formato consistente: "50.000 COP"
+- [x] Verificar que no se modifique diseño, layout ni estructura
+- [x] Verificar responsividad en mobile/desktop
