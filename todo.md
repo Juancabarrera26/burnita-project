@@ -134,6 +134,13 @@
   - Agregar 5 productos del carrusel: Sandía Sunset, Mojito Verde, Atardecer Tropical, Océano Nocturno, Eclipse Dorado
   - Agregar 3 nuevos: Limoncita, Pink Ice, Citrusita
   - Total: 8 cócteles a 50.000 COP
+- [x] Reemplazar imagen de Citrusita con nueva versión
+  - Subida a S3: /manus-storage/Citrusita_c45b99ed.png
+  - URL actualizada en Shop.tsx
+- [x] Eliminar marcos de color (bgColor) de todas las velas de cócteles
+  - Todos los productos con bgColor: "bg-transparent"
+- [x] Verificar espaciado uniforme entre tarjetas
+  - Grid con gap-6 md:gap-8 (consistente)
 - [ ] Probar envío de emails en navegador (manual testing)
 - [x] Actualizar precios en carrusel (Products.tsx)
   - Nube de Fresa: 55.000 COP (excepción postre)
