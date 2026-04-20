@@ -115,6 +115,11 @@
 - [x] Agregar mensajes de confirmación y éxito
 - [x] Cambiar textos de suscripción ("Quiero enterarme")
 - [x] Cambiar imagen de tarjeta de Cócteles en Colecciones
+- [x] Expandir lista de colores disponibles (13 colores)
+- [x] Crear selector visual de colores con swatches circulares
+- [x] Integrar nuevo selector en ExploreLab.tsx
+- [x] Actualizar enum de colores en server/routers.ts
+- [x] Mantener funcionalidad de generación de velas
 - [ ] Probar envío de emails en navegador (manual testing)
 - [x] Actualizar precios en carrusel (Products.tsx)
   - Nube de Fresa: 55.000 COP (excepción postre)

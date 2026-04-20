@@ -13,7 +13,7 @@ import { Loader2 } from "lucide-react";
 
 type CandleType = "Cóctel" | "Postre" | "Elegante" | "Corporativa";
 type CandleAroma = "Frutal" | "Dulce" | "Cítrico" | "Especiado";
-type CandleColor = "Rosado" | "Amarillo" | "Rojo" | "Blanco";
+type CandleColor = "Rojo" | "Azul" | "Amarillo" | "Verde" | "Naranja" | "Morado" | "Rosado" | "Negro" | "Blanco" | "Cafe" | "Beige" | "Dorado" | "Plateado";
 type CandleDecoration = "Frutas" | "Crema" | "Especias" | "Minimalista";
 
 interface CandleCustomization {
@@ -45,10 +45,19 @@ const CANDLE_OPTIONS = {
     { label: "Especiado", value: "Especiado" as CandleAroma },
   ],
   color: [
-    { label: "Rosado", value: "Rosado" as CandleColor },
-    { label: "Amarillo", value: "Amarillo" as CandleColor },
-    { label: "Rojo", value: "Rojo" as CandleColor },
-    { label: "Blanco", value: "Blanco" as CandleColor },
+    { label: "Rojo", value: "Rojo" as CandleColor, hex: "#EF4444" },
+    { label: "Azul", value: "Azul" as CandleColor, hex: "#3B82F6" },
+    { label: "Amarillo", value: "Amarillo" as CandleColor, hex: "#FBBF24" },
+    { label: "Verde", value: "Verde" as CandleColor, hex: "#10B981" },
+    { label: "Naranja", value: "Naranja" as CandleColor, hex: "#F97316" },
+    { label: "Morado", value: "Morado" as CandleColor, hex: "#A855F7" },
+    { label: "Rosado", value: "Rosado" as CandleColor, hex: "#EC4899" },
+    { label: "Negro", value: "Negro" as CandleColor, hex: "#1F2937" },
+    { label: "Blanco", value: "Blanco" as CandleColor, hex: "#F3F4F6" },
+    { label: "Cafe", value: "Cafe" as CandleColor, hex: "#92400E" },
+    { label: "Beige", value: "Beige" as CandleColor, hex: "#D2B48C" },
+    { label: "Dorado", value: "Dorado" as CandleColor, hex: "#D4AF37" },
+    { label: "Plateado", value: "Plateado" as CandleColor, hex: "#C0C0C0" },
   ],
   decoration: [
     { label: "Frutas", value: "Frutas" as CandleDecoration },
@@ -178,21 +187,32 @@ export default function ExploreLab() {
                   </div>
                 </div>
 
-                {/* Color */}
+                {/* Color - Improved Visual Selector */}
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-black">Color</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {CANDLE_OPTIONS.color.map((option) => (
+                  <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
+                    {CANDLE_OPTIONS.color.map((option: any) => (
                       <button
                         key={option.value}
                         onClick={() => handleSelect("color", option.value)}
-                        className={`py-3 px-4 rounded-lg font-semibold transition-all ${
+                        className={`flex flex-col items-center gap-2 transition-all ${
                           customization.color === option.value
-                            ? "bg-[#2ADBC9] text-white"
-                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                            ? "scale-110"
+                            : "hover:scale-105"
                         }`}
+                        title={option.label}
                       >
-                        {option.label}
+                        <div
+                          className="w-14 h-14 rounded-full shadow-md border-2 transition-all cursor-pointer"
+                          style={{
+                            backgroundColor: option.hex,
+                            borderColor: customization.color === option.value ? "#000" : "#ddd",
+                            borderWidth: customization.color === option.value ? "3px" : "2px",
+                          }}
+                        />
+                        <span className="text-xs font-semibold text-gray-700 text-center leading-tight">
+                          {option.label}
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -248,65 +268,65 @@ export default function ExploreLab() {
                       />
                     </div>
 
-                    {/* Product Info */}
+                    {/* Candle Details */}
                     <div className="space-y-4">
-                      <div>
-                        <h3 className="text-2xl font-bold text-black mb-2">
-                          Vela {generatedCandle.type}
-                        </h3>
-                        <p className="text-gray-600">
-                          Aroma: <span className="font-semibold">{generatedCandle.aroma}</span> • Color:{" "}
-                          <span className="font-semibold">{generatedCandle.color}</span> • Decoración:{" "}
-                          <span className="font-semibold">{generatedCandle.decoration}</span>
-                        </p>
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                          <p className="text-gray-600 font-semibold">Tipo</p>
+                          <p className="text-black font-bold">{generatedCandle.type}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-600 font-semibold">Aroma</p>
+                          <p className="text-black font-bold">{generatedCandle.aroma}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-600 font-semibold">Color</p>
+                          <p className="text-black font-bold">{generatedCandle.color}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-600 font-semibold">Decoración</p>
+                          <p className="text-black font-bold">{generatedCandle.decoration}</p>
+                        </div>
                       </div>
 
+                      {/* Price */}
                       <div className="pt-4 border-t border-gray-200">
-                        <p className="text-gray-600 text-sm mb-2">PRECIO APROXIMADO</p>
+                        <p className="text-gray-600 font-semibold mb-2">Precio estimado</p>
                         <p className="text-3xl font-bold text-[#FF5CA8]">
-                          ${getRecommendedPrice().toLocaleString("es-CO")} COP
+                          {getRecommendedPrice().toLocaleString()} COP
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-3 pt-4">
-                        <Button className="bg-[#FF5CA8] hover:bg-[#FF3D8F] text-white font-bold py-2 rounded-full">
-                          Agregar al carrito
+                      {/* Action Buttons */}
+                      <div className="flex gap-3 pt-4">
+                        <Button
+                          onClick={() => setGeneratedCandle(null)}
+                          className="flex-1 py-3 bg-gray-200 text-gray-800 hover:bg-gray-300 rounded-lg font-semibold"
+                        >
+                          Crear otra
                         </Button>
                         <Button
-                          variant="outline"
-                          onClick={() => setGeneratedCandle(null)}
-                          className="border-2 border-gray-300 text-gray-700 font-bold py-2 rounded-full hover:bg-gray-50"
+                          className="flex-1 py-3 bg-[#FF5CA8] text-white hover:bg-[#FF3D8F] rounded-lg font-semibold"
                         >
-                          Intentar de nuevo
+                          Agregar al carrito
                         </Button>
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="w-full h-96 bg-gradient-to-br from-[#fff6ea] to-[#f5e6d3] rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-300">
+                  <div className="w-full h-96 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-300">
                     <div className="text-center">
-                      <div className="text-6xl mb-4">🕯️</div>
-                      <p className="text-gray-600 font-semibold">
-                        Selecciona tus preferencias y haz clic en "Generar mi vela"
+                      <p className="text-gray-500 font-semibold text-lg mb-2">
+                        Tu vela personalizada
+                      </p>
+                      <p className="text-gray-400 text-sm">
+                        Selecciona opciones y haz clic en "Generar mi vela"
                       </p>
                     </div>
                   </div>
                 )}
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Info Section */}
-        <section className="py-12 px-4 bg-[#fff6ea]">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4 text-black">¿Cómo funciona?</h2>
-            <p className="text-gray-700 mb-8">
-              Selecciona las características de tu vela personalizada y nuestro generador de IA creará una imagen única basada en tus preferencias. Luego puedes agregar tu vela al carrito y personalizarla aún más con nuestro equipo.
-            </p>
-            <Button className="bg-[#FF5CA8] hover:bg-[#FF3D8F] text-white font-bold py-3 px-8 rounded-full">
-              Contacta con nosotros
-            </Button>
           </div>
         </section>
       </main>

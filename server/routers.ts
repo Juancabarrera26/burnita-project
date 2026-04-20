@@ -83,7 +83,7 @@ export const appRouter = router({
         z.object({
           type: z.enum(["Cóctel", "Postre", "Elegante", "Corporativa"]),
           aroma: z.enum(["Frutal", "Dulce", "Cítrico", "Especiado"]),
-          color: z.enum(["Rosado", "Amarillo", "Rojo", "Blanco"]),
+          color: z.enum(["Rojo", "Azul", "Amarillo", "Verde", "Naranja", "Morado", "Rosado", "Negro", "Blanco", "Cafe", "Beige", "Dorado", "Plateado"]),
           decoration: z.enum(["Frutas", "Crema", "Especias", "Minimalista"]),
         })
       )
