@@ -123,6 +123,17 @@
 - [x] Eliminar descripción "Cera de Soya Natural" de todas las velas
   - Carrusel (Products.tsx): eliminado
   - Tienda (Shop.tsx): eliminado
+- [x] Extraer ZIP de cócteles y analizar imágenes
+- [x] Identificar nombres desde etiquetas visibles:
+  - Limoncita (cóctel amarillo)
+  - Pink Ice (cóctel rosado)
+  - Citrusita (cóctel cítrico)
+- [x] Subir imágenes a S3 y obtener URLs
+- [x] Integrar en tienda:
+  - Eliminar Nube de Fresa de cócteles (es postre)
+  - Agregar 5 productos del carrusel: Sandía Sunset, Mojito Verde, Atardecer Tropical, Océano Nocturno, Eclipse Dorado
+  - Agregar 3 nuevos: Limoncita, Pink Ice, Citrusita
+  - Total: 8 cócteles a 50.000 COP
 - [ ] Probar envío de emails en navegador (manual testing)
 - [x] Actualizar precios en carrusel (Products.tsx)
   - Nube de Fresa: 55.000 COP (excepción postre)
