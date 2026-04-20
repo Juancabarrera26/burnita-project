@@ -106,3 +106,12 @@
 - AI Integration: Manus built-in image generation service
 - Authentication: Manus OAuth
 - Styling: Tailwind CSS with custom brand colors
+
+## Email Configuration
+- [x] Crear archivo send-email.php con lógica de envío de emails
+- [x] Actualizar formulario de suscripción (Newsletter) con envío a PHP
+- [x] Actualizar formularios de personalización con envío a PHP
+- [x] Implementar validación de campos obligatorios
+- [x] Agregar mensajes de confirmación y éxito
+- [x] Cambiar textos de suscripción ("Quiero enterarme")
+- [ ] Probar envío de emails en navegador (manual testing)
