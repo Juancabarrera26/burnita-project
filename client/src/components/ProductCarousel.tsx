@@ -1,6 +1,7 @@
 /**
  * ProductCarousel - Carrusel horizontal de productos
- * Muestra 4 productos en desktop, 2 en tablet, 1 en mobile
+ * Desktop: Muestra 4 productos, puntos del 1 al 4
+ * Mobile: Muestra 1 producto, puntos del 1 al 10 (todas las fotos)
  * Navegación con botones izquierda/derecha
  */
 
@@ -22,6 +23,7 @@ interface ProductCarouselProps {
 
 export default function ProductCarousel({ products }: ProductCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Configuración responsive
   const getItemsPerView = () => {
@@ -37,15 +39,29 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   // Actualizar itemsPerView en resize
   useEffect(() => {
     const handleResize = () => {
-      setItemsPerView(getItemsPerView());
+      const newItemsPerView = getItemsPerView();
+      setItemsPerView(newItemsPerView);
+      setIsMobile(newItemsPerView === 1);
     };
+    
+    // Inicializar isMobile
+    setIsMobile(itemsPerView === 1);
+    
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [itemsPerView]);
 
   const maxIndex = Math.max(0, products.length - itemsPerView);
-  // Limitar a máximo 4 indicadores (puntos)
-  const maxIndicators = Math.min(4, maxIndex + 1);
+  
+  // Lógica de indicadores diferente según dispositivo
+  let maxIndicators: number;
+  if (isMobile) {
+    // Mobile: mostrar todos los productos (del 1 al 10)
+    maxIndicators = products.length;
+  } else {
+    // Desktop/Tablet: mostrar solo 4 puntos
+    maxIndicators = Math.min(4, maxIndex + 1);
+  }
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? maxIndicators - 1 : prev - 1));
@@ -123,10 +139,10 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
         </>
       )}
 
-      {/* Indicadores de posición: solo mostrar 4 puntos (del 1 al 4) */}
+      {/* Indicadores de posición: responsivo */}
       {products.length > itemsPerView && (
-        <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: Math.min(4, maxIndex + 1) }).map((_, i) => (
+        <div className="flex justify-center gap-2 mt-8 flex-wrap">
+          {Array.from({ length: maxIndicators }).map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
