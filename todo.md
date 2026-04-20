@@ -146,6 +146,18 @@
   - Eliminadas de Postres y Temporada
   - bgColor: "bg-transparent" en todas
   - Total de cócteles: 11 productos
+- [x] Crear componente ProductCarousel reutilizable
+  - Navegación con botones izq/der
+  - Responsive: 4 desktop, 2 tablet, 1 mobile
+  - Movimiento suave con framer-motion
+  - Loop infinito
+- [x] Integrar ProductCarousel en Shop.tsx
+  - Reemplazar grid con carrusel en todas las secciones
+  - Cócteles, Postres y Temporada funcionan como carrusel
+- [x] Implementar lógica de navegación
+  - Botones con iconos ChevronLeft/ChevronRight
+  - Click en botones mueve 1 producto
+  - Indicadores de posición (dots)
 - [ ] Probar envío de emails en navegador (manual testing)
 - [x] Actualizar precios en carrusel (Products.tsx)
   - Nube de Fresa: 55.000 COP (excepción postre)

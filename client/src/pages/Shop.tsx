@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import ProductCarousel from "@/components/ProductCarousel";
 
 // Datos de productos por categoría
 const categories = [
@@ -201,12 +202,8 @@ function CategorySection({ category }: { category: (typeof categories)[0] }) {
           </p>
         </div>
 
-        {/* Grid de productos */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {category.products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {/* Carrusel de productos */}
+        <ProductCarousel products={category.products} />
       </div>
     </section>
   );
