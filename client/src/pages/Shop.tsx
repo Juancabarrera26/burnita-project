@@ -68,6 +68,27 @@ const categories = [
         image: "/manus-storage/Citrusita_c45b99ed.png",
         bgColor: "bg-transparent",
       },
+      {
+        id: 3,
+        name: "Miel Dorada",
+        price: 50000,
+        image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp",
+        bgColor: "bg-transparent",
+      },
+      {
+        id: 5,
+        name: "Frutos del Bosque",
+        price: 50000,
+        image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp",
+        bgColor: "bg-transparent",
+      },
+      {
+        id: 7,
+        name: "Océano Nocturno",
+        price: 50000,
+        image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
+        bgColor: "bg-transparent",
+      },
     ],
   },
   {
@@ -77,20 +98,6 @@ const categories = [
     description: "Velas con crema tipo postre (cupcakes, helados, etc)",
     basePrice: 50000,
     products: [
-      {
-        id: 3,
-        name: "Miel Dorada",
-        price: 55000,
-        image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp",
-        bgColor: "bg-crema",
-      },
-      {
-        id: 5,
-        name: "Frutos del Bosque",
-        price: 55000,
-        image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp",
-        bgColor: "bg-mango/30",
-      },
       {
         id: 10,
         name: "Cupcake Deluxe",
@@ -114,13 +121,6 @@ const categories = [
     description: "Colección especial con aromas y diseños de temporada",
     basePrice: 42000,
     products: [
-      {
-        id: 7,
-        name: "Océano Nocturno",
-        price: 55000,
-        image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
-        bgColor: "bg-mint/30",
-      },
       {
         id: 17,
         name: "Invierno Mágico",

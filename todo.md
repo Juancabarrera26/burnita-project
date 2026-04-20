@@ -141,6 +141,11 @@
   - Todos los productos con bgColor: "bg-transparent"
 - [x] Verificar espaciado uniforme entre tarjetas
   - Grid con gap-6 md:gap-8 (consistente)
+- [x] Mover Miel Dorada, Frutos del Bosque y Océano Nocturno a Cócteles
+  - Agregadas a sección de Cócteles con precio 50.000 COP
+  - Eliminadas de Postres y Temporada
+  - bgColor: "bg-transparent" en todas
+  - Total de cócteles: 11 productos
 - [ ] Probar envío de emails en navegador (manual testing)
 - [x] Actualizar precios en carrusel (Products.tsx)
   - Nube de Fresa: 55.000 COP (excepción postre)
