@@ -1,8 +1,7 @@
 /**
  * ProductCarousel - Carrusel horizontal de productos
- * Desktop: Muestra 4 productos, puntos del 1 al 4
- * Mobile: Muestra 1 producto, puntos del 1 al 10 (todas las fotos)
- * Navegación con botones izquierda/derecha
+ * MOBILE: Interfaz separada - 1 foto a la vez, puntos del 1 al 10
+ * DESKTOP: Interfaz separada - 4 fotos a la vez, puntos del 1 al 4
  */
 
 import { useState, useEffect } from "react";
@@ -25,55 +24,121 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Configuración responsive
-  const getItemsPerView = () => {
-    if (typeof window === "undefined") return 4;
-    const width = window.innerWidth;
-    if (width < 768) return 1; // mobile
-    if (width < 1024) return 2; // tablet
-    return 4; // desktop
-  };
-
-  const [itemsPerView, setItemsPerView] = useState(getItemsPerView());
-
-  // Actualizar itemsPerView en resize
+  // Detectar si es mobile
   useEffect(() => {
-    const handleResize = () => {
-      const newItemsPerView = getItemsPerView();
-      setItemsPerView(newItemsPerView);
-      setIsMobile(newItemsPerView === 1);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
-    
-    // Inicializar isMobile
-    setIsMobile(itemsPerView === 1);
-    
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [itemsPerView]);
 
-  const maxIndex = Math.max(0, products.length - itemsPerView);
-  
-  // Lógica de indicadores diferente según dispositivo
-  let maxIndicators: number;
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // ==================== MOBILE INTERFACE ====================
   if (isMobile) {
-    // Mobile: mostrar todos los productos (del 1 al 10)
-    maxIndicators = products.length;
-  } else {
-    // Desktop/Tablet: mostrar solo 4 puntos
-    maxIndicators = Math.min(4, maxIndex + 1);
+    const handlePrevMobile = () => {
+      setCurrentIndex((prev) => (prev === 0 ? products.length - 1 : prev - 1));
+    };
+
+    const handleNextMobile = () => {
+      setCurrentIndex((prev) => (prev === products.length - 1 ? 0 : prev + 1));
+    };
+
+    return (
+      <div className="relative w-full">
+        {/* Contenedor del carrusel - 1 foto a la vez */}
+        <div className="overflow-hidden bg-white">
+          <motion.div
+            className="flex"
+            animate={{ x: -currentIndex * 100 + "%" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            style={{
+              width: `${products.length * 100}%`,
+            }}
+          >
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="flex-shrink-0 w-full"
+              >
+                <motion.div
+                  className="group px-4"
+                >
+                  <div
+                    className={`${product.bgColor} rounded-2xl p-6 mb-4 overflow-hidden relative h-64 flex items-center justify-center`}
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover rounded-xl"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-display text-lg font-bold text-charcoal">
+                      {product.name}
+                    </h3>
+                    <div className="flex items-center justify-between pt-2">
+                      <span className="font-display text-xl font-bold text-guayaba">
+                        {product.price.toLocaleString("es-CO")} COP
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Botones de navegación - Mobile */}
+        <button
+          onClick={handlePrevMobile}
+          className="absolute left-0 top-1/3 -translate-y-1/2 -translate-x-8 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
+          aria-label="Anterior"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={handleNextMobile}
+          className="absolute right-0 top-1/3 -translate-y-1/2 translate-x-8 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
+          aria-label="Siguiente"
+        >
+          <ChevronRight size={20} />
+        </button>
+
+        {/* Indicadores - Mobile: del 1 al 10 (todas las fotos) */}
+        <div className="flex justify-center gap-2 mt-8 flex-wrap">
+          {Array.from({ length: products.length }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`h-2 rounded-full transition-all ${
+                i === currentIndex ? "bg-guayaba w-8" : "bg-guayaba/30 w-2"
+              }`}
+              aria-label={`Ir a foto ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    );
   }
 
-  const handlePrev = () => {
+  // ==================== DESKTOP INTERFACE ====================
+  const itemsPerView = 4;
+  const maxIndex = Math.max(0, products.length - itemsPerView);
+  const maxIndicators = Math.min(4, maxIndex + 1);
+
+  const handlePrevDesktop = () => {
     setCurrentIndex((prev) => (prev === 0 ? maxIndicators - 1 : prev - 1));
   };
 
-  const handleNext = () => {
+  const handleNextDesktop = () => {
     setCurrentIndex((prev) => (prev === maxIndicators - 1 ? 0 : prev + 1));
   };
 
   return (
     <div className="relative w-full">
-      {/* Contenedor del carrusel */}
+      {/* Contenedor del carrusel - 4 fotos a la vez */}
       <div className="overflow-hidden bg-white">
         <motion.div
           className="flex gap-6 md:gap-8"
@@ -119,18 +184,18 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
         </motion.div>
       </div>
 
-      {/* Botones de navegación */}
+      {/* Botones de navegación - Desktop */}
       {products.length > itemsPerView && (
         <>
           <button
-            onClick={handlePrev}
+            onClick={handlePrevDesktop}
             className="absolute left-0 top-1/3 -translate-y-1/2 -translate-x-12 md:-translate-x-16 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
             aria-label="Anterior"
           >
             <ChevronLeft size={24} />
           </button>
           <button
-            onClick={handleNext}
+            onClick={handleNextDesktop}
             className="absolute right-0 top-1/3 -translate-y-1/2 translate-x-12 md:translate-x-16 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
             aria-label="Siguiente"
           >
@@ -139,9 +204,9 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
         </>
       )}
 
-      {/* Indicadores de posición: responsivo */}
+      {/* Indicadores - Desktop: del 1 al 4 */}
       {products.length > itemsPerView && (
-        <div className="flex justify-center gap-2 mt-8 flex-wrap">
+        <div className="flex justify-center gap-2 mt-8">
           {Array.from({ length: maxIndicators }).map((_, i) => (
             <button
               key={i}
