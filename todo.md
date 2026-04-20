@@ -120,6 +120,9 @@
 - [x] Integrar nuevo selector en ExploreLab.tsx
 - [x] Actualizar enum de colores en server/routers.ts
 - [x] Mantener funcionalidad de generación de velas
+- [x] Eliminar descripción "Cera de Soya Natural" de todas las velas
+  - Carrusel (Products.tsx): eliminado
+  - Tienda (Shop.tsx): eliminado
 - [ ] Probar envío de emails en navegador (manual testing)
 - [x] Actualizar precios en carrusel (Products.tsx)
   - Nube de Fresa: 55.000 COP (excepción postre)

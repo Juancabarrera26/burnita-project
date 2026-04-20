@@ -22,7 +22,6 @@ const categories = [
       {
         id: 1,
         name: "Nube de Fresa",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/eLfUhTdnLWLCwiNF.webp",
         bgColor: "bg-lavanda/30",
@@ -30,7 +29,6 @@ const categories = [
       {
         id: 2,
         name: "Sandía Sunset",
-        material: "Cera de Soya Natural",
         price: 50000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp",
         bgColor: "bg-mango/20",
@@ -38,7 +36,6 @@ const categories = [
       {
         id: 4,
         name: "Mojito Verde",
-        material: "Cera de Soya Natural",
         price: 50000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/CZamKEhNVDpNpvdU.webp",
         bgColor: "bg-guayaba/15",
@@ -46,7 +43,6 @@ const categories = [
       {
         id: 9,
         name: "Tropical Vibes",
-        material: "Cera de Soya Natural",
         price: 50000,
         image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-cocteles-1-XHYqBd79kqkFebMnYRDMq6.webp",
         bgColor: "bg-mint/20",
@@ -63,7 +59,6 @@ const categories = [
       {
         id: 3,
         name: "Miel Dorada",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp",
         bgColor: "bg-crema",
@@ -71,7 +66,6 @@ const categories = [
       {
         id: 5,
         name: "Frutos del Bosque",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp",
         bgColor: "bg-mango/30",
@@ -79,7 +73,6 @@ const categories = [
       {
         id: 10,
         name: "Cupcake Deluxe",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-postres-1-5p9s85mtmntxVUKM86Z5TS.webp",
         bgColor: "bg-guayaba/20",
@@ -87,7 +80,6 @@ const categories = [
       {
         id: 11,
         name: "Helado Soñado",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-postres-1-5p9s85mtmntxVUKM86Z5TS.webp",
         bgColor: "bg-lavanda/20",
@@ -104,7 +96,6 @@ const categories = [
       {
         id: 7,
         name: "Océano Nocturno",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
         bgColor: "bg-mint/30",
@@ -112,7 +103,6 @@ const categories = [
       {
         id: 17,
         name: "Invierno Mágico",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-temporada-1.webp",
         bgColor: "bg-mint/20",
@@ -120,7 +110,6 @@ const categories = [
       {
         id: 18,
         name: "Primavera Floreciente",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-temporada-2.webp",
         bgColor: "bg-guayaba/15",
@@ -128,7 +117,6 @@ const categories = [
       {
         id: 19,
         name: "Verano Tropical",
-        material: "Cera de Soya Natural",
         price: 55000,
         image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/vela-temporada-3.webp",
         bgColor: "bg-mango/20",
@@ -154,7 +142,6 @@ function ProductCard({ product }: { product: (typeof categories[0]["products"])[
       </div>
       <div className="space-y-2">
         <h3 className="font-display text-lg font-bold text-charcoal">{product.name}</h3>
-        <p className="font-body text-sm text-charcoal/60">{product.material}</p>
         <div className="flex items-center justify-between pt-2">
           <span className="font-display text-xl font-bold text-guayaba">
             {product.price.toLocaleString()} COP

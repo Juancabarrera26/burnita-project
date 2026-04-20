@@ -21,7 +21,6 @@ const products = [
   {
     id: 1,
     name: "Nube de Fresa",
-    material: "Cera de Soya Natural",
     price: "55.000 COP",
     bgColor: "bg-lavanda/30",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/eLfUhTdnLWLCwiNF.webp",
@@ -29,7 +28,6 @@ const products = [
   {
     id: 2,
     name: "Sandía Sunset",
-    material: "Cera de Soya Natural",
     price: "50.000 COP",
     bgColor: "bg-mango/20",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp",
@@ -37,7 +35,6 @@ const products = [
   {
     id: 3,
     name: "Miel Dorada",
-    material: "Cera de Soya Natural",
     price: "50.000 COP",
     bgColor: "bg-crema",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp",
@@ -45,7 +42,6 @@ const products = [
   {
     id: 4,
     name: "Mojito Verde",
-    material: "Cera de Soya Natural",
     price: "50.000 COP",
     bgColor: "bg-guayaba/15",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/CZamKEhNVDpNpvdU.webp",
@@ -53,7 +49,6 @@ const products = [
   {
     id: 5,
     name: "Frutos del Bosque",
-    material: "Cera de Soya Natural",
     price: "50.000 COP",
     bgColor: "bg-mango/30",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp",
@@ -61,7 +56,6 @@ const products = [
   {
     id: 6,
     name: "Atardecer Tropical",
-    material: "Cera de Soya Natural",
     price: "50.000 COP",
     bgColor: "bg-mint/20",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/KtCXNCkEisgWrviL.webp",
@@ -69,7 +63,6 @@ const products = [
   {
     id: 7,
     name: "Océano Nocturno",
-    material: "Cera de Soya Natural",
     price: "50.000 COP",
     bgColor: "bg-mint/30",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
@@ -77,7 +70,6 @@ const products = [
   {
     id: 8,
     name: "Eclipse Dorado",
-    material: "Cera de Soya Natural",
     price: "50.000 COP",
     bgColor: "bg-guayaba/20",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/IPeSKSvvXNaAfAxq.webp",
@@ -348,10 +340,7 @@ export default function Products() {
                   <h3 className="font-display text-xl md:text-2xl font-semibold text-charcoal mb-1">
                     {product.name}
                   </h3>
-                  {/* Material - Inter */}
-                  <p className="font-body text-sm text-charcoal/60">
-                    {product.material}
-                  </p>
+
                 </div>
                 {/* Price - Guayaba Pop */}
                 <p className="font-body text-lg font-semibold text-guayaba">
