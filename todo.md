@@ -114,4 +114,5 @@
 - [x] Implementar validación de campos obligatorios
 - [x] Agregar mensajes de confirmación y éxito
 - [x] Cambiar textos de suscripción ("Quiero enterarme")
+- [x] Cambiar imagen de tarjeta de Cócteles en Colecciones
 - [ ] Probar envío de emails en navegador (manual testing)

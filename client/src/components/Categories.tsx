@@ -12,7 +12,7 @@ const firstRowCategories = [
   {
     id: 1,
     name: "CÓCTELES",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/cocteles_893c54ad.jpg",
+    image: "/manus-storage/pasted_file_j0DXMd_BurnitaShNov25(45)(1)_400ec80f.webp",
     rotation: -5,
     link: "/shop#cocteles",
   },
