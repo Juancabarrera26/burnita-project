@@ -44,13 +44,15 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   }, []);
 
   const maxIndex = Math.max(0, products.length - itemsPerView);
+  // Limitar a máximo 4 indicadores (puntos)
+  const maxIndicators = Math.min(4, maxIndex + 1);
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? maxIndicators - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === maxIndicators - 1 ? 0 : prev + 1));
   };
 
   return (
