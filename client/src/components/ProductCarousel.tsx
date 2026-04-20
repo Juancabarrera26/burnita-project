@@ -56,7 +56,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   return (
     <div className="relative w-full">
       {/* Contenedor del carrusel */}
-      <div className="overflow-hidden">
+      <div className="overflow-hidden bg-white">
         <motion.div
           className="flex gap-6 md:gap-8"
           animate={{ x: -currentIndex * (100 / itemsPerView) + "%" }}
@@ -121,10 +121,10 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
         </>
       )}
 
-      {/* Indicadores de posición (opcional) */}
+      {/* Indicadores de posición: solo mostrar 4 puntos (del 1 al 4) */}
       {products.length > itemsPerView && (
         <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+          {Array.from({ length: Math.min(4, maxIndex + 1) }).map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
