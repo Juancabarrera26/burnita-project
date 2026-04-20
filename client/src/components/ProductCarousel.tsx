@@ -1,10 +1,13 @@
 /**
  * ProductCarousel - Carrusel horizontal de productos
- * MOBILE: Interfaz separada - 1 foto a la vez, puntos del 1 al 10
- * DESKTOP: Interfaz separada - 4 fotos a la vez, puntos del 1 al 4
+ * Basado en el carrusel del Home (Products.tsx)
+ * - Scroll suave con botones izq/der
+ * - Loop visual infinito con clones
+ * - Autoplay responsivo
+ * - SIN deslizador
  */
 
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -21,204 +24,240 @@ interface ProductCarouselProps {
 }
 
 export default function ProductCarousel({ products }: ProductCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isAutoplayActive, setIsAutoplayActive] = useState(true);
+  const [visibleProducts, setVisibleProducts] = useState(3); // Default desktop
+  const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef(false);
+  const lastScrollTimeRef = useRef(0);
+  const isResettingRef = useRef(false);
 
-  // Detectar si es mobile
+  // Detectar cantidad de productos visibles según breakpoint
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+    const updateVisibleProducts = () => {
+      if (window.innerWidth < 640) {
+        setVisibleProducts(1); // Mobile
+      } else if (window.innerWidth < 1024) {
+        setVisibleProducts(2); // Tablet
+      } else {
+        setVisibleProducts(3); // Desktop
+      }
     };
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    updateVisibleProducts();
+    window.addEventListener("resize", updateVisibleProducts);
+    return () => window.removeEventListener("resize", updateVisibleProducts);
   }, []);
 
-  // ==================== MOBILE INTERFACE ====================
-  if (isMobile) {
-    const handlePrevMobile = () => {
-      setCurrentIndex((prev) => (prev === 0 ? products.length - 1 : prev - 1));
-    };
-
-    const handleNextMobile = () => {
-      setCurrentIndex((prev) => (prev === products.length - 1 ? 0 : prev + 1));
-    };
-
-    return (
-      <div className="relative w-full">
-        {/* Contenedor del carrusel - 1 foto a la vez */}
-        <div className="overflow-hidden bg-white">
-          <motion.div
-            className="flex"
-            animate={{ x: -currentIndex * 100 + "%" }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            style={{
-              width: `${products.length * 100}%`,
-            }}
-          >
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="flex-shrink-0 w-full"
-              >
-                <motion.div
-                  className="group px-4"
-                >
-                  <div
-                    className={`${product.bgColor} rounded-2xl p-6 mb-4 overflow-hidden relative h-64 flex items-center justify-center`}
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover rounded-xl"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="font-display text-lg font-bold text-charcoal">
-                      {product.name}
-                    </h3>
-                    <div className="flex items-center justify-between pt-2">
-                      <span className="font-display text-xl font-bold text-guayaba">
-                        {product.price.toLocaleString("es-CO")} COP
-                      </span>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Botones de navegación - Mobile */}
-        <button
-          onClick={handlePrevMobile}
-          className="absolute left-0 top-1/3 -translate-y-1/2 -translate-x-8 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
-          aria-label="Anterior"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <button
-          onClick={handleNextMobile}
-          className="absolute right-0 top-1/3 -translate-y-1/2 translate-x-8 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
-          aria-label="Siguiente"
-        >
-          <ChevronRight size={20} />
-        </button>
-
-        {/* Indicadores - Mobile: del 1 al 10 (todas las fotos) */}
-        <div className="flex justify-center gap-2 mt-8 flex-wrap">
-          {Array.from({ length: products.length }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === currentIndex ? "bg-guayaba w-8" : "bg-guayaba/30 w-2"
-              }`}
-              aria-label={`Ir a foto ${i + 1}`}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  // ==================== DESKTOP INTERFACE ====================
-  const itemsPerView = 4;
-  const maxIndex = Math.max(0, products.length - itemsPerView);
-  const maxIndicators = Math.min(4, maxIndex + 1);
-
-  const handlePrevDesktop = () => {
-    setCurrentIndex((prev) => (prev === 0 ? maxIndicators - 1 : prev - 1));
+  const checkScroll = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+    }
   };
 
-  const handleNextDesktop = () => {
-    setCurrentIndex((prev) => (prev === maxIndicators - 1 ? 0 : prev + 1));
+  const scroll = (direction: "left" | "right") => {
+    if (!carouselRef.current || isScrollingRef.current) return;
+
+    const carousel = carouselRef.current;
+    const cardElement = carousel.querySelector("[data-product-card]");
+    if (!cardElement) return;
+
+    const cardWidth = cardElement.getBoundingClientRect().width;
+    const gap = 24; // gap-6 = 24px
+    const scrollAmount = cardWidth + gap;
+
+    isScrollingRef.current = true;
+    lastScrollTimeRef.current = Date.now();
+
+    if (direction === "left") {
+      carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    } else {
+      carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+
+    setTimeout(() => {
+      isScrollingRef.current = false;
+      checkScroll();
+    }, 600);
   };
+
+  const pauseAutoplay = () => {
+    setIsAutoplayActive(false);
+    lastScrollTimeRef.current = Date.now();
+
+    if (pauseTimeoutRef.current) {
+      clearTimeout(pauseTimeoutRef.current);
+    }
+
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsAutoplayActive(true);
+    }, 3000);
+  };
+
+  // Autoplay effect - Con loop visual infinito
+  useEffect(() => {
+    if (!isAutoplayActive || !carouselRef.current) return;
+
+    const carousel = carouselRef.current;
+
+    autoplayIntervalRef.current = setInterval(() => {
+      if (!carousel || isScrollingRef.current || isResettingRef.current) return;
+
+      const cardElement = carousel.querySelector("[data-product-card]");
+      if (!cardElement) return;
+
+      const cardWidth = cardElement.getBoundingClientRect().width;
+      const gap = 24;
+      const singleCardScroll = cardWidth + gap;
+
+      const scrollAmount = singleCardScroll * visibleProducts;
+
+      const { scrollLeft, scrollWidth, clientWidth } = carousel;
+      const maxScroll = scrollWidth - clientWidth;
+
+      isScrollingRef.current = true;
+
+      const originalProductsWidth = singleCardScroll * products.length;
+      const cloneStartPosition = originalProductsWidth;
+
+      if (scrollLeft + scrollAmount >= cloneStartPosition - 10) {
+        isResettingRef.current = true;
+        carousel.scrollTo({ left: 0, behavior: "auto" });
+
+        setTimeout(() => {
+          isResettingRef.current = false;
+          isScrollingRef.current = false;
+        }, 50);
+      } else {
+        const newScrollLeft = scrollLeft + scrollAmount;
+        carousel.scrollTo({ left: newScrollLeft, behavior: "smooth" });
+
+        setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 600);
+      }
+    }, 2500);
+
+    return () => {
+      if (autoplayIntervalRef.current) {
+        clearInterval(autoplayIntervalRef.current);
+      }
+    };
+  }, [isAutoplayActive, visibleProducts, carouselRef, products.length]);
+
+  useEffect(() => {
+    return () => {
+      if (autoplayIntervalRef.current) {
+        clearInterval(autoplayIntervalRef.current);
+      }
+      if (pauseTimeoutRef.current) {
+        clearTimeout(pauseTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Crear array de productos con clones al final
+  const displayProducts = [
+    ...products,
+    ...products.slice(0, 3),
+  ];
 
   return (
     <div className="relative w-full">
-      {/* Contenedor del carrusel - 4 fotos a la vez */}
-      <div className="overflow-hidden bg-white">
-        <motion.div
-          className="flex gap-6 md:gap-8"
-          animate={{ x: -currentIndex * (100 / itemsPerView) + "%" }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          style={{
-            width: `${(products.length / itemsPerView) * 100}%`,
+      {/* Botones de navegación */}
+      <div className="flex gap-2 mb-6">
+        <button
+          onClick={() => {
+            pauseAutoplay();
+            scroll("left");
           }}
+          disabled={!canScrollLeft}
+          className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Productos anteriores"
         >
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="flex-shrink-0"
-              style={{ width: `${100 / products.length}%` }}
-            >
-              <motion.div
-                whileHover={{ y: -8 }}
-                transition={{ duration: 0.3 }}
-                className="group"
-              >
-                <div
-                  className={`${product.bgColor} rounded-2xl p-6 mb-4 overflow-hidden relative h-64 flex items-center justify-center`}
-                >
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-display text-lg font-bold text-charcoal">
-                    {product.name}
-                  </h3>
-                  <div className="flex items-center justify-between pt-2">
-                    <span className="font-display text-xl font-bold text-guayaba">
-                      {product.price.toLocaleString("es-CO")} COP
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          ))}
-        </motion.div>
+          <ChevronLeft className="w-5 h-5 text-charcoal" />
+        </button>
+        <button
+          onClick={() => {
+            pauseAutoplay();
+            scroll("right");
+          }}
+          disabled={!canScrollRight}
+          className="w-12 h-12 rounded-full border-2 border-charcoal/20 flex items-center justify-center hover:border-guayaba hover:bg-guayaba/5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Siguientes productos"
+        >
+          <ChevronRight className="w-5 h-5 text-charcoal" />
+        </button>
       </div>
 
-      {/* Botones de navegación - Desktop */}
-      {products.length > itemsPerView && (
-        <>
-          <button
-            onClick={handlePrevDesktop}
-            className="absolute left-0 top-1/3 -translate-y-1/2 -translate-x-12 md:-translate-x-16 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
-            aria-label="Anterior"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <button
-            onClick={handleNextDesktop}
-            className="absolute right-0 top-1/3 -translate-y-1/2 translate-x-12 md:translate-x-16 z-10 p-2 rounded-full bg-guayaba hover:bg-guayaba/80 text-white transition-colors"
-            aria-label="Siguiente"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </>
-      )}
+      {/* Carrusel */}
+      <div
+        ref={carouselRef}
+        className="flex gap-6 overflow-x-auto scroll-smooth bg-white"
+        style={{
+          scrollBehavior: "smooth",
+          scrollSnapType: "x mandatory",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+        onScroll={checkScroll}
+        onMouseEnter={pauseAutoplay}
+        onTouchStart={pauseAutoplay}
+      >
+        <style>{`
+          [data-carousel]::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
 
-      {/* Indicadores - Desktop: del 1 al 4 */}
-      {products.length > itemsPerView && (
-        <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: maxIndicators }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`h-2 rounded-full transition-all ${
-                i === currentIndex ? "bg-guayaba w-8" : "bg-guayaba/30 w-2"
-              }`}
-              aria-label={`Ir a posición ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
+        {displayProducts.map((product, index) => (
+          <motion.div
+            key={`${product.id}-${index}`}
+            data-product-card
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: (index % products.length) * 0.1 }}
+            className="flex-shrink-0 group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+            style={{
+              scrollSnapAlign: "center",
+              scrollSnapStop: "always",
+            }}
+          >
+            {/* Product Image */}
+            <div
+              className={`relative aspect-square rounded-2xl overflow-hidden mb-4 ${product.bgColor}`}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+
+            {/* Product Info */}
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="font-display text-xl md:text-2xl font-semibold text-charcoal mb-1">
+                  {product.name}
+                </h3>
+              </div>
+              <p className="font-body text-lg font-semibold text-guayaba">
+                {typeof product.price === "number"
+                  ? product.price.toLocaleString("es-CO") + " COP"
+                  : product.price}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 }
