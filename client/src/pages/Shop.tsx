@@ -4,11 +4,12 @@
  * Organización: Hero + Categorías + Grid de Productos
  */
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 
 // Datos de productos por categoría
@@ -176,7 +177,6 @@ const categories = [
         image: "/manus-storage/Pistatella_e821cdce.png",
         bgColor: "bg-transparent",
       },
-
     ],
   },
   {
@@ -276,16 +276,37 @@ function ProductCard({ product }: { product: (typeof categories[0]["products"])[
   );
 }
 
-// Componente CategorySection
+// Componente CategorySection con Ver más/Ver menos
 function CategorySection({ category }: { category: (typeof categories)[0] }) {
+  const [showAll, setShowAll] = useState(false);
+
   const getSectionId = (categoryId: string) => {
-    // Mapear IDs de categoría a IDs de sección
     const idMap: Record<string, string> = {
       'cocktails': 'cocteles',
       'desserts': 'postres',
       'seasonal': 'temporada'
     };
     return idMap[categoryId] || categoryId;
+  };
+
+  const initialCount = 4;
+  const visibleProducts = showAll ? category.products : category.products.slice(0, initialCount);
+  const hasMore = category.products.length > initialCount;
+
+  const handleScroll = () => {
+    if (showAll) {
+      const element = document.getElementById(getSectionId(category.id));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
+  const toggleShowAll = () => {
+    setShowAll(!showAll);
+    if (!showAll) {
+      setTimeout(handleScroll, 100);
+    }
   };
 
   return (
@@ -301,12 +322,35 @@ function CategorySection({ category }: { category: (typeof categories)[0] }) {
           </p>
         </div>
 
-        {/* Grid de productos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {category.products.map((product) => (
+        {/* Grid de productos - Responsive: 2 mobile, 2 tablet, 4 desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+          {visibleProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
+
+        {/* Botón Ver más / Ver menos */}
+        {hasMore && (
+          <div className="flex justify-center">
+            <Button
+              onClick={toggleShowAll}
+              variant="outline"
+              className="flex items-center gap-2 px-6 py-3 text-base md:text-lg border-2 border-guayaba text-guayaba hover:bg-guayaba/10"
+            >
+              {showAll ? (
+                <>
+                  Ver menos
+                  <ChevronUp className="w-5 h-5" />
+                </>
+              ) : (
+                <>
+                  Ver más
+                  <ChevronDown className="w-5 h-5" />
+                </>
+              )}
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
@@ -352,7 +396,7 @@ export default function Shop() {
         </section>
 
         {/* Secciones de categorías */}
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <div key={category.id} className="bg-transparent">
             <CategorySection category={category} />
           </div>
