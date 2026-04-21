@@ -101,7 +101,7 @@ const categories = [
     products: [
       {
         id: 1,
-        name: "Nube de Fresa",
+        name: "Nubesita",
         price: 55000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/eLfUhTdnLWLCwiNF.webp",
         bgColor: "bg-transparent",
@@ -176,13 +176,7 @@ const categories = [
         image: "/manus-storage/Pistatella_e821cdce.png",
         bgColor: "bg-transparent",
       },
-      {
-        id: 32,
-        name: "Nubesita",
-        price: 55000,
-        image: "/manus-storage/NubedeFresa_b8c9d5e2.png",
-        bgColor: "bg-transparent",
-      },
+
     ],
   },
   {
