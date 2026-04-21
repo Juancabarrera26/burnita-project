@@ -22,7 +22,7 @@ const categories = [
     products: [
       {
         id: 2,
-        name: "Sandía Sunset",
+        name: "Melodita",
         price: 50000,
         image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp",
         bgColor: "bg-transparent",
@@ -59,7 +59,7 @@ const categories = [
         id: 15,
         name: "Pink Ice",
         price: 50000,
-        image: "/manus-storage/PinkIce_b09ac31a.jpg",
+        image: "/manus-storage/Pinklce_aa3310ee.png",
         bgColor: "bg-transparent",
       },
       {

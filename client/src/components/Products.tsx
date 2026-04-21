@@ -27,7 +27,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Sandía Sunset",
+    name: "Melodita",
     price: "50.000 COP",
     bgColor: "bg-mango/20",
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp",
@@ -68,11 +68,11 @@ const products = [
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
   },
   {
-    id: 8,
-    name: "Ambaria",
+    id: 15,
+    name: "Pink Ice",
     price: "50.000 COP",
     bgColor: "bg-guayaba/20",
-    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/IPeSKSvvXNaAfAxq.webp",
+    image: "/manus-storage/Pinklce_aa3310ee.png",
   },
 ];
 
