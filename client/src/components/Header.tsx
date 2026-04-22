@@ -7,6 +7,7 @@
 
 import { useState, useEffect } from "react";
 import { ShoppingBag, Menu, X } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const navLinks = [
   { label: "Inicio", href: "/#inicio" },
@@ -16,9 +17,15 @@ const navLinks = [
   { label: "Contacto", href: "/#contacto" },
 ];
 
-export default function Header() {
+interface HeaderProps {
+  onCartClick?: () => void;
+}
+
+export default function Header({ onCartClick }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { getTotalItems } = useCart();
+  const cartCount = getTotalItems();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,13 +73,18 @@ export default function Header() {
 
           {/* Actions - Solo carrito e ícono de menú móvil */}
           <div className="flex items-center gap-4">
-            <a
-              href="/shop"
-              className="p-2 text-charcoal/80 hover:text-guayaba transition-colors"
-              aria-label="Ir a la tienda"
+            <button
+              onClick={onCartClick}
+              className="relative p-2 text-charcoal/80 hover:text-guayaba transition-colors"
+              aria-label="Abrir carrito"
             >
               <ShoppingBag className="w-5 h-5" />
-            </a>
+              {cartCount > 0 && (
+                <span className="absolute top-0 right-0 bg-guayaba text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </button>
 
             {/* Mobile Menu Button */}
             <button

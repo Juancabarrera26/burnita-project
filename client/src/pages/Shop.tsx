@@ -5,6 +5,7 @@
  */
 
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
@@ -247,12 +248,20 @@ const categories = [
 ];
 
 // Componente ProductCard
-function ProductCard({ product }: { product: (typeof categories[0]["products"])[0] }) {
+function ProductCard({ product }: { product: (typeof categories)[0]["products"][0] }) {
+  const [, setLocation] = useLocation();
+
+  const handleClick = () => {
+    const productId = product.name.toLowerCase().replace(/\s+/g, '-');
+    setLocation(`/product/${productId}`);
+  };
+
   return (
     <motion.div
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
-      className="group"
+      className="group cursor-pointer"
+      onClick={handleClick}
     >
       <div className={`${product.bgColor} rounded-2xl p-6 mb-4 overflow-hidden relative h-64 flex items-center justify-center`}>
         <img

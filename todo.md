@@ -158,6 +158,30 @@
   - Botones con iconos ChevronLeft/ChevronRight
   - Click en botones mueve 1 producto
   - Indicadores de posición (dots)
+- [ ] Crear contexto de carrito y hook useCart
+- [ ] Crear página de detalle de producto (ProductDetail.tsx)
+  - Imagen grande sin recortes
+  - Nombre, precio, descripción
+  - Selector de cantidad (+/-)
+  - Botón "Agregar al carrito"
+- [ ] Generar descripción automática con LLM
+  - Basada en nombre del producto
+  - Formato: frase principal + diseño + sensorial + uso ideal
+- [ ] Crear componente CartPanel.tsx
+  - Lista de productos
+  - Aumentar/disminuir cantidad
+  - Eliminar producto
+  - Subtotal y total
+- [ ] Integrar icono de carrito en header
+  - Mostrar contador de productos
+  - Click abre panel lateral
+- [ ] Implementar checkout por WhatsApp
+  - Mensaje automático con lista de productos
+  - Cantidades y total
+- [ ] Hacer productos clickeables
+  - Redirigir a /product/:id
+  - Mantener navegación existente
+- [ ] Verificar responsive (mobile, tablet, desktop)
 - [ ] Probar envío de emails en navegador (manual testing)
 - [x] Actualizar precios en carrusel (Products.tsx)
   - Nube de Fresa: 55.000 COP (excepción postre)

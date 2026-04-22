@@ -10,8 +10,12 @@ import ExploreLab from "./pages/ExploreLab";
 import SolicitudRecordatorios from "./pages/SolicitudRecordatorios";
 import SolicitudEmpresarial from "./pages/SolicitudEmpresarial";
 import { useNavigationScroll } from "./hooks/useNavigationScroll";
+import { CartProvider } from "./contexts/CartContext";
+import ProductDetail from "./pages/ProductDetail";
+import CartPanel from "./components/CartPanel";
+import { useState } from "react";
 
-function Router() {
+function Router({ onCartClick }: { onCartClick: () => void }) {
   // Scroll al top en cada cambio de ruta
   useNavigationScroll();
 
@@ -20,6 +24,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/shop"} component={Shop} />
+      <Route path={"/product/:id"} component={ProductDetail} />
       <Route path={"/explore-lab"} component={ExploreLab} />
       <Route path={"/solicitud/recordatorios"} component={SolicitudRecordatorios} />
       <Route path={"/solicitud/empresarial"} component={SolicitudEmpresarial} />
@@ -36,17 +41,22 @@ function Router() {
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
+      <CartProvider>
+        <ThemeProvider
+          defaultTheme="light"
+          // switchable
+        >
+          <TooltipProvider>
+            <Toaster />
+            <Router onCartClick={() => setIsCartOpen(true)} />
+            <CartPanel isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+          </TooltipProvider>
+        </ThemeProvider>
+      </CartProvider>
     </ErrorBoundary>
   );
 }
