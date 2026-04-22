@@ -12,6 +12,7 @@ import SolicitudEmpresarial from "./pages/SolicitudEmpresarial";
 import { useNavigationScroll } from "./hooks/useNavigationScroll";
 import { CartProvider } from "./contexts/CartContext";
 import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 import CartPanel from "./components/CartPanel";
 import { useState } from "react";
 
@@ -25,6 +26,7 @@ function Router({ onCartClick }: { onCartClick: () => void }) {
       <Route path={"/"} component={Home} />
       <Route path={"/shop"} component={Shop} />
       <Route path={"/product/:id"} component={ProductDetail} />
+      <Route path={"/cart"} component={Cart} />
       <Route path={"/explore-lab"} component={ExploreLab} />
       <Route path={"/solicitud/recordatorios"} component={SolicitudRecordatorios} />
       <Route path={"/solicitud/empresarial"} component={SolicitudEmpresarial} />

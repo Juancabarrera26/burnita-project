@@ -86,6 +86,18 @@
 - [x] Asegurar z-index correcto
 
 ## In Progress / Pending
+
+## CORRECCIONES CRITICAS DEL CARRITO
+- [x] CartContext creado con gestión de estado
+- [x] Persistencia en localStorage implementada
+- [x] ProductDetail.tsx con imagen y descripción automática
+- [x] Página completa del carrito /cart creada
+- [x] CartPanel.tsx actualizado con botón "Ir al carrito"
+- [x] Contador del carrito en Header funcional
+- [x] Checkout por WhatsApp implementado
+- [x] Productos clickeables redirigen a /product/:id
+- [x] Flujo completo: Shop -> Producto -> Carrito -> WhatsApp
+
 - [ ] Test navegación en browser (manual testing - CRÍTICO)
 - [ ] Test solicitudes personalizadas en browser (manual testing)
 - [ ] Test AI image generation en browser (manual testing)

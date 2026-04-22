@@ -13,21 +13,42 @@ interface Product {
   description?: string;
 }
 
+// Todos los productos de la tienda
 const PRODUCTS: Product[] = [
   // Cócteles
-  { id: 'melodita', name: 'Melodita', price: 50000, image: '/manus-storage/Melodita_url.png' },
-  { id: 'mojita', name: 'Mojita', price: 50000, image: '/manus-storage/Mojita_url.png' },
-  { id: 'mielita', name: 'Mielita', price: 50000, image: '/manus-storage/Mielita_url.png' },
-  { id: 'berrita', name: 'Berrita', price: 50000, image: '/manus-storage/Berrita_url.png' },
-  { id: 'tropica', name: 'Tropica', price: 50000, image: '/manus-storage/Tropica_url.png' },
-  { id: 'nocturna', name: 'Nocturna', price: 50000, image: '/manus-storage/Nocturna_url.png' },
-  { id: 'ambaria', name: 'Ambaria', price: 50000, image: '/manus-storage/Ambaria_url.png' },
-  { id: 'limoncita', name: 'Limoncita', price: 50000, image: '/manus-storage/Limoncita_url.png' },
-  { id: 'pinkice', name: 'Pink Ice', price: 50000, image: '/manus-storage/PinkIce_url.png' },
-  { id: 'citrusita', name: 'Citrusita', price: 50000, image: '/manus-storage/Citrusita_url.png' },
+  { id: 'melodita', name: 'Melodita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp' },
+  { id: 'mojita', name: 'Mojita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/CZamKEhNVDpNpvdU.webp' },
+  { id: 'tropica', name: 'Tropica', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/KtCXNCkEisgWrviL.webp' },
+  { id: 'ambaria', name: 'Ambaria', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/IPeSKSvvXNaAfAxq.webp' },
+  { id: 'limoncita', name: 'Limoncita', price: 50000, image: '/manus-storage/Limoncita_3d1ea23f.png' },
+  { id: 'pinkice', name: 'Pink Ice', price: 50000, image: '/manus-storage/Pinklce_aa3310ee.png' },
+  { id: 'citrusita', name: 'Citrusita', price: 50000, image: '/manus-storage/Citrusita_96447f19.png' },
+  { id: 'mielita', name: 'Mielita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp' },
+  { id: 'berrita', name: 'Berrita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp' },
+  { id: 'nocturna', name: 'Nocturna', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp' },
   
   // Postres
-  { id: 'nubesita', name: 'Nubesita', price: 55000, image: '/manus-storage/Nubesita_url.png' },
+  { id: 'nubesita', name: 'Nubesita', price: 55000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/eLfUhTdnLWLCwiNF.webp' },
+  { id: 'berryita', name: 'Berryita', price: 55000, image: '/manus-storage/Berryita_488db945.png' },
+  { id: 'blueberryta', name: 'Blueberryta', price: 55000, image: '/manus-storage/Blueberryta_cde230b4.png' },
+  { id: 'bluedita', name: 'Bluedita', price: 55000, image: '/manus-storage/Bluedita_da4978fa.png' },
+  { id: 'caramelita', name: 'Caramelita', price: 55000, image: '/manus-storage/Caramelita_e6e32a07.png' },
+  { id: 'chococereza', name: 'Chococereza', price: 55000, image: '/manus-storage/Chococereza_0c1358b4.png' },
+  { id: 'chocofresita', name: 'Chocofresita', price: 55000, image: '/manus-storage/Chocofresita_54d25d94.png' },
+  { id: 'fresichoco', name: 'Fresichoco', price: 55000, image: '/manus-storage/Fresichoco_68badba4.png' },
+  { id: 'pinkbliss', name: 'Pinkbliss', price: 55000, image: '/manus-storage/Pinkbliss_9b5671b3.png' },
+  { id: 'pistachita', name: 'Pistachita', price: 55000, image: '/manus-storage/Pistachita_8f981d5e.png' },
+  { id: 'pistatella', name: 'Pistatella', price: 55000, image: '/manus-storage/Pistatella_e821cdce.png' },
+  
+  // Temporada
+  { id: 'bloomita', name: 'Bloomita', price: 55000, image: '/manus-storage/Bloomita_2f71182b.png' },
+  { id: 'blushita', name: 'Blushita', price: 55000, image: '/manus-storage/Blushita_a8c0d3e2.png' },
+  { id: 'calabacita', name: 'Calabacita', price: 55000, image: '/manus-storage/Calabacita_f5e9c1b7.png' },
+  { id: 'fallita', name: 'Fallita', price: 55000, image: '/manus-storage/Fallita_d2b4a9f1.png' },
+  { id: 'floralita', name: 'Floralita', price: 55000, image: '/manus-storage/Floralita_c3e7f2a8.png' },
+  { id: 'frostita', name: 'Frostita', price: 55000, image: '/manus-storage/Frostita_b1d6e4f9.png' },
+  { id: 'holidayita', name: 'Holidayita', price: 55000, image: '/manus-storage/Holidayita_e5c2a9d3.png' },
+  { id: 'winterita', name: 'Winterita', price: 55000, image: '/manus-storage/Winterita_a7f1c8e2.png' },
 ];
 
 const PRODUCT_DESCRIPTIONS: Record<string, string> = {
@@ -74,14 +95,17 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     if (product) {
-      addItem({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-      });
+      for (let i = 0; i < quantity; i++) {
+        addItem({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+        });
+      }
       setAddedToCart(true);
       setTimeout(() => setAddedToCart(false), 2000);
+      setQuantity(1);
     }
   };
 

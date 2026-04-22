@@ -1,5 +1,6 @@
 import { useCart } from '@/contexts/CartContext';
-import { X, Plus, Minus, Trash2 } from 'lucide-react';
+import { useLocation } from 'wouter';
+import { X, Plus, Minus, Trash2, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface CartPanelProps {
@@ -9,6 +10,12 @@ interface CartPanelProps {
 
 export default function CartPanel({ isOpen, onClose }: CartPanelProps) {
   const { items, removeItem, updateQuantity, getTotalPrice } = useCart();
+  const [, setLocation] = useLocation();
+
+  const handleGoToCart = () => {
+    setLocation('/cart');
+    onClose();
+  };
 
   const handleCheckout = () => {
     if (items.length === 0) return;
@@ -129,7 +136,14 @@ export default function CartPanel({ isOpen, onClose }: CartPanelProps) {
               </span>
             </div>
 
-            {/* Botón checkout */}
+            {/* Botones */}
+            <Button
+              onClick={handleGoToCart}
+              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              Ir al carrito
+            </Button>
             <Button
               onClick={handleCheckout}
               className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white py-3 rounded-lg font-semibold transition"
