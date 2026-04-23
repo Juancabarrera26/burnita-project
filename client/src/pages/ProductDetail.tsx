@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'wouter';
 import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { ChevronLeft, Plus, Minus, ShoppingCart } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 interface Product {
   id: string;
@@ -13,6 +13,11 @@ interface Product {
   description?: string;
 }
 
+// Función para generar IDs consistentemente (igual que en Shop.tsx)
+const generateProductId = (name: string): string => {
+  return name.toLowerCase().replace(/\s+/g, '-');
+};
+
 // Todos los productos de la tienda
 const PRODUCTS: Product[] = [
   // Cócteles
@@ -21,7 +26,7 @@ const PRODUCTS: Product[] = [
   { id: 'tropica', name: 'Tropica', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/KtCXNCkEisgWrviL.webp' },
   { id: 'ambaria', name: 'Ambaria', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/IPeSKSvvXNaAfAxq.webp' },
   { id: 'limoncita', name: 'Limoncita', price: 50000, image: '/manus-storage/Limoncita_3d1ea23f.png' },
-  { id: 'pinkice', name: 'Pink Ice', price: 50000, image: '/manus-storage/Pinklce_aa3310ee.png' },
+  { id: 'pink-ice', name: 'Pink Ice', price: 50000, image: '/manus-storage/Pinklce_aa3310ee.png' },
   { id: 'citrusita', name: 'Citrusita', price: 50000, image: '/manus-storage/Citrusita_96447f19.png' },
   { id: 'mielita', name: 'Mielita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp' },
   { id: 'berrita', name: 'Berrita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp' },
@@ -105,105 +110,104 @@ export default function ProductDetail() {
       }
       setAddedToCart(true);
       setTimeout(() => setAddedToCart(false), 2000);
-      setQuantity(1);
     }
   };
 
-  if (!product) {
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-500">Producto no encontrado</p>
+      <div className="min-h-screen bg-[#fff6ea] flex items-center justify-center pt-24">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-guayaba"></div>
+          <p className="mt-4 text-gray-600">Cargando producto...</p>
+        </div>
       </div>
     );
   }
 
+  if (!product) {
+    return null;
+  }
+
   return (
-    <div className="min-h-screen bg-[#fff6ea] py-8 px-4">
-      {/* Header con botón atrás */}
-      <div className="max-w-6xl mx-auto mb-8">
+    <div className="min-h-screen bg-[#fff6ea] pt-24 pb-12">
+      <div className="max-w-6xl mx-auto px-4">
+        {/* Botón atrás */}
         <button
           onClick={() => setLocation('/shop')}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition"
+          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition mb-8"
         >
           <ChevronLeft className="w-5 h-5" />
           Volver a la tienda
         </button>
-      </div>
 
-      {/* Contenedor principal */}
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-        {/* Imagen izquierda */}
-        <div className="flex items-center justify-center bg-white rounded-lg p-8 shadow-sm">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-auto max-h-[500px] object-contain"
-          />
-        </div>
-
-        {/* Información derecha */}
-        <div className="flex flex-col justify-center space-y-6">
-          {/* Nombre */}
-          <div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-              {product.name}
-            </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          {/* Imagen del producto */}
+          <div className="flex items-center justify-center bg-white rounded-2xl p-6 md:p-8">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-auto max-h-96 object-contain"
+            />
           </div>
 
-          {/* Precio */}
-          <div className="text-3xl font-bold text-[#d946a6]">
-            {product.price.toLocaleString('es-CO')} COP
-          </div>
+          {/* Información del producto */}
+          <div className="flex flex-col justify-center space-y-6">
+            <div>
+              <h1 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-4">
+                {product.name}
+              </h1>
+              <p className="text-2xl font-bold text-guayaba">
+                {product.price.toLocaleString('es-CO')} COP
+              </p>
+            </div>
 
-          {/* Descripción */}
-          <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-gray-900">Descripción</h3>
-            {loading ? (
-              <div className="animate-pulse space-y-2">
-                <div className="h-4 bg-gray-200 rounded w-full"></div>
-                <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+            {/* Descripción */}
+            <p className="text-gray-700 leading-relaxed text-lg">
+              {description}
+            </p>
+
+            {/* Selector de cantidad */}
+            <div className="flex items-center gap-4">
+              <span className="text-gray-700 font-semibold">Cantidad:</span>
+              <div className="flex items-center border border-gray-300 rounded-lg">
+                <button
+                  onClick={() => handleQuantityChange(quantity - 1)}
+                  className="p-2 hover:bg-gray-100 transition"
+                >
+                  <Minus className="w-5 h-5 text-gray-600" />
+                </button>
+                <span className="px-4 py-2 font-semibold text-gray-900">
+                  {quantity}
+                </span>
+                <button
+                  onClick={() => handleQuantityChange(quantity + 1)}
+                  className="p-2 hover:bg-gray-100 transition"
+                >
+                  <Plus className="w-5 h-5 text-gray-600" />
+                </button>
               </div>
-            ) : (
-              <p className="text-gray-700 leading-relaxed">{description}</p>
-            )}
-          </div>
+            </div>
 
-          {/* Selector de cantidad */}
-          <div className="flex items-center gap-4">
-            <span className="text-gray-700 font-medium">Cantidad:</span>
-            <div className="flex items-center border border-gray-300 rounded-lg">
-              <button
-                onClick={() => handleQuantityChange(quantity - 1)}
-                className="p-2 hover:bg-gray-100 transition"
-              >
-                <Minus className="w-5 h-5 text-gray-600" />
-              </button>
-              <span className="px-4 py-2 font-semibold text-gray-900">{quantity}</span>
-              <button
-                onClick={() => handleQuantityChange(quantity + 1)}
-                className="p-2 hover:bg-gray-100 transition"
-              >
-                <Plus className="w-5 h-5 text-gray-600" />
-              </button>
+            {/* Botón agregar al carrito */}
+            <Button
+              onClick={handleAddToCart}
+              className={`w-full py-4 rounded-lg font-semibold text-lg transition flex items-center justify-center gap-2 ${
+                addedToCart
+                  ? 'bg-green-500 hover:bg-green-600 text-white'
+                  : 'bg-guayaba hover:bg-[#c0368a] text-white'
+              }`}
+            >
+              <ShoppingCart className="w-6 h-6" />
+              {addedToCart ? '✓ Agregado al carrito' : 'Agregar al carrito'}
+            </Button>
+
+            {/* Info adicional */}
+            <div className="bg-white rounded-lg p-4 text-sm text-gray-600">
+              <p>✓ Envío disponible a toda Colombia</p>
+              <p>✓ Vela artesanal de alta calidad</p>
+              <p>✓ Garantía de satisfacción</p>
             </div>
           </div>
-
-          {/* Botón agregar al carrito */}
-          <Button
-            onClick={handleAddToCart}
-            className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white py-3 rounded-lg flex items-center justify-center gap-2 text-lg font-semibold transition"
-          >
-            <ShoppingCart className="w-5 h-5" />
-            {addedToCart ? '¡Agregado al carrito!' : 'Agregar al carrito'}
-          </Button>
-
-          {/* Feedback visual */}
-          {addedToCart && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center text-green-700">
-              Producto agregado correctamente
-            </div>
-          )}
         </div>
       </div>
     </div>

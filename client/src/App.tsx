@@ -14,9 +14,10 @@ import { CartProvider } from "./contexts/CartContext";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import CartPanel from "./components/CartPanel";
+import Header from "./components/Header";
 import { useState } from "react";
 
-function Router({ onCartClick }: { onCartClick: () => void }) {
+function Router() {
   // Scroll al top en cada cambio de ruta
   useNavigationScroll();
 
@@ -54,7 +55,8 @@ function App() {
         >
           <TooltipProvider>
             <Toaster />
-            <Router onCartClick={() => setIsCartOpen(true)} />
+            <Header onCartClick={() => setIsCartOpen(true)} />
+            <Router />
             <CartPanel isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
           </TooltipProvider>
         </ThemeProvider>

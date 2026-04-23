@@ -5,11 +5,9 @@
  */
 
 import { useEffect } from "react";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
 import BurnitaLab from "@/components/BurnitaLab";
-
 import About from "@/components/About";
 import Categories from "@/components/Categories";
 import Newsletter from "@/components/Newsletter";
@@ -32,12 +30,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <Header />
       <main>
         <Hero />
         <Products />
         <BurnitaLab />
-
         <About />
         <Categories />
         <Newsletter />

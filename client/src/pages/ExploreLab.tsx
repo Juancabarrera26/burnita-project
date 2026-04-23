@@ -5,7 +5,7 @@
  */
 
 import { useState } from "react";
-import Header from "@/components/Header";
+
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
@@ -127,7 +127,7 @@ export default function ExploreLab() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
+      
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-12 px-4 bg-gradient-to-br from-[#fff6ea] to-[#f5e6d3]">

@@ -87,15 +87,29 @@
 
 ## In Progress / Pending
 
-## CORRECCIONES CRITICAS DEL CARRITO
-- [x] CartContext creado con gestión de estado
-- [x] Persistencia en localStorage implementada
-- [x] ProductDetail.tsx con imagen y descripción automática
-- [x] Página completa del carrito /cart creada
-- [x] CartPanel.tsx actualizado con botón "Ir al carrito"
-- [x] Contador del carrito en Header funcional
-- [x] Checkout por WhatsApp implementado
-- [x] Productos clickeables redirigen a /product/:id
+## CORRECCIONES CRITICAS DEL CARRITO - FASE 2
+- [x] Icono del carrito en Header ahora FUNCIONA
+  - Header refactorizado a nivel de App.tsx
+  - onCartClick pasa correctamente a Header
+  - CartPanel se abre desde cualquier página
+- [x] Rutas dinámicas de productos ARREGLADAS
+  - ProductDetail.tsx con IDs consistentes
+  - Shop.tsx genera IDs correctamente
+  - Todos los productos redirigen correctamente
+- [x] CartPanel funcional en TODAS las páginas
+  - Muestra productos con imagen
+  - Edita cantidades (+/-)
+  - Elimina productos
+  - Subtotal y total correcto
+  - Botón "Ir al carrito" funcional
+  - Checkout por WhatsApp funcional
+- [x] Página de carrito /cart completa
+  - Lista de productos
+  - Edición de cantidades
+  - Eliminación de productos
+  - Resumen de compra
+- [x] Contador del carrito actualiza en tiempo real
+- [x] localStorage persiste carrito correctamente
 - [x] Flujo completo: Shop -> Producto -> Carrito -> WhatsApp
 
 - [ ] Test navegación en browser (manual testing - CRÍTICO)

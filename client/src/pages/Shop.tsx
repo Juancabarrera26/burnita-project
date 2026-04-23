@@ -6,7 +6,6 @@
 
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
@@ -382,8 +381,6 @@ export default function Shop() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#FFF6EA' }}>
-      <Header />
-
       <main className="pt-24 md:pt-32">
         {/* Hero de la tienda */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-guayaba/5 via-transparent to-mint/5">
