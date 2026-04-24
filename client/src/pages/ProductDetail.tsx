@@ -162,16 +162,23 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-crema py-8 md:py-12">
-      <div className="container max-w-6xl">
-        {/* Header con botón atrás */}
-        <button
-          onClick={() => setLocation('/shop')}
-          className="flex items-center gap-2 text-charcoal hover:text-guayaba transition-colors mb-8 font-body text-base font-medium px-4 py-2 rounded-lg hover:bg-charcoal/5 active:bg-charcoal/10 focus:outline-none focus:ring-2 focus:ring-guayaba/50"
-        >
-          <ChevronLeft className="w-5 h-5" />
-          Volver a la tienda
-        </button>
+    <div className="min-h-screen bg-crema">
+      {/* Botón "Volver a la tienda" - SEPARADO DEL HEADER */}
+      <div className="fixed top-20 left-0 right-0 z-40 pointer-events-none">
+        <div className="container max-w-6xl">
+          <button
+            onClick={() => setLocation('/shop')}
+            className="pointer-events-auto flex items-center gap-2 text-charcoal hover:text-guayaba transition-colors font-body text-base font-medium px-4 py-2 rounded-lg hover:bg-charcoal/5 active:bg-charcoal/10 focus:outline-none focus:ring-2 focus:ring-guayaba/50"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            Volver a la tienda
+          </button>
+        </div>
+      </div>
+
+      {/* Contenido principal con padding superior */}
+      <div className="pt-24 md:pt-28 py-8 md:py-12">
+        <div className="container max-w-6xl">
 
         {/* Grid: Imagen + Detalles */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -239,6 +246,7 @@ export default function ProductDetail() {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

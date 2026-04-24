@@ -276,3 +276,10 @@
 - [x] Cambiar fondo de Burnita Lab a #fff6ea
 - [x] Arreglar separación del botón "Volver a la tienda"
 - [x] Probar en desktop, tablet y mobile
+
+## PROBLEMA CRÍTICO - SUPERPOSICIÓN DE ELEMENTOS
+- [x] Diagnosticar superposición entre logo y botón "Volver a la tienda"
+- [x] Separar completamente Header de ProductDetail
+- [x] Aplicar z-index correcto (Header z-50, Botón z-40)
+- [x] Arreglar espaciado y posicionamiento (fixed top-20)
+- [x] Probar en desktop y mobile
