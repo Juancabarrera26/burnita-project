@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { ChevronLeft, Plus, Minus, ShoppingCart } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import ImageZoom from '@/components/ImageZoom';
 
 interface Product {
   id: string;
@@ -141,12 +142,12 @@ export default function ProductDetail() {
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Imagen del producto */}
-          <div className="flex items-center justify-center bg-white rounded-2xl p-6 md:p-8">
-            <img
+          {/* Imagen del producto con zoom */}
+          <div className="flex items-center justify-center">
+            <ImageZoom
               src={product.image}
               alt={product.name}
-              className="w-full h-auto max-h-96 object-contain"
+              className="w-full max-w-md"
             />
           </div>
 

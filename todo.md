@@ -220,3 +220,11 @@
   - Formato consistente: "50.000 COP"
 - [x] Verificar que no se modifique diseño, layout ni estructura
 - [x] Verificar responsividad en mobile/desktop
+
+## MEJORA DE VISUALIZACIÓN DE IMÁGENES - ZOOM INTERACTIVO
+- [x] Crear componente ImageZoom.tsx con zoom desktop y mobile
+- [x] Eliminar contenedor blanco innecesario
+- [x] Implementar hover zoom en desktop
+- [x] Implementar touch zoom en mobile
+- [x] Integrar ImageZoom en ProductDetail.tsx
+- [x] Probar en desktop, tablet y mobile
