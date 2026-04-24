@@ -1,5 +1,4 @@
-import { useParams } from 'wouter';
-import { useLocation } from 'wouter';
+import { useLocation, useParams } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { ChevronLeft, Plus, Minus, ShoppingCart } from 'lucide-react';
@@ -19,9 +18,9 @@ const generateProductId = (name: string): string => {
   return name.toLowerCase().replace(/\s+/g, '-');
 };
 
-// Todos los productos de la tienda
+// TODOS los productos de la tienda - UNIFICADO CON SHOP.TSX
 const PRODUCTS: Product[] = [
-  // Cócteles
+  // CÓCTELES
   { id: 'melodita', name: 'Melodita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp' },
   { id: 'mojita', name: 'Mojita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/CZamKEhNVDpNpvdU.webp' },
   { id: 'tropica', name: 'Tropica', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/KtCXNCkEisgWrviL.webp' },
@@ -33,7 +32,7 @@ const PRODUCTS: Product[] = [
   { id: 'berrita', name: 'Berrita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp' },
   { id: 'nocturna', name: 'Nocturna', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp' },
   
-  // Postres
+  // POSTRES
   { id: 'nubesita', name: 'Nubesita', price: 55000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/eLfUhTdnLWLCwiNF.webp' },
   { id: 'berryita', name: 'Berryita', price: 55000, image: '/manus-storage/Berryita_488db945.png' },
   { id: 'blueberryta', name: 'Blueberryta', price: 55000, image: '/manus-storage/Blueberryta_cde230b4.png' },
@@ -46,15 +45,15 @@ const PRODUCTS: Product[] = [
   { id: 'pistachita', name: 'Pistachita', price: 55000, image: '/manus-storage/Pistachita_8f981d5e.png' },
   { id: 'pistatella', name: 'Pistatella', price: 55000, image: '/manus-storage/Pistatella_e821cdce.png' },
   
-  // Temporada
+  // TEMPORADA - UNIFICADO CON SHOP.TSX
   { id: 'bloomita', name: 'Bloomita', price: 55000, image: '/manus-storage/Bloomita_2f71182b.png' },
-  { id: 'blushita', name: 'Blushita', price: 55000, image: '/manus-storage/Blushita_a8c0d3e2.png' },
-  { id: 'calabacita', name: 'Calabacita', price: 55000, image: '/manus-storage/Calabacita_f5e9c1b7.png' },
-  { id: 'fallita', name: 'Fallita', price: 55000, image: '/manus-storage/Fallita_d2b4a9f1.png' },
-  { id: 'floralita', name: 'Floralita', price: 55000, image: '/manus-storage/Floralita_c3e7f2a8.png' },
-  { id: 'frostita', name: 'Frostita', price: 55000, image: '/manus-storage/Frostita_b1d6e4f9.png' },
-  { id: 'holidayita', name: 'Holidayita', price: 55000, image: '/manus-storage/Holidayita_e5c2a9d3.png' },
-  { id: 'winterita', name: 'Winterita', price: 55000, image: '/manus-storage/Winterita_a7f1c8e2.png' },
+  { id: 'blushita', name: 'Blushita', price: 55000, image: '/manus-storage/Blushita_cf50ab14.png' },
+  { id: 'calabacita', name: 'Calabacita', price: 55000, image: '/manus-storage/Calabacita_7109f1e9.png' },
+  { id: 'fallita', name: 'Fallita', price: 55000, image: '/manus-storage/Fallita_c4a5c704.png' },
+  { id: 'glacielita', name: 'Glacielita', price: 55000, image: '/manus-storage/Glacielita_93ff393b.png' },
+  { id: 'tropicalita', name: 'Tropicalita', price: 55000, image: '/manus-storage/tropicalita_4cce5374.png' },
+  { id: 'gomiblu', name: 'Gomiblu', price: 55000, image: '/manus-storage/Gomiblu_6241f980.jpg' },
+  { id: 'oceanita', name: 'Oceanita', price: 55000, image: '/manus-storage/Oceanita_6ffb6b29.jpg' },
 ];
 
 const PRODUCT_DESCRIPTIONS: Record<string, string> = {
@@ -69,10 +68,29 @@ const PRODUCT_DESCRIPTIONS: Record<string, string> = {
   'Pink Ice': 'Sofisticación fría y cautivadora. Pink Ice combina aromas frescos con toques florales rosados. Una vela moderna y elegante para espacios contemporáneos.',
   'Citrusita': 'Vibrante mezcla de cítricos. Citrusita es una vela energética que combina naranja, limón y pomelo. Perfecta para espacios que necesitan vitalidad y frescura.',
   'Nubesita': 'Dulce como una nube. Nubesita es un postre aromático que evoca algodón de azúcar y caramelo. Una vela que crea momentos dulces y memorables.',
+  'Berryita': 'Frutos rojos en su máxima expresión. Berryita combina aromas de fresa, frambuesa y arándano. Una vela que despierta la alegría y la vitalidad.',
+  'Blueberryta': 'Profundidad azul de arándanos. Blueberryta es una vela que evoca la dulzura del arándano silvestre. Perfecta para momentos de relajación.',
+  'Bluedita': 'Frescura azulada y sofisticada. Bluedita combina notas de arándano con toques florales. Una vela moderna y elegante.',
+  'Caramelita': 'Dulzura caramelizada en cada llama. Caramelita es una vela que evoca el aroma del caramelo casero. Perfecta para crear ambientes acogedores.',
+  'Chococereza': 'Lujo de chocolate y cereza. Chococereza combina aromas de chocolate oscuro con notas de cereza. Una vela sofisticada y deliciosa.',
+  'Chocofresita': 'Contraste perfecto de chocolate y fresa. Chocofresita es una vela que mezcla lo dulce del chocolate con la frescura de la fresa.',
+  'Fresichoco': 'Fresa y chocolate en armonía. Fresichoco es una vela que celebra la combinación clásica de fresa y chocolate.',
+  'Pinkbliss': 'Dicha rosa en forma de vela. Pinkbliss combina aromas florales con toques dulces. Una vela romántica y sofisticada.',
+  'Pistachita': 'Sofisticación verde del pistacho. Pistachita es una vela que evoca el aroma del pistacho tostado. Perfecta para espacios elegantes.',
+  'Pistatella': 'Elegancia de pistacho con toques florales. Pistatella es una vela que combina pistacho con notas delicadas.',
+  'Bloomita': 'Floración de primavera en cada llama. Bloomita es una vela que captura la esencia de las flores de primavera.',
+  'Blushita': 'Sonrojo de primavera. Blushita es una vela que evoca los tonos rosados de la primavera.',
+  'Calabacita': 'Calidez de otoño. Calabacita es una vela que celebra la temporada de calabaza y especias cálidas.',
+  'Fallita': 'Espíritu del otoño. Fallita combina aromas de hojas secas, canela y especias otoñales.',
+  'Glacielita': 'Frescura invernal cristalina. Glacielita es una vela que evoca la pureza del hielo y la nieve.',
+  'Tropicalita': 'Paraíso tropical en temporada. Tropicalita es una vela que trae aromas exóticos y tropicales.',
+  'Gomiblu': 'Diversión azul de gominolas. Gomiblu es una vela que evoca la dulzura de los caramelos gominola.',
+  'Oceanita': 'Profundidad marina. Oceanita es una vela que captura la esencia del océano y la brisa marina.',
 };
 
 export default function ProductDetail() {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams<{ id: string }>();
+  const id = params?.id;
   const [, setLocation] = useLocation();
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
@@ -83,6 +101,10 @@ export default function ProductDetail() {
 
   // Buscar producto
   useEffect(() => {
+    if (!id) {
+      setLocation('/shop');
+      return;
+    }
     const foundProduct = PRODUCTS.find((p) => p.id === id);
     if (foundProduct) {
       setProduct(foundProduct);
@@ -101,14 +123,12 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     if (product) {
-      for (let i = 0; i < quantity; i++) {
-        addItem({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          image: product.image,
-        });
-      }
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      });
       setAddedToCart(true);
       setTimeout(() => setAddedToCart(false), 2000);
     }
@@ -116,98 +136,107 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#fff6ea] flex items-center justify-center pt-24">
+      <div className="min-h-screen flex items-center justify-center bg-crema">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-guayaba"></div>
-          <p className="mt-4 text-gray-600">Cargando producto...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-guayaba mx-auto mb-4"></div>
+          <p className="text-charcoal font-body">Cargando producto...</p>
         </div>
       </div>
     );
   }
 
   if (!product) {
-    return null;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-crema">
+        <div className="text-center">
+          <p className="text-charcoal font-body mb-4">Producto no encontrado</p>
+          <button
+            onClick={() => setLocation('/shop')}
+            className="text-guayaba hover:text-guayaba/80 font-display font-bold"
+          >
+            Volver a la tienda
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-[#fff6ea] pt-24 pb-12">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Botón atrás */}
+    <div className="min-h-screen bg-crema py-8 md:py-12">
+      <div className="container max-w-6xl">
+        {/* Header con botón atrás */}
         <button
           onClick={() => setLocation('/shop')}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition mb-8"
+          className="flex items-center gap-2 text-charcoal hover:text-guayaba transition-colors mb-8 font-body"
         >
           <ChevronLeft className="w-5 h-5" />
           Volver a la tienda
         </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Imagen del producto con zoom */}
+        {/* Grid: Imagen + Detalles */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          {/* Imagen con Zoom */}
           <div className="flex items-center justify-center">
-            <ImageZoom
-              src={product.image}
-              alt={product.name}
-              className="w-full max-w-md"
-            />
+            <ImageZoom src={product.image} alt={product.name} />
           </div>
 
-          {/* Información del producto */}
-          <div className="flex flex-col justify-center space-y-6">
-            <div>
-              <h1 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-4">
-                {product.name}
-              </h1>
-              <p className="text-2xl font-bold text-guayaba">
-                {product.price.toLocaleString('es-CO')} COP
-              </p>
-            </div>
+          {/* Detalles del Producto */}
+          <div className="flex flex-col justify-start">
+            {/* Nombre y Precio */}
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-2">
+              {product.name}
+            </h1>
+            <p className="font-display text-3xl font-bold text-guayaba mb-6">
+              ${product.price.toLocaleString()}
+            </p>
 
             {/* Descripción */}
-            <p className="text-gray-700 leading-relaxed text-lg">
+            <p className="font-body text-charcoal/70 text-lg leading-relaxed mb-8">
               {description}
             </p>
 
-            {/* Selector de cantidad */}
-            <div className="flex items-center gap-4">
-              <span className="text-gray-700 font-semibold">Cantidad:</span>
-              <div className="flex items-center border border-gray-300 rounded-lg">
+            {/* Selector de Cantidad */}
+            <div className="flex items-center gap-4 mb-8">
+              <span className="font-body text-charcoal font-medium">Cantidad:</span>
+              <div className="flex items-center border border-charcoal/20 rounded-full">
                 <button
                   onClick={() => handleQuantityChange(quantity - 1)}
-                  className="p-2 hover:bg-gray-100 transition"
+                  className="p-2 hover:bg-crema/50 transition-colors"
                 >
-                  <Minus className="w-5 h-5 text-gray-600" />
+                  <Minus className="w-5 h-5 text-charcoal" />
                 </button>
-                <span className="px-4 py-2 font-semibold text-gray-900">
+                <span className="px-6 py-2 font-body font-bold text-charcoal">
                   {quantity}
                 </span>
                 <button
                   onClick={() => handleQuantityChange(quantity + 1)}
-                  className="p-2 hover:bg-gray-100 transition"
+                  className="p-2 hover:bg-crema/50 transition-colors"
                 >
-                  <Plus className="w-5 h-5 text-gray-600" />
+                  <Plus className="w-5 h-5 text-charcoal" />
                 </button>
               </div>
             </div>
 
-            {/* Botón agregar al carrito */}
+            {/* Botón Agregar al Carrito */}
             <Button
               onClick={handleAddToCart}
-              className={`w-full py-4 rounded-lg font-semibold text-lg transition flex items-center justify-center gap-2 ${
+              size="lg"
+              className={`w-full mb-4 font-body font-bold rounded-full py-6 text-lg transition-all ${
                 addedToCart
-                  ? 'bg-green-500 hover:bg-green-600 text-white'
-                  : 'bg-guayaba hover:bg-[#c0368a] text-white'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-guayaba text-white hover:bg-guayaba/90'
               }`}
             >
-              <ShoppingCart className="w-6 h-6" />
-              {addedToCart ? '✓ Agregado al carrito' : 'Agregar al carrito'}
+              <ShoppingCart className="w-5 h-5 mr-2" />
+              {addedToCart ? '¡Agregado al carrito!' : 'Agregar al carrito'}
             </Button>
 
-            {/* Info adicional */}
-            <div className="bg-white rounded-lg p-4 text-sm text-gray-600">
-              <p>✓ Envío disponible a toda Colombia</p>
-              <p>✓ Vela artesanal de alta calidad</p>
-              <p>✓ Garantía de satisfacción</p>
-            </div>
+            {/* Mensaje de éxito */}
+            {addedToCart && (
+              <p className="text-center text-green-600 font-body font-medium text-sm">
+                Producto agregado correctamente
+              </p>
+            )}
           </div>
         </div>
       </div>
