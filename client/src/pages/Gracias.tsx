@@ -3,7 +3,7 @@ import { CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 
-export default function CheckoutSuccess() {
+export default function Gracias() {
   const [, setLocation] = useLocation();
 
   return (
@@ -20,9 +20,9 @@ export default function CheckoutSuccess() {
 
             {/* Título */}
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">¡Pago exitoso!</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">¡Pago realizado con éxito!</h1>
               <p className="text-gray-600">
-                Tu pedido ha sido procesado correctamente. Pronto recibirás un email con los detalles.
+                Gracias por tu compra. Pronto recibirás un email con los detalles de tu pedido y el estado del envío.
               </p>
             </div>
 
@@ -33,8 +33,8 @@ export default function CheckoutSuccess() {
                 <span className="font-semibold text-green-600">Confirmado</span>
               </div>
               <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Referencia:</span>
-                <span className="font-mono text-xs text-gray-900">Disponible en email</span>
+                <span className="text-gray-600">Próximo paso:</span>
+                <span className="font-semibold text-gray-900">Preparar envío</span>
               </div>
             </div>
 

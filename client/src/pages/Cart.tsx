@@ -1,56 +1,29 @@
 import { useCart } from '@/contexts/CartContext';
 import { useLocation } from 'wouter';
-import { ChevronLeft, Plus, Minus, Trash2, ShoppingBag, AlertCircle } from 'lucide-react';
+import { ChevronLeft, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useWompiCheckout } from '@/hooks/useWompiCheckout';
 import Footer from '@/components/Footer';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Cart() {
   const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
   const [, setLocation] = useLocation();
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [checkoutError, setCheckoutError] = useState<string | null>(null);
-  const { openCheckout } = useWompiCheckout();
 
+  // Cargar script de Wompi cuando el componente se monta
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://checkout.wompi.co/widget.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    return () => {
+      // No remover el script para evitar problemas
+    };
+  }, []);
+
+  const totalInCents = Math.round(getTotalPrice() * 100);
+  const reference = `BURNITA-${Date.now()}`;
   const WOMPI_PUBLIC_KEY = 'pub_prod_WYZrZvxxwpC34MYOIc5vDijzSwNB50PR';
-  const WOMPI_CURRENCY = 'COP';
-
-  const handleCheckout = () => {
-    if (items.length === 0) return;
-
-    setCheckoutError(null);
-    setIsCheckingOut(true);
-
-    try {
-      const total = getTotalPrice();
-      const amountInCents = Math.round(total * 100);
-      const reference = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-
-      openCheckout({
-        amountInCents,
-        currency: WOMPI_CURRENCY,
-        reference,
-        publicKey: WOMPI_PUBLIC_KEY,
-        customerEmail: undefined,
-        onSuccess: (transactionId: string) => {
-          console.log('Pago exitoso:', transactionId);
-          clearCart();
-          setIsCheckingOut(false);
-          setLocation('/checkout-success');
-        },
-        onError: (error: string) => {
-          console.error('Error en pago:', error);
-          setCheckoutError(error);
-          setIsCheckingOut(false);
-        },
-      });
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
-      setCheckoutError(errorMessage);
-      setIsCheckingOut(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-[#fff6ea] flex flex-col">
@@ -192,33 +165,32 @@ export default function Cart() {
                     </span>
                   </div>
 
-                  {/* Error message */}
-                  {checkoutError && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex gap-3">
-                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-red-900 font-semibold text-sm">Error en el pago</p>
-                        <p className="text-red-700 text-sm">{checkoutError}</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Botones */}
-                  <div className="space-y-3">
-                    <Button
-                      onClick={handleCheckout}
-                      disabled={isCheckingOut || items.length === 0}
-                      className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white py-3 rounded-lg font-semibold transition disabled:opacity-50"
-                    >
-                      {isCheckingOut ? 'Abriendo Wompi...' : 'Finalizar compra'}
-                    </Button>
-                    <Button
-                      onClick={() => setLocation('/shop')}
-                      className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-3 rounded-lg font-semibold transition"
-                    >
-                      Continuar comprando
-                    </Button>
+                  {/* Botón de pago Wompi */}
+                  <div className="pt-4">
+                    {items.length > 0 ? (
+                      <script
+                        src="https://checkout.wompi.co/widget.js"
+                        data-render="button"
+                        data-public-key={WOMPI_PUBLIC_KEY}
+                        data-currency="COP"
+                        data-amount-in-cents={totalInCents}
+                        data-reference={reference}
+                        data-redirect-url={`${window.location.origin}/gracias`}
+                      />
+                    ) : (
+                      <p className="text-center text-gray-500 text-sm">
+                        Agrega productos antes de continuar
+                      </p>
+                    )}
                   </div>
+
+                  {/* Botón alternativo */}
+                  <Button
+                    onClick={() => setLocation('/shop')}
+                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-3 rounded-lg font-semibold transition"
+                  >
+                    Continuar comprando
+                  </Button>
 
                   {/* Nota */}
                   <p className="text-xs text-gray-500 text-center">
