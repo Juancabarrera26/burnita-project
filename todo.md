@@ -271,3 +271,8 @@
 ✓ Rutas dinámicas funcionando: /product/:id
 ✓ 0 redirecciones incorrectas al inicio
 ✓ 17 tests del servidor pasando
+
+## CORRECCIONES ESPECÍFICAS DE DISEÑO
+- [x] Cambiar fondo de Burnita Lab a #fff6ea
+- [x] Arreglar separación del botón "Volver a la tienda"
+- [x] Probar en desktop, tablet y mobile
