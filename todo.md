@@ -228,3 +228,9 @@
 - [x] Implementar touch zoom en mobile
 - [x] Integrar ImageZoom en ProductDetail.tsx
 - [x] Probar en desktop, tablet y mobile
+
+## CORRECCIONES DE ZOOM - FASE 2
+- [x] Corregir zoom desktop para seguir cursor precisamente
+- [x] Implementar arrastre de imagen en mobile
+- [x] Indicadores visuales mejorados
+- [x] Optimizaciones de rendimiento
