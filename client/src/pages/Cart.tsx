@@ -3,27 +3,28 @@ import { useLocation } from 'wouter';
 import { ChevronLeft, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Cart() {
-  const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
+  const { items, removeItem, updateQuantity, getTotalPrice } = useCart();
   const [, setLocation] = useLocation();
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
-  // Cargar script de Wompi cuando el componente se monta
+  // Cargar script de Wompi una sola vez
   useEffect(() => {
+    if (scriptLoaded) return;
+
     const script = document.createElement('script');
     script.src = 'https://checkout.wompi.co/widget.js';
     script.async = true;
+    script.onload = () => setScriptLoaded(true);
     document.head.appendChild(script);
-
-    return () => {
-      // No remover el script para evitar problemas
-    };
-  }, []);
+  }, [scriptLoaded]);
 
   const totalInCents = Math.round(getTotalPrice() * 100);
   const reference = `BURNITA-${Date.now()}`;
   const WOMPI_PUBLIC_KEY = 'pub_prod_WYZrZvxxwpC34MYOIc5vDijzSwNB50PR';
+  const redirectUrl = `${window.location.origin}/gracias`;
 
   return (
     <div className="min-h-screen bg-[#fff6ea] flex flex-col">
@@ -165,26 +166,20 @@ export default function Cart() {
                     </span>
                   </div>
 
-                  {/* Botón de pago Wompi */}
-                  <div className="pt-4">
-                    {items.length > 0 ? (
-                      <script
-                        src="https://checkout.wompi.co/widget.js"
-                        data-render="button"
-                        data-public-key={WOMPI_PUBLIC_KEY}
-                        data-currency="COP"
-                        data-amount-in-cents={totalInCents}
-                        data-reference={reference}
-                        data-redirect-url={`${window.location.origin}/gracias`}
-                      />
-                    ) : (
-                      <p className="text-center text-gray-500 text-sm">
-                        Agrega productos antes de continuar
-                      </p>
-                    )}
-                  </div>
+                  {/* Botón de pago Wompi - ÚNICO */}
+                  {scriptLoaded && (
+                    <script
+                      src="https://checkout.wompi.co/widget.js"
+                      data-render="button"
+                      data-public-key={WOMPI_PUBLIC_KEY}
+                      data-currency="COP"
+                      data-amount-in-cents={totalInCents}
+                      data-reference={reference}
+                      data-redirect-url={redirectUrl}
+                    />
+                  )}
 
-                  {/* Botón alternativo */}
+                  {/* Botón continuar comprando */}
                   <Button
                     onClick={() => setLocation('/shop')}
                     className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-3 rounded-lg font-semibold transition"
@@ -192,7 +187,7 @@ export default function Cart() {
                     Continuar comprando
                   </Button>
 
-                  {/* Nota */}
+                  {/* Nota de seguridad */}
                   <p className="text-xs text-gray-500 text-center">
                     Paga de forma segura con Wompi
                   </p>
