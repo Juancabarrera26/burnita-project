@@ -283,3 +283,13 @@
 - [x] Aplicar z-index correcto (Header z-50, Botón z-40)
 - [x] Arreglar espaciado y posicionamiento (fixed top-20)
 - [x] Probar en desktop y mobile
+
+## INTEGRACIÓN WOMPI CHECKOUT
+- [x] Revisar estructura del carrito y Cart.tsx
+- [x] Crear hook useWompiCheckout
+- [x] Integrar Wompi en Cart.tsx
+- [x] Agregar validaciones y manejo de errores
+- [x] Crear página de éxito CheckoutSuccess.tsx
+- [x] Agregar ruta /checkout-success a App.tsx
+- [x] Probar integración completa
+- [x] Verificar que el botón "Finalizar compra" funciona

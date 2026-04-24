@@ -1,8 +1,8 @@
 import { useCart } from '@/contexts/CartContext';
 import { useLocation } from 'wouter';
-import { ChevronLeft, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
+import { ChevronLeft, Plus, Minus, Trash2, ShoppingBag, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
+import { useWompiCheckout } from '@/hooks/useWompiCheckout';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
 
@@ -10,30 +10,46 @@ export default function Cart() {
   const { items, removeItem, updateQuantity, getTotalPrice, clearCart } = useCart();
   const [, setLocation] = useLocation();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const { openCheckout } = useWompiCheckout();
+
+  const WOMPI_PUBLIC_KEY = 'pub_prod_WYZrZvxxwpC34MYOIc5vDijzSwNB50PR';
+  const WOMPI_CURRENCY = 'COP';
 
   const handleCheckout = () => {
     if (items.length === 0) return;
 
+    setCheckoutError(null);
     setIsCheckingOut(true);
 
-    // Construir mensaje para WhatsApp
-    const message = items
-      .map((item) => `${item.name} x${item.quantity} - ${item.price.toLocaleString('es-CO')} COP`)
-      .join('\n');
+    try {
+      const total = getTotalPrice();
+      const amountInCents = Math.round(total * 100);
+      const reference = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-    const total = getTotalPrice();
-    const fullMessage = `Hola, me gustaría hacer un pedido:\n\n${message}\n\nTotal: ${total.toLocaleString('es-CO')} COP`;
-
-    // Redirigir a WhatsApp
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fullMessage)}`;
-    window.open(whatsappUrl, '_blank');
-
-    // Limpiar carrito después de checkout
-    setTimeout(() => {
-      clearCart();
+      openCheckout({
+        amountInCents,
+        currency: WOMPI_CURRENCY,
+        reference,
+        publicKey: WOMPI_PUBLIC_KEY,
+        customerEmail: undefined,
+        onSuccess: (transactionId: string) => {
+          console.log('Pago exitoso:', transactionId);
+          clearCart();
+          setIsCheckingOut(false);
+          setLocation('/checkout-success');
+        },
+        onError: (error: string) => {
+          console.error('Error en pago:', error);
+          setCheckoutError(error);
+          setIsCheckingOut(false);
+        },
+      });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      setCheckoutError(errorMessage);
       setIsCheckingOut(false);
-      setLocation('/shop');
-    }, 1000);
+    }
   };
 
   return (
@@ -176,14 +192,25 @@ export default function Cart() {
                     </span>
                   </div>
 
+                  {/* Error message */}
+                  {checkoutError && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex gap-3">
+                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-red-900 font-semibold text-sm">Error en el pago</p>
+                        <p className="text-red-700 text-sm">{checkoutError}</p>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Botones */}
                   <div className="space-y-3">
                     <Button
                       onClick={handleCheckout}
-                      disabled={isCheckingOut}
+                      disabled={isCheckingOut || items.length === 0}
                       className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white py-3 rounded-lg font-semibold transition disabled:opacity-50"
                     >
-                      {isCheckingOut ? 'Procesando...' : 'Finalizar pedido'}
+                      {isCheckingOut ? 'Abriendo Wompi...' : 'Finalizar compra'}
                     </Button>
                     <Button
                       onClick={() => setLocation('/shop')}
@@ -195,7 +222,7 @@ export default function Cart() {
 
                   {/* Nota */}
                   <p className="text-xs text-gray-500 text-center">
-                    Serás redirigido a WhatsApp para completar tu pedido
+                    Paga de forma segura con Wompi
                   </p>
                 </div>
               </div>
