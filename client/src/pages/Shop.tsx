@@ -7,6 +7,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import Footer from "@/components/Footer";
+import ShopContactCTA from "@/components/ShopContactCTA";
 import { ArrowUpRight, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -408,20 +409,7 @@ export default function Shop() {
           </div>
         ))}
 
-        {/* CTA final */}
-        <section className="py-16 md:py-24" style={{ background: 'linear-gradient(to right, #E8B4A8, #7ECCC4)' }}>
-          <div className="container text-center">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
-              ¿No encontraste lo que buscas?
-            </h2>
-            <p className="font-body text-white/90 text-lg mb-8">
-              Contáctanos para crear una vela personalizada especialmente para ti.
-            </p>
-            <button className="px-8 py-3 bg-white text-guayaba font-display font-bold rounded-full hover:bg-crema transition-colors">
-              Contactar
-            </button>
-          </div>
-        </section>
+        <ShopContactCTA />
       </main>
 
       <Footer />

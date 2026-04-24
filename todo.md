@@ -241,3 +241,10 @@
 - [x] Implementar botón WhatsApp funcional (https://wa.me/573013493062)
 - [x] Agregar mensaje predefinido en WhatsApp
 - [x] Probar en desktop, tablet y mobile
+
+## AJUSTES DE UBICACIÓN DE SECCIONES
+- [x] Eliminar CustomizationCTA del Home
+- [x] Revisar y eliminar sección actual de Shop
+- [x] Crear ShopContactCTA con botones WhatsApp y Llamar
+- [x] Integrar ShopContactCTA en Shop.tsx
+- [x] Probar en desktop y mobile
