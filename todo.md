@@ -234,3 +234,10 @@
 - [x] Implementar arrastre de imagen en mobile
 - [x] Indicadores visuales mejorados
 - [x] Optimizaciones de rendimiento
+
+## MEJORAS DE COHERENCIA VISUAL
+- [x] Cambiar icono del carrito por uno profesional (ShoppingCart de lucide-react)
+- [x] Rediseñar sección final "¿No encontraste lo que buscas?"
+- [x] Implementar botón WhatsApp funcional (https://wa.me/573013493062)
+- [x] Agregar mensaje predefinido en WhatsApp
+- [x] Probar en desktop, tablet y mobile
