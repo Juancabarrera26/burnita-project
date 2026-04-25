@@ -8,6 +8,7 @@ interface CheckoutSectionProps {
 
 export default function CheckoutSection({ totalPrice, hasItems }: CheckoutSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scriptLoadedRef = useRef(false);
   
   const totalInCents = Math.round(totalPrice * 100);
   const reference = `BURNITA-${Date.now()}`;
@@ -17,39 +18,44 @@ export default function CheckoutSection({ totalPrice, hasItems }: CheckoutSectio
   useEffect(() => {
     if (!hasItems || !containerRef.current) return;
 
-    // Crear script de Wompi
-    const script = document.createElement('script');
-    script.src = 'https://checkout.wompi.co/widget.js';
-    script.async = true;
-    script.dataset.render = 'button';
-    script.dataset.publicKey = publicKey;
-    script.dataset.currency = 'COP';
-    script.dataset.amountInCents = totalInCents.toString();
-    script.dataset.reference = reference;
-    script.dataset.redirectUrl = redirectUrl;
+    // Limpiar contenedor antes de renderizar
+    containerRef.current.innerHTML = '';
 
-    containerRef.current.appendChild(script);
+    // Crear script de Wompi solo si no está cargado
+    if (!scriptLoadedRef.current) {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.wompi.co/widget.js';
+      script.async = true;
+      script.id = 'wompi-checkout-script';
+      script.dataset.render = 'button';
+      script.dataset.publicKey = publicKey;
+      script.dataset.currency = 'COP';
+      script.dataset.amountInCents = totalInCents.toString();
+      script.dataset.reference = reference;
+      script.dataset.redirectUrl = redirectUrl;
 
-    // Esperar a que el botón se renderice y cambiar el texto
-    const changeButtonText = () => {
-      const button = containerRef.current?.querySelector('button');
-      if (button) {
-        button.textContent = 'Finalizar compra';
-      } else {
-        // Reintentar si el botón aún no está disponible
-        setTimeout(changeButtonText, 100);
-      }
-    };
+      containerRef.current.appendChild(script);
+      scriptLoadedRef.current = true;
 
-    // Esperar un poco para que Wompi renderice el botón
-    setTimeout(changeButtonText, 500);
+      // Esperar a que el botón se renderice y cambiar el texto
+      const changeButtonText = () => {
+        const button = containerRef.current?.querySelector('button');
+        if (button) {
+          button.textContent = 'Finalizar compra';
+        } else {
+          // Reintentar si el botón aún no está disponible
+          setTimeout(changeButtonText, 100);
+        }
+      };
+
+      // Esperar un poco para que Wompi renderice el botón
+      setTimeout(changeButtonText, 500);
+    }
 
     return () => {
-      if (containerRef.current && script.parentNode === containerRef.current) {
-        containerRef.current.removeChild(script);
-      }
+      // No limpiar el script aquí para evitar duplicación
     };
-  }, [hasItems, totalInCents, reference, publicKey, redirectUrl]);
+  }, [hasItems]);
 
   if (!hasItems) {
     return null;
