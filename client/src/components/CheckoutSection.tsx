@@ -30,6 +30,20 @@ export default function CheckoutSection({ totalPrice, hasItems }: CheckoutSectio
 
     containerRef.current.appendChild(script);
 
+    // Esperar a que el botón se renderice y cambiar el texto
+    const changeButtonText = () => {
+      const button = containerRef.current?.querySelector('button');
+      if (button) {
+        button.textContent = 'Finalizar compra';
+      } else {
+        // Reintentar si el botón aún no está disponible
+        setTimeout(changeButtonText, 100);
+      }
+    };
+
+    // Esperar un poco para que Wompi renderice el botón
+    setTimeout(changeButtonText, 500);
+
     return () => {
       if (containerRef.current && script.parentNode === containerRef.current) {
         containerRef.current.removeChild(script);
@@ -42,8 +56,10 @@ export default function CheckoutSection({ totalPrice, hasItems }: CheckoutSectio
   }
 
   return (
-    <div ref={containerRef} className="w-full checkout-section">
-      {/* El script de Wompi se renderizará aquí */}
+    <div className="wompi-button-wrapper">
+      <div ref={containerRef} className="w-full checkout-section">
+        {/* El script de Wompi se renderizará aquí */}
+      </div>
     </div>
   );
 }
