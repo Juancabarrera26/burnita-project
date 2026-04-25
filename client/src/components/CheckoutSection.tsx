@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import './CheckoutSection.css';
 
 interface CheckoutSectionProps {
   totalPrice: number;
@@ -41,7 +42,7 @@ export default function CheckoutSection({ totalPrice, hasItems }: CheckoutSectio
   }
 
   return (
-    <div ref={containerRef} className="w-full">
+    <div ref={containerRef} className="w-full checkout-section">
       {/* El script de Wompi se renderizará aquí */}
     </div>
   );
