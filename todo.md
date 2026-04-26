@@ -334,3 +334,9 @@
 ✓ 17 tests pasando sin errores
 ✓ Sin compilacion errors
 ✓ Responsive en mobile y desktop
+
+
+## LIMPIEZA DE CARTPANEL - SUBCARRITO
+- [x] Eliminar completamente botón de WhatsApp de CartPanel
+- [x] Dejar solo botón "Ir al carrito" funcional
+- [x] Probar en desktop y mobile

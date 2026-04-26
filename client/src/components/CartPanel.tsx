@@ -17,22 +17,6 @@ export default function CartPanel({ isOpen, onClose }: CartPanelProps) {
     onClose();
   };
 
-  const handleCheckout = () => {
-    if (items.length === 0) return;
-
-    // Construir mensaje para WhatsApp
-    const message = items
-      .map((item) => `${item.name} x${item.quantity} - ${item.price.toLocaleString('es-CO')} COP`)
-      .join('\n');
-
-    const total = getTotalPrice();
-    const fullMessage = `Hola, me gustaría hacer un pedido:\n\n${message}\n\nTotal: ${total.toLocaleString('es-CO')} COP`;
-
-    // Redirigir a WhatsApp
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fullMessage)}`;
-    window.open(whatsappUrl, '_blank');
-  };
-
   return (
     <>
       {/* Overlay */}
@@ -136,19 +120,13 @@ export default function CartPanel({ isOpen, onClose }: CartPanelProps) {
               </span>
             </div>
 
-            {/* Botones */}
+            {/* Botón único: Ir al carrito */}
             <Button
               onClick={handleGoToCart}
-              className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
+              className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2"
             >
               <ShoppingCart className="w-5 h-5" />
               Ir al carrito
-            </Button>
-            <Button
-              onClick={handleCheckout}
-              className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white py-3 rounded-lg font-semibold transition"
-            >
-              Finalizar pedido por WhatsApp
             </Button>
           </div>
         )}
