@@ -1,5 +1,5 @@
-import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
+import { COOKIE_NAME } from "@shared/const";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { generateImage } from "./_core/imageGeneration";
@@ -88,13 +88,43 @@ export const appRouter = router({
         })
       )
       .mutation(async ({ input }) => {
-        const prompt = `Create a hyper-realistic artisanal handmade candle with the following characteristics:
-- Type: ${input.type} candle
-- Aroma: ${input.aroma} scent
-- Color: ${input.color}
-- Decoration: ${input.decoration} style
+        // Aroma-specific color hints for visual consistency
+        const aromaColorHints: Record<string, string> = {
+          "Frutal": "with fresh fruit tones",
+          "Dulce": "with warm dessert-inspired hues",
+          "Cítrico": "with bright citrus accents",
+          "Especiado": "with warm spice tones",
+        };
 
-The candle should look premium, handcrafted, and visually stunning. Professional product photography style with beautiful lighting.`;
+        // Decoration-specific details
+        const decorationDetails: Record<string, string> = {
+          "Frutas": "topped with fresh fruit pieces (strawberries, mango, or berries) as subtle decoration",
+          "Crema": "with whipped cream-like texture on top, smooth and elegant",
+          "Especias": "with dried spice elements (cinnamon sticks, star anise) as delicate garnish",
+          "Minimalista": "with clean, minimalist aesthetic, no decorations",
+        };
+
+        // Type-specific layer descriptions
+        const typeLayerDescription: Record<string, string> = {
+          "Cóctel": "3-4 distinct colored layers like a cocktail drink",
+          "Postre": "2-3 layers with dessert-inspired color combinations",
+          "Elegante": "2 sophisticated layers with elegant color gradient",
+          "Corporativa": "single solid color with professional minimalist design",
+        };
+
+        const prompt = `A realistic layered candle in a transparent glass, drink-style candle, soft studio lighting, clean minimal background, product photography, consistent glass shape, elegant and modern aesthetic.
+
+Specifications:
+- Container: Transparent glass, cylindrical shape like a beverage glass (ALWAYS maintain this shape)
+- Layers: ${typeLayerDescription[input.type]}
+- Primary Color: ${input.color} ${aromaColorHints[input.aroma]}
+- Decoration: ${decorationDetails[input.decoration]}
+- Style: Professional product photography, studio lighting, neutral background
+- CRITICAL: ALWAYS maintain the same transparent glass container shape and realistic beverage-style candle format
+- Ensure the candle looks like a variation of the same product line, not a different product
+- No fantasy styles, no unusual shapes, no sculptural forms
+- Realistic and fabricable design
+- The candle must look like it belongs to the same product family`;
 
         try {
           const result = await generateImage({ prompt });

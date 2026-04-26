@@ -387,3 +387,14 @@
 - [x] Verificar sin duplicación de scripts Wompi
 - [x] Verificar sin errores en consola
 - [x] Guardar checkpoint
+
+
+## MEJORA: VELAS PERSONALIZADAS CONSISTENTES
+- [ ] Revisar componente BurnitaLab.tsx y lógica de generación
+- [ ] Subir imagen de referencia de velas actuales a S3
+- [ ] Crear prompt base consistente con estructura fija
+- [ ] Integrar referencia visual en generación de imágenes
+- [ ] Actualizar lógica de prompts dinámicos (colores, aromas, decoraciones)
+- [ ] Probar generación con diferentes combinaciones
+- [ ] Verificar consistencia visual entre generaciones
+- [ ] Validar que no cambie recipiente ni estilo
