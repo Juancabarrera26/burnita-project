@@ -340,3 +340,50 @@
 - [x] Eliminar completamente botón de WhatsApp de CartPanel
 - [x] Dejar solo botón "Ir al carrito" funcional
 - [x] Probar en desktop y mobile
+
+
+## CHECKOUT PROFESIONAL MULTI-PASO - NUEVA FASE
+
+### FASE 1: ESTRUCTURA Y BOTÓN
+- [x] Cambiar botón "Finalizar compra" en Cart.tsx para redirigir a /checkout
+- [x] Crear ruta /checkout en App.tsx
+- [x] Agregar estilos base para layout de checkout
+
+### FASE 2: PÁGINA DE CHECKOUT
+- [x] Crear client/src/pages/Checkout.tsx
+- [x] Implementar layout 2 columnas (desktop) / 1 columna (mobile)
+- [x] Crear formulario de envío con validación
+- [x] Campos: Nombre, Apellido, Email, Teléfono, Dirección, Ciudad, Departamento, Notas
+- [x] Validación de campos obligatorios
+
+### FASE 3: SELECTOR DE ENVÍOS
+- [x] Crear componente ShippingSelector
+- [x] Opción 1: Envío local - 10.000 COP
+- [x] Opción 2: Envío nacional - 15.000 COP
+- [x] Validar que el usuario seleccione un envío
+- [x] Actualizar total dinámicamente
+
+### FASE 4: RESUMEN DEL PEDIDO
+- [x] Crear componente OrderSummary
+- [x] Mostrar lista de productos (nombre + cantidad)
+- [x] Mostrar subtotal
+- [x] Mostrar costo de envío dinámico
+- [x] Mostrar total final
+- [x] Actualizar en tiempo real al cambiar envío
+
+### FASE 5: INTEGRACIÓN WOMPI
+- [x] Botón "Finalizar compra" en checkout
+- [x] Validar formulario + envío antes de pagar
+- [x] Calcular total final en centavos
+- [x] Generar referencia: BURNITA-{timestamp}
+- [x] Abrir Wompi Checkout con datos correctos
+- [x] Redirect a /gracias después del pago
+- [x] Mostrar loading state en botón
+
+### FASE 6: PRUEBAS Y CHECKPOINT
+- [x] Probar flujo completo: Carrito → Checkout → Wompi → Gracias
+- [x] Verificar validaciones funcionan
+- [x] Verificar responsive en mobile/tablet/desktop
+- [x] Verificar sin duplicación de scripts Wompi
+- [x] Verificar sin errores en consola
+- [x] Guardar checkpoint

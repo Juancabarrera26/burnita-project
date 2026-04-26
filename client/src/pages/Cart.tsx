@@ -3,7 +3,6 @@ import { useLocation } from 'wouter';
 import { ChevronLeft, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
-import CheckoutSection from '@/components/CheckoutSection';
 
 export default function Cart() {
   const { items, removeItem, updateQuantity, getTotalPrice } = useCart();
@@ -149,8 +148,13 @@ export default function Cart() {
                     </span>
                   </div>
 
-                  {/* Sección de checkout con Wompi */}
-                  <CheckoutSection totalPrice={getTotalPrice()} hasItems={items.length > 0} />
+                  {/* Botón Finalizar compra */}
+                  <Button
+                    onClick={() => setLocation('/checkout')}
+                    className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white py-3 rounded-lg font-semibold transition"
+                  >
+                    Finalizar compra
+                  </Button>
 
                   {/* Botón continuar comprando */}
                   <Button

@@ -13,6 +13,7 @@ import { useNavigationScroll } from "./hooks/useNavigationScroll";
 import { CartProvider } from "./contexts/CartContext";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import Gracias from "./pages/Gracias";
 import CartPanel from "./components/CartPanel";
 import Header from "./components/Header";
@@ -29,6 +30,7 @@ function Router() {
       <Route path={"/shop"} component={Shop} />
       <Route path={"/product/:id"} component={ProductDetail} />
       <Route path={"/cart"} component={Cart} />
+      <Route path={"/checkout"} component={Checkout} />
       <Route path={"/gracias"} component={Gracias} />
       <Route path={"/explore-lab"} component={ExploreLab} />
       <Route path={"/solicitud/recordatorios"} component={SolicitudRecordatorios} />
