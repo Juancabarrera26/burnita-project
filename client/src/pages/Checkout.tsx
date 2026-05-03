@@ -29,6 +29,7 @@ export default function Checkout() {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [showWompiCheckout, setShowWompiCheckout] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [formData, setFormData] = useState<ShippingFormData>({
     firstName: '',
     lastName: '',
@@ -56,6 +57,7 @@ export default function Checkout() {
     if (!formData.department.trim()) newErrors.department = 'El departamento es obligatorio';
     if (!formData.city.trim()) newErrors.city = 'La ciudad es obligatoria';
     if (items.length === 0) newErrors.cart = 'El carrito está vacío';
+    if (!acceptedTerms) newErrors.terms = 'Debes aceptar los términos y condiciones';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -365,6 +367,41 @@ export default function Checkout() {
                       rows={3}
                       className="w-full px-4 py-3 rounded-lg border border-cream-300 focus:outline-none focus:ring-2 focus:ring-guayaba-500 resize-none"
                     />
+                  </div>
+
+                  {/* Aceptar terminos */}
+                  <div className="mt-6 p-4 bg-guayaba-50 rounded-lg border border-guayaba-200">
+                    <label className="flex items-start gap-3 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={acceptedTerms}
+                        onChange={(e) => {
+                          setAcceptedTerms(e.target.checked);
+                          if (errors.terms) {
+                            setErrors((prev) => {
+                              const newErrors = { ...prev };
+                              delete newErrors.terms;
+                              return newErrors;
+                            });
+                          }
+                        }}
+                        className="w-5 h-5 mt-0.5 accent-guayaba-500 cursor-pointer"
+                      />
+                      <span className="text-sm text-charcoal-700">
+                        He leido y acepto los{' '}
+                        <a
+                          href="/terminos-y-condiciones"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-guayaba-500 hover:text-guayaba-600 font-semibold underline"
+                        >
+                          Terminos y Condiciones
+                        </a>
+                      </span>
+                    </label>
+                    {errors.terms && (
+                      <p className="text-red-500 text-sm mt-2">{errors.terms}</p>
+                    )}
                   </div>
                 </div>
               </div>

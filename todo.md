@@ -433,3 +433,47 @@
 
 ### FASE 6: CHECKPOINT
 - [x] Backend funcional creado (pendiente activacion con credenciales)
+
+
+## LEGAL PAGE AND TERMS ACCEPTANCE - COMPLETADO
+
+### FASE 1: CREAR PÁGINA DE TÉRMINOS Y CONDICIONES
+- [x] Crear client/src/pages/TerminosYCondiciones.tsx
+- [x] Agregar sección "Términos y Condiciones" con 11 secciones
+- [x] Agregar sección "Política de Privacidad" con 12 secciones
+- [x] Implementar estilos profesionales con Tailwind CSS
+- [x] Responsive en mobile, tablet y desktop
+
+### FASE 2: INTEGRACIÓN DE RUTAS
+- [x] Agregar import de TerminosYCondiciones en App.tsx
+- [x] Agregar ruta /terminos-y-condiciones en App.tsx
+- [x] Verificar que la página carga correctamente
+
+### FASE 3: CHECKBOX DE ACEPTACIÓN EN CHECKOUT
+- [x] Agregar estado acceptedTerms en Checkout.tsx
+- [x] Agregar validación de términos en validateForm()
+- [x] Crear HTML/JSX del checkbox con estilos
+- [x] Agregar link a /terminos-y-condiciones en el checkbox
+- [x] Mostrar error si no se acepta antes de pagar
+- [x] Limpiar error cuando se marca el checkbox
+
+### FASE 4: ACTUALIZAR FOOTER
+- [x] Footer.tsx ya tiene links a /terminos-y-condiciones
+- [x] Links funcionan correctamente
+
+### FASE 5: PRUEBAS
+- [x] Verificar que página de términos carga correctamente
+- [x] Verificar que checkbox aparece en checkout
+- [x] Verificar que checkbox funciona (check/uncheck)
+- [x] Verificar que link abre página de términos en nueva pestaña
+- [x] Verificar que validación bloquea pago sin aceptar términos
+- [x] Verificar que error desaparece al marcar checkbox
+
+### RESULTADO FINAL
+✓ Página de Términos y Condiciones + Política de Privacidad completa
+✓ Checkbox de aceptación en checkout
+✓ Validación funcional bloquea pago sin aceptar
+✓ Link a términos abre en nueva pestaña
+✓ Responsive en todas las plataformas
+✓ 17 tests pasando
+✓ Sin errores de compilación
