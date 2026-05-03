@@ -423,9 +423,6 @@ export default function Checkout() {
       </main>
 
       <Footer />
-
-      {/* Wompi Script */}
-      <script src="https://checkout.wompi.co/widget.js"></script>
     </div>
   );
 }
