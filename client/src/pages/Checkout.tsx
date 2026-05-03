@@ -5,6 +5,8 @@ import { ChevronLeft, AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 import { DEPARTMENTS, CITIES, FIXED_SHIPPING_COST, getCitiesByDepartment } from '@shared/locations';
+import { WOMPI_PUBLIC_KEY, WOMPI_INTEGRITY_KEY } from '@shared/const';
+import SHA256 from 'crypto-js/sha256';
 
 interface ShippingFormData {
   firstName: string;
@@ -127,14 +129,22 @@ export default function Checkout() {
       // Guardar referencia en localStorage para la página de gracias
       localStorage.setItem('lastOrderReference', referencia);
 
+      // Generar firma de integridad SHA256
+      const amountInCents = total * 100;
+      const cadena = referencia + amountInCents + 'COP' + WOMPI_INTEGRITY_KEY;
+      const signature = SHA256(cadena).toString();
+
       // Abrir Wompi Checkout
       const WompiCheckout = (window as any).WidgetCheckout;
       if (WompiCheckout) {
         const checkout = new WompiCheckout({
           currency: 'COP',
-          amountInCents: total * 100,
+          amountInCents,
           reference: referencia,
-          publicKey: 'pub_prod_WYZrZvxxwpC34MYOIc5vDijzSwNB50PR',
+          publicKey: WOMPI_PUBLIC_KEY,
+          signature: {
+            integrity: signature,
+          },
           redirectUrl: `${window.location.origin}/gracias?referencia=${referencia}`,
         });
         checkout.open((transaction: any) => {
