@@ -408,10 +408,36 @@ export default function Checkout() {
                 </div>
 
                 {/* Botón de pago */}
-                <Button
+                <button
                   onClick={handleCheckout}
                   disabled={isLoading}
-                  className="w-full bg-guayaba-500 hover:bg-guayaba-600 text-white font-bold py-3 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  style={{
+                    backgroundColor: isLoading ? '#ccc' : '#ff4fa3',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '999px',
+                    padding: '14px 24px',
+                    fontWeight: '600',
+                    fontSize: '16px',
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: isLoading ? 'not-allowed' : 'pointer',
+                    opacity: isLoading ? 0.7 : 1,
+                    transition: 'background-color 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isLoading) {
+                      (e.target as HTMLButtonElement).style.backgroundColor = '#e84393';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isLoading) {
+                      (e.target as HTMLButtonElement).style.backgroundColor = '#ff4fa3';
+                    }
+                  }}
+                  className="gap-2"
                 >
                   {isLoading ? (
                     <>
@@ -421,7 +447,7 @@ export default function Checkout() {
                   ) : (
                     'Finalizar compra'
                   )}
-                </Button>
+                </button>
 
                 <p className="text-xs text-charcoal-500 text-center mt-3">
                   Serás redirigido a Wompi para completar el pago
