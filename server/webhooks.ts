@@ -40,9 +40,9 @@ export async function handleWompiWebhook(req: Request, res: Response) {
 
     // Handle different event types
     if (event.event === 'transaction.updated') {
-      const transaction = event.data;
-      const reference = transaction.reference;
-      const status = transaction.status;
+      const transaction = event.data?.transaction || event.data;
+      const reference = transaction?.reference;
+      const status = transaction?.status;
 
       console.log(`[Wompi Webhook] Transaction ${reference} status: ${status}`);
 
@@ -56,15 +56,21 @@ export async function handleWompiWebhook(req: Request, res: Response) {
       }
 
       // Update order status in database
-      if (orderStatus !== 'pendiente') {
+      if (reference) {
         await updateOrderStatus(reference, orderStatus);
         console.log(`[Wompi Webhook] Order ${reference} updated to ${orderStatus}`);
+        
+        return res.status(200).json({ 
+          success: true, 
+          message: `Order ${reference} updated to ${orderStatus}` 
+        });
+      } else {
+        console.warn('[Wompi Webhook] No reference found in transaction');
+        return res.status(400).json({ 
+          success: false, 
+          error: 'No reference found in transaction' 
+        });
       }
-
-      return res.status(200).json({ 
-        success: true, 
-        message: `Order ${reference} updated to ${orderStatus}` 
-      });
     }
 
     // Unknown event type
