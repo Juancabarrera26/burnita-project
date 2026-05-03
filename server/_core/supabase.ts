@@ -1,15 +1,16 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error(
-    'Missing Supabase credentials. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.'
-  );
-}
+let supabase: SupabaseClient | null = null;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+if (supabaseUrl && supabaseKey) {
+  supabase = createClient(supabaseUrl, supabaseKey);
+  console.log('[Supabase] Connected successfully');
+} else {
+  console.warn('[Supabase] Credentials not configured. Order operations will fail until SUPABASE_URL and SUPABASE_ANON_KEY are set.');
+}
 
 /**
  * Type definitions for Supabase tables
@@ -43,20 +44,34 @@ export interface Order {
 /**
  * Create a new order in Supabase
  */
-export async function createOrder(orderData: Omit<Order, 'id' | 'referencia' | 'fecha' | 'created_at' | 'updated_at'>) {
+export async function createOrder(orderData: any) {
+  if (!supabase) {
+    throw new Error('Supabase not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+  }
+
   const referencia = `BURNITA-${Date.now()}`;
   const fecha = new Date().toISOString();
 
-  const { data, error } = await supabase
+  const orderRecord = {
+    referencia,
+    nombre: orderData.nombre,
+    apellido: orderData.apellido,
+    email: orderData.email,
+    telefono: orderData.telefono,
+    direccion: orderData.direccion,
+    ciudad: orderData.ciudad,
+    departamento: orderData.departamento,
+    productos: orderData.productos,
+    subtotal: orderData.subtotal,
+    envio: orderData.envio,
+    total: orderData.total,
+    fecha,
+    estado: 'pendiente',
+  };
+
+  const { data, error } = await (supabase as any)
     .from('ordenes')
-    .insert([
-      {
-        referencia,
-        ...orderData,
-        fecha,
-        estado: 'pendiente',
-      },
-    ])
+    .insert([orderRecord])
     .select();
 
   if (error) {
@@ -70,7 +85,11 @@ export async function createOrder(orderData: Omit<Order, 'id' | 'referencia' | '
  * Get order by reference
  */
 export async function getOrderByReference(referencia: string) {
-  const { data, error } = await supabase
+  if (!supabase) {
+    throw new Error('Supabase not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+  }
+
+  const { data, error } = await (supabase as any)
     .from('ordenes')
     .select('*')
     .eq('referencia', referencia)
@@ -86,10 +105,16 @@ export async function getOrderByReference(referencia: string) {
 /**
  * Update order status
  */
-export async function updateOrderStatus(referencia: string, estado: Order['estado']) {
-  const { data, error } = await supabase
+export async function updateOrderStatus(referencia: string, estado: string) {
+  if (!supabase) {
+    throw new Error('Supabase not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+  }
+
+  const updateData = { estado, updated_at: new Date().toISOString() };
+
+  const { data, error } = await (supabase as any)
     .from('ordenes')
-    .update({ estado, updated_at: new Date().toISOString() })
+    .update(updateData)
     .eq('referencia', referencia)
     .select();
 
@@ -104,7 +129,11 @@ export async function updateOrderStatus(referencia: string, estado: Order['estad
  * Get all orders (for admin dashboard)
  */
 export async function getAllOrders() {
-  const { data, error } = await supabase
+  if (!supabase) {
+    throw new Error('Supabase not configured. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+  }
+
+  const { data, error } = await (supabase as any)
     .from('ordenes')
     .select('*')
     .order('created_at', { ascending: false });
