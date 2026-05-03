@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCart } from '@/contexts/CartContext';
 import { useLocation } from 'wouter';
-import { ChevronLeft, AlertCircle } from 'lucide-react';
+import { ChevronLeft, AlertCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 
@@ -31,6 +31,7 @@ export default function Checkout() {
   const [selectedShipping, setSelectedShipping] = useState<'local' | 'national' | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [showWompiCheckout, setShowWompiCheckout] = useState(false);
   const [formData, setFormData] = useState<ShippingFormData>({
     firstName: '',
     lastName: '',
@@ -101,13 +102,47 @@ export default function Checkout() {
 
     setIsLoading(true);
 
-    // Simular delay para mostrar loading state
-    setTimeout(() => {
-      // Generar referencia única
-      const reference = `BURNITA-${Date.now()}`;
+    try {
+      // Preparar datos de la orden
+      const orderData = {
+        nombre: formData.firstName.trim(),
+        apellido: formData.lastName.trim(),
+        email: formData.email.trim(),
+        telefono: formData.phone.trim(),
+        direccion: formData.address.trim(),
+        ciudad: formData.city.trim(),
+        departamento: formData.department.trim(),
+        productos: items.map((item) => ({
+          id: item.id,
+          nombre: item.name,
+          precio: item.price,
+          cantidad: item.quantity,
+          imagen: item.image,
+        })),
+        subtotal,
+        envio: shippingCost,
+        total,
+      };
+
+      // Crear orden en el backend
+      const response = await fetch('/api/orders/crear', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Error al crear la orden');
+      }
+
+      const result = await response.json();
+      const reference = result.referencia;
       const amountInCents = Math.round(total * 100);
 
-      // Renderizar script de Wompi
+      // Renderizar script de Wompi con la referencia del backend
       const container = document.getElementById('wompi-checkout-container');
       if (container) {
         container.innerHTML = '';
@@ -124,12 +159,19 @@ export default function Checkout() {
         container.appendChild(script);
       }
 
+      setShowWompiCheckout(true);
+    } catch (error) {
+      console.error('Error:', error);
+      setErrors({
+        checkout: error instanceof Error ? error.message : 'Error al procesar el pago',
+      });
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   // Si el carrito está vacío, redirigir a shop
-  if (items.length === 0) {
+  if (items.length === 0 && !showWompiCheckout) {
     return (
       <div className="min-h-screen bg-[#fff6ea] flex flex-col">
         <main className="flex-1 pt-24 px-4 pb-12">
@@ -279,7 +321,7 @@ export default function Checkout() {
                       className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d946a6] ${
                         errors.address ? 'border-red-500' : 'border-gray-300'
                       }`}
-                      placeholder="Calle, número, apartamento"
+                      placeholder="Calle 123 #45-67"
                     />
                     {errors.address && (
                       <p className="text-red-500 text-sm mt-1">{errors.address}</p>
@@ -300,7 +342,7 @@ export default function Checkout() {
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d946a6] ${
                           errors.city ? 'border-red-500' : 'border-gray-300'
                         }`}
-                        placeholder="Tu ciudad"
+                        placeholder="Medellín"
                       />
                       {errors.city && (
                         <p className="text-red-500 text-sm mt-1">{errors.city}</p>
@@ -319,7 +361,7 @@ export default function Checkout() {
                         className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#d946a6] ${
                           errors.department ? 'border-red-500' : 'border-gray-300'
                         }`}
-                        placeholder="Tu departamento"
+                        placeholder="Antioquia"
                       />
                       {errors.department && (
                         <p className="text-red-500 text-sm mt-1">{errors.department}</p>
@@ -343,26 +385,18 @@ export default function Checkout() {
                   </div>
                 </div>
 
-                {/* Tipo de envío */}
-                <div className="border-t border-gray-200 pt-8">
+                {/* Selector de envío */}
+                <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-6">Tipo de envío</h2>
-
-                  {errors.shipping && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4 flex items-start gap-3">
-                      <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-red-700 text-sm">{errors.shipping}</p>
-                    </div>
-                  )}
-
                   <div className="space-y-3">
                     {Object.entries(SHIPPING_OPTIONS).map(([key, option]) => (
                       <label
                         key={key}
-                        className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition ${
-                          selectedShipping === key
-                            ? 'border-[#d946a6] bg-pink-50'
-                            : 'border-gray-200 hover:border-gray-300'
-                        }`}
+                        className="flex items-center p-4 border-2 rounded-lg cursor-pointer transition"
+                        style={{
+                          borderColor: selectedShipping === key ? '#d946a6' : '#e5e7eb',
+                          backgroundColor: selectedShipping === key ? '#fdf2f8' : '#ffffff',
+                        }}
                       >
                         <input
                           type="radio"
@@ -370,86 +404,91 @@ export default function Checkout() {
                           value={key}
                           checked={selectedShipping === key}
                           onChange={() => handleShippingChange(key as 'local' | 'national')}
-                          className="w-4 h-4 text-[#d946a6] cursor-pointer"
+                          className="w-4 h-4 cursor-pointer"
                         />
                         <div className="ml-4 flex-1">
                           <p className="font-semibold text-gray-900">{option.label}</p>
-                          <p className="text-sm text-gray-600">
-                            {option.price.toLocaleString('es-CO')} COP
-                          </p>
                         </div>
+                        <p className="font-bold text-gray-900">${option.price.toLocaleString('es-CO')}</p>
                       </label>
                     ))}
                   </div>
+                  {errors.shipping && (
+                    <p className="text-red-500 text-sm mt-2">{errors.shipping}</p>
+                  )}
+                </div>
+
+                {/* Error general */}
+                {errors.checkout && (
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <p className="text-red-700 text-sm">{errors.checkout}</p>
+                  </div>
+                )}
+
+                {/* Botón Finalizar compra */}
+                <div className="mt-8">
+                  {!showWompiCheckout ? (
+                    <Button
+                      onClick={handleCheckout}
+                      disabled={isLoading}
+                      className="w-full bg-[#d946a6] hover:bg-[#c0368a] text-white px-6 py-3 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Procesando...
+                        </>
+                      ) : (
+                        'Finalizar compra'
+                      )}
+                    </Button>
+                  ) : (
+                    <div id="wompi-checkout-container" className="mt-4"></div>
+                  )}
                 </div>
               </div>
             </div>
 
-            {/* Resumen del pedido - Derecha (1 columna en desktop) */}
+            {/* Resumen del pedido - Derecha */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-sm p-6 sticky top-24 space-y-6">
-                <h2 className="text-2xl font-bold text-gray-900">Resumen del pedido</h2>
+              <div className="bg-white rounded-lg shadow-sm p-8 sticky top-24">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">Resumen del pedido</h2>
 
-                {/* Lista de productos */}
-                <div className="space-y-3 border-b border-gray-200 pb-6">
+                {/* Productos */}
+                <div className="space-y-4 mb-6 pb-6 border-b border-gray-200">
                   {items.map((item) => (
-                    <div key={item.id} className="flex justify-between text-sm text-gray-600">
-                      <span>
-                        {item.name} x {item.quantity}
-                      </span>
-                      <span>{(item.price * item.quantity).toLocaleString('es-CO')} COP</span>
+                    <div key={item.id} className="flex justify-between items-start">
+                      <div>
+                        <p className="font-semibold text-gray-900">{item.name}</p>
+                        <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
+                      </div>
+                      <p className="font-semibold text-gray-900">
+                        ${(item.price * item.quantity).toLocaleString('es-CO')}
+                      </p>
                     </div>
                   ))}
                 </div>
 
-                {/* Detalles de precios */}
-                <div className="space-y-3 border-b border-gray-200 pb-6">
+                {/* Totales */}
+                <div className="space-y-3">
                   <div className="flex justify-between text-gray-600">
-                    <span>Subtotal:</span>
-                    <span>{subtotal.toLocaleString('es-CO')} COP</span>
+                    <span>Subtotal</span>
+                    <span>${subtotal.toLocaleString('es-CO')}</span>
                   </div>
                   <div className="flex justify-between text-gray-600">
-                    <span>Envío:</span>
-                    <span>
-                      {selectedShipping
-                        ? `${shippingCost.toLocaleString('es-CO')} COP`
-                        : 'Por seleccionar'}
-                    </span>
+                    <span>Envío</span>
+                    <span>${shippingCost.toLocaleString('es-CO')}</span>
                   </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>Impuestos:</span>
-                    <span>Incluidos</span>
+                  <div className="flex justify-between text-xl font-bold text-gray-900 pt-3 border-t border-gray-200">
+                    <span>Total</span>
+                    <span>${total.toLocaleString('es-CO')}</span>
                   </div>
                 </div>
-
-                {/* Total */}
-                <div className="flex justify-between text-2xl font-bold text-gray-900">
-                  <span>Total:</span>
-                  <span className="text-[#d946a6]">{total.toLocaleString('es-CO')} COP</span>
-                </div>
-
-                {/* Contenedor para Wompi */}
-                <div id="wompi-checkout-container" className="min-h-[50px]" />
-
-                {/* Botón de pago */}
-                <Button
-                  onClick={handleCheckout}
-                  disabled={isLoading || !selectedShipping}
-                  className="w-full bg-[#d946a6] hover:bg-[#c0368a] disabled:bg-gray-300 text-white py-3 rounded-lg font-semibold transition"
-                >
-                  {isLoading ? 'Procesando...' : 'Finalizar compra'}
-                </Button>
-
-                {/* Nota de seguridad */}
-                <p className="text-xs text-gray-500 text-center">
-                  Paga de forma segura con Wompi
-                </p>
               </div>
             </div>
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );
