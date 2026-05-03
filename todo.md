@@ -398,3 +398,38 @@
 - [ ] Probar generación con diferentes combinaciones
 - [ ] Verificar consistencia visual entre generaciones
 - [ ] Validar que no cambie recipiente ni estilo
+
+
+## SISTEMA DE ÓRDENES - BACKEND
+
+### FASE 1: BASE DE DATOS SUPABASE
+- [x] Crear tabla `ordenes` en Supabase (SQL migration creada)
+- [x] Campos: id, referencia, nombre, apellido, email, telefono, direccion, ciudad, departamento, productos, subtotal, envio, total, estado, fecha
+- [ ] Configurar Supabase credentials en .env (pendiente credenciales del usuario)
+
+### FASE 2: CONEXION A BASE DE DATOS
+- [x] Crear cliente Supabase en servidor (server/_core/supabase.ts)
+- [x] Implementar query helpers para CRUD de ordenes
+- [ ] Validar conexion a base de datos (pendiente credenciales)
+
+### FASE 3: ENDPOINT POST /crear-orden
+- [x] Recibir datos del checkout
+- [x] Generar referencia unica (BURNITA-timestamp)
+- [x] Validar todos los campos requeridos
+- [x] Guardar orden en base de datos
+- [x] Devolver orden creada con referencia
+
+### FASE 4: ENDPOINT POST /wompi-webhook
+- [x] Recibir eventos de Wompi
+- [x] Validar firma del webhook (opcional)
+- [x] Si estado APPROVED: actualizar orden a "pagado"
+- [x] Manejar otros estados de pago
+
+### FASE 5: PRUEBAS
+- [ ] Probar POST /crear-orden con curl (pendiente credenciales)
+- [ ] Verificar datos guardados en Supabase (pendiente credenciales)
+- [ ] Probar POST /wompi-webhook (pendiente credenciales)
+- [ ] Verificar actualizacion de estado (pendiente credenciales)
+
+### FASE 6: CHECKPOINT
+- [x] Backend funcional creado (pendiente activacion con credenciales)

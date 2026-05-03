@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { generateImage } from "./_core/imageGeneration";
 import { createCustomRequest } from "./db";
+import { createOrder, updateOrderStatus, Order } from "./_core/supabase";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -73,6 +74,76 @@ export const appRouter = router({
         } catch (error) {
           console.error("[Custom Request Error]", error);
           throw new Error("No pudimos procesar tu solicitud. Por favor intenta de nuevo.");
+        }
+      }),
+  }),
+
+  orders: router({
+    crearOrden: publicProcedure
+      .input(
+        z.object({
+          nombre: z.string().min(1, "Nombre requerido"),
+          apellido: z.string().min(1, "Apellido requerido"),
+          email: z.string().email("Email inválido"),
+          telefono: z.string().min(1, "Teléfono requerido"),
+          direccion: z.string().min(1, "Dirección requerida"),
+          ciudad: z.string().min(1, "Ciudad requerida"),
+          departamento: z.string().min(1, "Departamento requerido"),
+          productos: z.array(
+            z.object({
+              id: z.string(),
+              nombre: z.string(),
+              precio: z.number().positive(),
+              cantidad: z.number().positive(),
+              imagen: z.string().optional(),
+            })
+          ).min(1, "Al menos un producto es requerido"),
+          subtotal: z.number().positive(),
+          envio: z.number().nonnegative(),
+          total: z.number().positive(),
+        })
+      )
+      .mutation(async ({ input }) => {
+        try {
+          // Validate all required fields
+          if (!input.nombre?.trim()) throw new Error("Nombre es requerido");
+          if (!input.apellido?.trim()) throw new Error("Apellido es requerido");
+          if (!input.email?.trim()) throw new Error("Email es requerido");
+          if (!input.telefono?.trim()) throw new Error("Teléfono es requerido");
+          if (!input.direccion?.trim()) throw new Error("Dirección es requerida");
+          if (!input.ciudad?.trim()) throw new Error("Ciudad es requerida");
+          if (!input.departamento?.trim()) throw new Error("Departamento es requerido");
+          if (!input.productos || input.productos.length === 0) throw new Error("Carrito vacío");
+          if (input.envio < 0) throw new Error("Envío inválido");
+
+          const orderData = {
+            nombre: input.nombre.trim(),
+            apellido: input.apellido.trim(),
+            email: input.email.trim(),
+            telefono: input.telefono.trim(),
+            direccion: input.direccion.trim(),
+            ciudad: input.ciudad.trim(),
+            departamento: input.departamento.trim(),
+            productos: input.productos,
+            subtotal: input.subtotal,
+            envio: input.envio,
+            total: input.total,
+            estado: "pendiente" as const,
+          };
+
+          const order = await createOrder(orderData);
+
+          return {
+            success: true,
+            referencia: order.referencia,
+            total: order.total,
+            message: "Orden creada exitosamente",
+          };
+        } catch (error) {
+          console.error("[Order Creation Error]", error);
+          throw new Error(
+            error instanceof Error ? error.message : "Error al crear la orden"
+          );
         }
       }),
   }),
