@@ -101,6 +101,14 @@
     font-family: "Inter", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Scroll padding to prevent header overlap */
+    scroll-padding-top: 6rem; /* 96px for desktop header (h-20) */
+  }
+  
+  @media (max-width: 768px) {
+    html {
+      scroll-padding-top: 4rem; /* 64px for mobile header (h-16) */
+    }
   }
   
   body {
@@ -108,6 +116,14 @@
     font-family: "Inter", system-ui, sans-serif;
     font-weight: 400;
     line-height: 1.6;
+    /* Padding to account for fixed header */
+    padding-top: 4rem; /* 64px for mobile header */
+  }
+  
+  @media (min-width: 768px) {
+    body {
+      padding-top: 5rem; /* 80px for desktop header */
+    }
   }
   
   /* Titulares con Manrope */
@@ -123,16 +139,26 @@
     font-weight: 800;
     letter-spacing: 0.04em;
     line-height: 1.1;
+    /* Prevent overlap with fixed header when scrolling to anchor */
+    scroll-margin-top: 6rem; /* 96px for desktop */
   }
   
   h2 {
     font-weight: 700;
     letter-spacing: 0.03em;
+    scroll-margin-top: 6rem;
   }
   
   h3 {
     font-weight: 600;
     letter-spacing: 0.02em;
+    scroll-margin-top: 6rem;
+  }
+  
+  @media (max-width: 768px) {
+    h1, h2, h3 {
+      scroll-margin-top: 4rem; /* 64px for mobile */
+    }
   }
   
   /* Párrafos y texto */

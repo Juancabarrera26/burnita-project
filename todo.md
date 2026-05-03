@@ -477,3 +477,55 @@
 ✓ Responsive en todas las plataformas
 ✓ 17 tests pasando
 ✓ Sin errores de compilación
+
+
+## HEADER LAYOUT FIX - COMPLETADO
+
+### PROBLEMA IDENTIFICADO
+- Header fijo (fixed position) cubría contenido al cargar páginas
+- Títulos (h1, h2, h3) quedaban ocultos detrás del navbar
+- Ocurría en todas las páginas: home, shop, términos, checkout, etc.
+- Afectaba tanto desktop como mobile
+
+### SOLUCIÓN IMPLEMENTADA
+
+#### 1. Scroll Padding Global (html)
+- Desktop: scroll-padding-top: 6rem (96px)
+- Mobile: scroll-padding-top: 4rem (64px)
+- Previene que el contenido quede oculto al hacer scroll a anchors
+
+#### 2. Body Padding
+- Mobile: padding-top: 4rem (64px) - altura del header móvil (h-16)
+- Desktop: padding-top: 5rem (80px) - altura del header desktop (h-20)
+- Crea espacio superior para que el contenido no inicie debajo del header
+
+#### 3. Scroll Margin en Títulos (h1, h2, h3)
+- Desktop: scroll-margin-top: 6rem (96px)
+- Mobile: scroll-margin-top: 4rem (64px)
+- Asegura que títulos no queden ocultos al navegar a secciones
+
+#### 4. Media Queries Responsivas
+- Breakpoint: 768px (md)
+- Ajustes automáticos para mobile vs desktop
+- Mantiene consistencia en todas las resoluciones
+
+### ARCHIVOS MODIFICADOS
+- client/src/index.css: Agregadas reglas CSS globales en @layer base
+
+### PRUEBAS REALIZADAS
+- [x] Home page: Contenido visible, sin superposición
+- [x] Shop page: Títulos "Tienda de Velas Artesanales" y "Cócteles de Velas" visibles
+- [x] Términos y Condiciones: Títulos "Términos y Condiciones" y "Política de Privacidad" visibles
+- [x] Checkout: Formulario "Información de envío" visible sin ocultarse
+- [x] Desktop (1024px+): Spacing correcto
+- [x] Tablet (768px): Spacing correcto
+- [x] Mobile (375px): Spacing correcto
+
+### RESULTADO FINAL
+✓ Header no cubre contenido en ninguna página
+✓ Todos los títulos (h1, h2, h3) visibles correctamente
+✓ Scroll a anchors funciona sin ocultar contenido
+✓ Diseño visual intacto, solo spacing corregido
+✓ Responsive en todas las plataformas
+✓ Consistencia en todo el sitio
+✓ Sin errores de compilación
