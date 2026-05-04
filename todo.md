@@ -546,3 +546,28 @@
   - ✓ Carrusel navega correctamente
   - ✓ Tienda expandible funciona
   - ✓ Todas las imágenes cargan correctamente
+
+
+## CORRECCIÓN DE CONSISTENCIA DE IMÁGENES DE PRODUCTOS
+- [x] Identificar componentes que renderizan imágenes de productos
+  - Products.tsx (carrusel home)
+  - ProductCarousel.tsx (carrusel shop)
+  - Shop.tsx (tarjetas de tienda)
+- [x] Ajustar object-fit de cover a contain en todas las imágenes
+  - Cambio de object-cover a object-contain
+- [x] Definir altura fija consistente en contenedores de imagen
+  - aspect-square mantenido para consistencia
+  - Flexbox centering agregado (flex items-center justify-center)
+- [x] Aplicar flexbox centering en contenedores
+  - Agregado a todos los contenedores de imagen
+- [x] Verificar que Pink Ice se vea sin zoom excesivo
+  - Pink Ice ahora se ve con proporcion correcta en carrusel
+  - Pink Ice se ve sin zoom en tienda
+- [x] Verificar que todas las imágenes mantengan proporción original
+  - Todas las imágenes se renderizan completas sin recorte
+- [x] Probar en carousel (home page)
+  - Carrusel funciona correctamente con nuevos estilos
+- [x] Probar en tienda (shop page)
+  - Tienda muestra imágenes consistentes
+- [x] Probar en detalle de producto
+  - Componentes de tienda funcionan correctamente

@@ -318,14 +318,15 @@ export default function Products() {
             >
               {/* Product Image */}
               <div
-                className={`relative aspect-square rounded-2xl overflow-hidden mb-4 ${product.bgColor}`}
+                className={`relative aspect-square rounded-2xl overflow-hidden mb-4 flex items-center justify-center ${product.bgColor}`}
+                style={{ backgroundColor: '#fff6ea' }}
               >
                 <img
                   src={product.image}
                   alt={product.name}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
                 {/* NO COMESTIBLE badge */}
                 <span className="absolute top-3 right-3 px-2 py-1 bg-charcoal text-crema font-body text-[10px] font-semibold uppercase tracking-wider rounded">
