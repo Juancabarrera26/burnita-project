@@ -268,7 +268,7 @@ function ProductCard({ product }: { product: (typeof categories)[0]["products"][
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
-          style={product.name === 'Pink Ice' ? { objectPosition: 'center 30%', transform: 'scale(0.9)' } : {}}
+          style={product.name === 'Pink Ice' ? { objectPosition: 'center 25%' } : {}}
         />
       </div>
       <div className="space-y-2">
