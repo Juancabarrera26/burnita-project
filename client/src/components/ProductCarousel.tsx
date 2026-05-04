@@ -231,15 +231,14 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
           >
             {/* Product Image */}
             <div
-              className={`relative aspect-square rounded-2xl overflow-hidden mb-4 flex items-center justify-center ${product.bgColor}`}
-              style={{ backgroundColor: '#fff6ea' }}
+              className={`relative aspect-square rounded-2xl overflow-hidden mb-4 ${product.bgColor}`}
             >
               <img
                 src={product.image}
                 alt={product.name}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
 

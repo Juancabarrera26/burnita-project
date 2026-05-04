@@ -263,11 +263,11 @@ function ProductCard({ product }: { product: (typeof categories)[0]["products"][
       className="group cursor-pointer"
       onClick={handleClick}
     >
-      <div className={`${product.bgColor} rounded-2xl p-6 mb-4 overflow-hidden relative h-64 flex items-center justify-center`} style={{ backgroundColor: '#fff6ea' }}>
+      <div className={`${product.bgColor} rounded-2xl p-6 mb-4 overflow-hidden relative h-64 flex items-center justify-center`}>
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-contain rounded-xl group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
         />
       </div>
       <div className="space-y-2">
