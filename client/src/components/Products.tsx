@@ -72,7 +72,7 @@ const products = [
     name: "Pink Ice",
     price: "50.000 COP",
     bgColor: "bg-guayaba/20",
-    image: "/manus-storage/Pinklce_aa3310ee.png",
+    image: "/manus-storage/ChatGPTImage3may2026,09_32_31p.m._050183f9.png",
   },
 ];
 

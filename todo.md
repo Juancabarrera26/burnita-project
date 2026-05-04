@@ -529,3 +529,20 @@
 ✓ Responsive en todas las plataformas
 ✓ Consistencia en todo el sitio
 ✓ Sin errores de compilación
+
+## REEMPLAZO DE IMAGEN PINK ICE
+- [x] Subir nueva imagen de Pink Ice a S3
+  - Archivo: ChatGPTImage3may2026,09_32_31p.m..png
+  - URL: /manus-storage/ChatGPTImage3may2026,09_32_31p.m._050183f9.png
+- [x] Actualizar referencia en Products.tsx (carrusel)
+  - Línea 75: image actualizada a nueva URL
+- [x] Actualizar referencia en Shop.tsx (tienda)
+  - Línea 64: image actualizada a nueva URL
+- [x] Verificar visualización en carrusel (home page)
+  - ✓ Nueva imagen de Pink Ice visible en carrusel
+- [x] Verificar visualización en tienda (shop page)
+  - ✓ Nueva imagen de Pink Ice visible en sección Cócteles
+- [x] Verificar funcionamiento de botones y navegación
+  - ✓ Carrusel navega correctamente
+  - ✓ Tienda expandible funciona
+  - ✓ Todas las imágenes cargan correctamente
