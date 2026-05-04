@@ -9,15 +9,15 @@ import { Instagram, Facebook, Twitter } from "lucide-react";
 
 const shopLinks = [
   { label: "Todas las Velas", href: "#products" },
-  { label: "Nuevos Lanzamientos", href: "#products" },
-  { label: "BURNITA Lab", href: "#" },
+  { label: "Nuevos Lanzamientos", href: "#contacto" },
+  { label: "BURNITA Lab", href: "#burnita-lab" },
   { label: "Sets de Regalo", href: "#" },
 ];
 
 const companyLinks = [
-  { label: "Nuestra Historia", href: "#about" },
+  { label: "Nuestra Historia", href: "#nosotros" },
   { label: "Sostenibilidad", href: "#" },
-  { label: "Contáctanos", href: "#newsletter" },
+  { label: "Contáctanos", href: "#contacto" },
   { label: "Preguntas Frecuentes", href: "#" },
 ];
 
@@ -37,7 +37,11 @@ export default function Footer() {
             {/* Logo - Imagen Burnita */}
             <a
               href="#"
-              className="inline-block mb-4 hover:opacity-80 transition-opacity"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="inline-block mb-4 hover:opacity-80 transition-opacity cursor-pointer"
             >
               <img
                 src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/ZVHHNJjKALrylsDS.png"
