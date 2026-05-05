@@ -52,7 +52,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="newsletter" className="py-12 md:py-16 bg-charcoal">
+    <section id="newsletter" className="py-8 md:py-12 bg-charcoal">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
