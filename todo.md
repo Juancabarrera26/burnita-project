@@ -86,6 +86,10 @@
 - [x] Asegurar z-index correcto
 
 ## In Progress / Pending
+- [x] Actualizar número de contacto a 3214175699 en ambas secciones "¿No encontraste lo que buscas?"
+- [x] Actualizar enlaces de WhatsApp en HOME y TIENDA
+- [x] Actualizar botones de llamada en HOME y TIENDA
+- [x] Validar funcionamiento en desktop y mobile
 
 ## CORRECCIONES CRITICAS DEL CARRITO - FASE 2
 - [x] Icono del carrito en Header ahora FUNCIONA

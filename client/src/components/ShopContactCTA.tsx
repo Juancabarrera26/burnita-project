@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 
 export default function ShopContactCTA() {
   const handleWhatsAppClick = () => {
-    const phoneNumber = "573013493062";
+    const phoneNumber = "3214175699";
     const message = encodeURIComponent(
       "Hola, quiero crear una vela personalizada. ¿Me puedes ayudar?"
     );
@@ -19,7 +19,7 @@ export default function ShopContactCTA() {
   };
 
   const handleCallClick = () => {
-    window.location.href = "tel:+573013493062";
+    window.location.href = "tel:+573214175699";
   };
 
   return (

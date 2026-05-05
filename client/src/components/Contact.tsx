@@ -33,7 +33,7 @@ export default function Contact() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             {/* WhatsApp Button */}
             <a
-              href="https://wa.me/573214175699"
+              href="https://wa.me/3214175699"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-guayaba text-white font-body font-semibold rounded-full hover:bg-guayaba/90 transition-all shadow-lg hover:shadow-xl"
