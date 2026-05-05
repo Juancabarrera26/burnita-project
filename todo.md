@@ -90,6 +90,8 @@
 - [x] Actualizar enlaces de WhatsApp en HOME y TIENDA
 - [x] Actualizar botones de llamada en HOME y TIENDA
 - [x] Validar funcionamiento en desktop y mobile
+- [x] Corregir formato de WhatsApp a +57 (formato internacional Colombia)
+- [x] Agregar mensaje predefinido en botones de WhatsApp
 
 ## CORRECCIONES CRITICAS DEL CARRITO - FASE 2
 - [x] Icono del carrito en Header ahora FUNCIONA

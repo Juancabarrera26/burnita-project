@@ -10,9 +10,9 @@ import { motion } from "framer-motion";
 
 export default function ShopContactCTA() {
   const handleWhatsAppClick = () => {
-    const phoneNumber = "3214175699";
+    const phoneNumber = "573214175699";
     const message = encodeURIComponent(
-      "Hola, quiero crear una vela personalizada. ¿Me puedes ayudar?"
+      "Hola, vengo desde Burnita y quiero más información"
     );
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(whatsappUrl, "_blank");
