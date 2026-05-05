@@ -26,7 +26,7 @@ const PRODUCTS: Product[] = [
   { id: 'tropica', name: 'Tropica', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/KtCXNCkEisgWrviL.webp' },
   { id: 'ambaria', name: 'Ambaria', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/IPeSKSvvXNaAfAxq.webp' },
   { id: 'limoncita', name: 'Limoncita', price: 50000, image: '/manus-storage/Limoncita_3d1ea23f.png' },
-  { id: 'pink-ice', name: 'Pink Ice', price: 50000, image: '/manus-storage/Pinklce_aa3310ee.png' },
+  { id: 'pink-ice', name: 'Pink Ice', price: 50000, image: '/manus-storage/pinkice_d65d2436.png' },
   { id: 'citrusita', name: 'Citrusita', price: 50000, image: '/manus-storage/Citrusita_96447f19.png' },
   { id: 'mielita', name: 'Mielita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp' },
   { id: 'berrita', name: 'Berrita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp' },

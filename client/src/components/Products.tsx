@@ -326,7 +326,7 @@ export default function Products() {
                   loading="lazy"
                   decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  style={product.name === 'Pink Ice' ? { objectPosition: 'center 25%' } : {}}
+                  style={{}}
                 />
                 {/* NO COMESTIBLE badge */}
                 <span className="absolute top-3 right-3 px-2 py-1 bg-charcoal text-crema font-body text-[10px] font-semibold uppercase tracking-wider rounded">
