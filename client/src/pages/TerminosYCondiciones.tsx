@@ -12,8 +12,15 @@ export default function TerminosYCondiciones() {
       <Header />
       
       <main className="flex-grow container mx-auto px-4 py-12 max-w-4xl">
+        {/* Navegación interna */}
+        <div className="mb-8 flex gap-4 justify-center">
+          <a href="#terminos" className="text-guayaba hover:underline font-semibold">Términos y Condiciones</a>
+          <span className="text-charcoal-400">|</span>
+          <a href="#privacidad" className="text-guayaba hover:underline font-semibold">Política de Privacidad</a>
+        </div>
+
         {/* Términos y Condiciones */}
-        <section className="mb-16">
+        <section id="terminos" className="mb-16">
           <h1 className="text-4xl font-bold text-charcoal-900 mb-8">Términos y Condiciones</h1>
           
           <div className="prose prose-lg max-w-none text-charcoal-700 space-y-6">
@@ -112,7 +119,7 @@ export default function TerminosYCondiciones() {
         </section>
 
         {/* Política de Privacidad */}
-        <section className="mb-16 pt-16 border-t-2 border-guayaba-200">
+        <section id="privacidad" className="mb-16 pt-16 border-t-2 border-guayaba-200">
           <h1 className="text-4xl font-bold text-charcoal-900 mb-8">Política de Privacidad</h1>
           
           <div className="prose prose-lg max-w-none text-charcoal-700 space-y-6">
