@@ -126,13 +126,13 @@ export default function ExploreLab() {
   const isLoading = generateImageMutation.isPending;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: '#fff6ea' }}>
       
-      <main className="pt-20">
+      <main>
         {/* Hero Section */}
-        <section className="py-12 px-4 bg-gradient-to-br from-[#fff6ea] to-[#f5e6d3]">
+        <section className="px-4 overflow-hidden" style={{ backgroundColor: '#fff6ea', paddingTop: '3rem', paddingBottom: '3rem' }}>
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-black">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-black" style={{ marginTop: 0 }}>
               Crea tu vela personalizada
             </h1>
             <p className="text-lg md:text-xl text-gray-700">

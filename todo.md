@@ -556,3 +556,8 @@
 - [x] Hacer uniforme el fondo #fff6ea en toda la página Tienda
 - [x] Extender fondo #fff6ea en Burnita Lab a todo el ancho sin espacios blancos
 - [x] Validar consistencia visual en ambas secciones
+- [x] Corregir espacio blanco superior en página "Crea tu vela personalizada"
+- [x] Eliminar margin collapsing del h1 en hero
+- [x] Aplicar padding en lugar de margin en contenedor hero
+- [x] Asegurar que fondo #fff6ea cubra desde navbar hacia abajo
+- [x] Validar que no haya espacios blancos residuales
