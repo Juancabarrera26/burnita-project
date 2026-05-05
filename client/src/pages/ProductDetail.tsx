@@ -4,6 +4,7 @@ import { useCart } from '@/contexts/CartContext';
 import { ChevronLeft, Plus, Minus, ShoppingCart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import ImageZoom from '@/components/ImageZoom';
+import UsageRecommendations from '@/components/UsageRecommendations';
 
 interface Product {
   id: string;
@@ -252,6 +253,9 @@ export default function ProductDetail() {
             )}
           </div>
         </div>
+
+        {/* Recomendaciones de Uso */}
+        <UsageRecommendations />
       </div>
       </div>
     </div>

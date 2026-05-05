@@ -566,3 +566,9 @@
   - [x] Agregar velas a la base de datos
   - [x] Crear páginas de detalle de producto
   - [x] Validar en tienda y carrito
+
+## SECCIÓN DE RECOMENDACIONES DE USO - NUEVAS FASES
+- [x] Crear componente UsageRecommendations.tsx reutilizable
+- [x] Integrar en ProductDetail.tsx debajo de descripción
+- [x] Aplicar a todas las velas existentes y futuras
+- [x] Validar consistencia visual en todas las páginas
