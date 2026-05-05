@@ -61,7 +61,7 @@ const categories = [
         id: 15,
         name: "Pink Ice",
         price: 50000,
-        image: "/manus-storage/ChatGPTImage3may2026,09_32_31p.m._050183f9.png",
+        image: "/manus-storage/pinkice_d65d2436.png",
         bgColor: "bg-transparent",
       },
       {
