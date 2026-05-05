@@ -52,7 +52,7 @@ export default function TerminosYCondiciones() {
             <div>
               <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Envíos</h2>
               <ul className="list-disc list-inside space-y-2">
-                <li>Realizamos envíos a todo Colombia.</li>
+                <li>Realizamos envíos a todo Colombia, no aplica para algunas zonas de difícil acceso o sin cobertura de transporte.</li>
                 <li>El costo de envío es de $15.000 COP y se incluye en el total de la compra.</li>
                 <li>El tiempo estimado de entrega es de 3 a 7 días hábiles después de la confirmación del pago.</li>
                 <li>Es responsabilidad del cliente ingresar correctamente los datos de envío. No nos hacemos responsables por retrasos o problemas derivados de información incorrecta.</li>
@@ -72,7 +72,7 @@ export default function TerminosYCondiciones() {
                 <li>Error en el pedido</li>
                 <li>Producto incorrecto</li>
               </ul>
-              <p className="mb-3">Debes reportarlo dentro de las primeras 48 horas después de recibirlo, enviando evidencia (foto o video).</p>
+              <p className="mb-3">Debes reportarlo dentro de las primeras 24 horas después de recibirlo, enviando evidencia (foto o video).</p>
               <p className="font-semibold mb-2">Si aplica:</p>
               <ul className="list-disc list-inside space-y-2 mb-3">
                 <li>Burnita evaluará cada caso y determinará si aplica cambio del producto o reembolso del dinero.</li>
