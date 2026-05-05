@@ -52,7 +52,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="newsletter" className="py-8 md:py-12 bg-charcoal">
+    <section id="newsletter" className="py-6 md:py-8 bg-charcoal">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -62,17 +62,17 @@ export default function Newsletter() {
           className="max-w-2xl mx-auto text-center"
         >
           {/* Title - Manrope */}
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-white tracking-brand-tight mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-white tracking-brand-tight mb-2">
             Únete al Círculo
           </h2>
           
           {/* Description - Inter */}
-          <p className="font-body text-sm md:text-base text-white/70 mb-6 max-w-lg mx-auto">
+          <p className="font-body text-sm md:text-base text-white/70 mb-5 max-w-lg mx-auto">
             Suscríbete para conocer nuevos lanzamientos, promociones y novedades exclusivas de Burnita.
           </p>
 
           {/* Subscription Form */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-6">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-0">
             <input
               type="email"
               value={email}
@@ -93,18 +93,7 @@ export default function Newsletter() {
             </Button>
           </form>
 
-          {/* Legal text - Inter */}
-          <p className="font-body text-xs text-white/50">
-            Al suscribirte aceptas nuestros{" "}
-            <a href="#" className="underline hover:text-white transition-colors">
-              Términos y Condiciones
-            </a>{" "}
-            y{" "}
-            <a href="#" className="underline hover:text-white transition-colors">
-              Política de Privacidad
-            </a>
-            .
-          </p>
+
         </motion.div>
       </div>
     </section>
