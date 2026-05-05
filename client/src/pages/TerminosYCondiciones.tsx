@@ -117,94 +117,81 @@ export default function TerminosYCondiciones() {
           
           <div className="prose prose-lg max-w-none text-charcoal-700 space-y-6">
             <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Identidad del responsable</h2>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">1. Responsable</h2>
               <p>
-                Burnita es el responsable del tratamiento de datos personales. Nos comprometemos a proteger tu privacidad y a cumplir con todas las leyes aplicables de protección de datos en Colombia.
+                Burnita es responsable del tratamiento de tus datos personales.
               </p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Datos recopilados</h2>
-              <p className="mb-3">Recopilamos la siguiente información personal:</p>
-              <ul className="list-disc list-inside space-y-2">
-                <li><strong>Datos de contacto:</strong> Nombre, apellido, email, teléfono</li>
-                <li><strong>Datos de envío:</strong> Dirección completa, ciudad, departamento</li>
-                <li><strong>Datos de pago:</strong> Procesados de forma segura a través de Wompi (no almacenamos tarjetas)</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Finalidad del uso de datos</h2>
-              <p className="mb-3">Tus datos personales se utilizan para:</p>
-              <ul className="list-disc list-inside space-y-2">
-                <li>Procesar y completar tus órdenes de compra</li>
-                <li>Enviar confirmaciones de pedido y actualizaciones de envío</li>
-                <li>Contactarte en caso de problemas con tu orden</li>
-                <li>Mejorar nuestros servicios y experiencia del usuario</li>
-                <li>Cumplir con obligaciones legales y fiscales</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Base legal</h2>
-              <p>
-                El tratamiento de tus datos se basa en: tu consentimiento explícito al realizar una compra, la ejecución del contrato de compra-venta, y nuestras obligaciones legales.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Compartición de datos</h2>
-              <p className="mb-3">Tus datos pueden ser compartidos con terceros de confianza únicamente para:</p>
-              <ul className="list-disc list-inside space-y-2">
-                <li><strong>Empresas de envío:</strong> Para procesar la entrega de tu orden</li>
-                <li><strong>Procesadores de pago:</strong> Wompi, para procesar pagos de forma segura</li>
-                <li><strong>Autoridades:</strong> Si es requerido por ley</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Tiempo de almacenamiento</h2>
-              <ul className="list-disc list-inside space-y-2">
-                <li>Datos de órdenes: Se conservan durante 3 años para fines contables y fiscales</li>
-                <li>Datos de contacto: Se conservan mientras tengas una relación comercial activa</li>
-                <li>Después del período de retención, los datos se eliminan de forma segura</li>
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Derechos del usuario</h2>
-              <p className="mb-3">Tienes derecho a:</p>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">2. Información que recopilamos</h2>
+              <p className="mb-3">Cuando realizas una compra, recopilamos:</p>
               <ul className="list-disc list-inside space-y-2 mb-3">
-                <li><strong>Acceso:</strong> Solicitar acceso a tus datos personales</li>
-                <li><strong>Rectificación:</strong> Corregir datos inexactos o incompletos</li>
-                <li><strong>Eliminación:</strong> Solicitar la eliminación de tus datos</li>
-                <li><strong>Portabilidad:</strong> Recibir tus datos en formato legible</li>
-                <li><strong>Oposición:</strong> Oponerte al procesamiento de tus datos</li>
+                <li>Nombre y apellido</li>
+                <li>Correo electrónico</li>
+                <li>Teléfono</li>
+                <li>Dirección de envío (ciudad y departamento)</li>
               </ul>
-              <p>Para ejercer cualquiera de estos derechos, contáctanos a: Info@burnita.com</p>
+              <p className="mb-2">Los datos de pago son procesados directamente por Wompi.</p>
+              <p>Burnita no tiene acceso a tu información bancaria.</p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Uso de cookies</h2>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">3. Uso de la información</h2>
+              <p className="mb-3">Usamos tus datos para:</p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong>Cookies esenciales:</strong> Necesarias para el funcionamiento del sitio</li>
-                <li><strong>Cookies de análisis:</strong> Para entender cómo los usuarios interactúan con nuestro sitio</li>
-                <li>Puedes desactivar cookies en la configuración de tu navegador</li>
+                <li>Procesar tu pedido</li>
+                <li>Gestionar envíos</li>
+                <li>Contactarte si hay algún problema con tu compra</li>
+              </ul>
+              <p className="mt-3">No vendemos ni compartimos tus datos con terceros con fines comerciales.</p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">4. Compartición de datos</h2>
+              <p className="mb-3">Solo compartimos información cuando es necesario:</p>
+              <ul className="list-disc list-inside space-y-2">
+                <li>Empresas de envío (para entregar tu pedido)</li>
+                <li>Wompi (para procesar el pago)</li>
               </ul>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Edad mínima</h2>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">5. Almacenamiento</h2>
               <p>
-                Nuestros servicios están dirigidos a personas mayores de 18 años. No recopilamos intencionalmente datos de menores de edad.
+                Los datos se almacenan únicamente para gestión de pedidos y control interno.
               </p>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Contacto</h2>
-              <p className="mb-3">Si tienes preguntas sobre esta Política de Privacidad o sobre cómo manejamos tus datos, contáctanos a:</p>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">6. Derechos del usuario</h2>
+              <p className="mb-3">Puedes solicitar en cualquier momento:</p>
+              <ul className="list-disc list-inside space-y-2 mb-3">
+                <li>Acceso a tus datos</li>
+                <li>Corrección</li>
+                <li>Eliminación</li>
+              </ul>
+              <p>Escribiendo a: <a href="mailto:Info@burnita.com" className="text-guayaba hover:underline">Info@burnita.com</a></p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">7. Seguridad</h2>
+              <p>
+                Tomamos medidas para proteger tu información, pero ningún sistema es 100% seguro.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">8. Cambios</h2>
+              <p>
+                Esta política puede actualizarse en cualquier momento.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="text-2xl font-bold text-charcoal-900 mb-4">9. Contacto</h2>
               <ul className="list-disc list-inside space-y-2">
-                <li>Email: Info@burnita.com</li>
+                <li>Email: <a href="mailto:Info@burnita.com" className="text-guayaba hover:underline">Info@burnita.com</a></li>
                 <li>WhatsApp: 3214175699</li>
               </ul>
             </div>
