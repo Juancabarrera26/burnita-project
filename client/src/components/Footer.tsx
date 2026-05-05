@@ -8,17 +8,15 @@
 import { Instagram, Facebook, Twitter } from "lucide-react";
 
 const shopLinks = [
-  { label: "Todas las Velas", href: "#products" },
-  { label: "Nuevos Lanzamientos", href: "#contacto" },
-  { label: "BURNITA Lab", href: "#burnita-lab" },
-  { label: "Sets de Regalo", href: "#" },
+  { label: "Todas las Velas", href: "/#products" },
+  { label: "Nuevos Lanzamientos", href: "/#unete-circulo" },
+  { label: "BURNITA Lab", href: "/#burnita-lab" },
 ];
 
 const companyLinks = [
-  { label: "Nuestra Historia", href: "#nosotros" },
-  { label: "Sostenibilidad", href: "#" },
-  { label: "Contáctanos", href: "#contacto" },
-  { label: "Preguntas Frecuentes", href: "#" },
+  { label: "Nuestra Historia", href: "/#nosotros" },
+  { label: "Contáctanos", href: "/#contacto" },
+  { label: "Preguntas Frecuentes", href: "/preguntas-frecuentes" },
 ];
 
 const socialLinks = [

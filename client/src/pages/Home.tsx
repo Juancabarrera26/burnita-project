@@ -11,6 +11,7 @@ import BurnitaLab from "@/components/BurnitaLab";
 import About from "@/components/About";
 import Categories from "@/components/Categories";
 import Newsletter from "@/components/Newsletter";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -36,6 +37,7 @@ export default function Home() {
         <BurnitaLab />
         <About />
         <Categories />
+        <Contact />
         <Newsletter />
       </main>
       <Footer />

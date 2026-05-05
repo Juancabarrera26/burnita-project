@@ -12,7 +12,7 @@ import { useCart } from "@/contexts/CartContext";
 import { useLocation } from "wouter";
 
 const navLinks = [
-  { label: "Inicio", href: "/#inicio" },
+  { label: "Inicio", href: "/" },
   { label: "Shop", href: "/shop" },
   { label: "Colecciones", href: "/#colecciones" },
   { label: "Nosotros", href: "/#nosotros" },

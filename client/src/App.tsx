@@ -16,6 +16,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Gracias from "./pages/Gracias";
 import TerminosYCondiciones from "./pages/TerminosYCondiciones";
+import FAQ from "./pages/FAQ";
 import CartPanel from "./components/CartPanel";
 import Header from "./components/Header";
 import { useState } from "react";
@@ -34,6 +35,7 @@ function Router() {
       <Route path={"/checkout"} component={Checkout} />
       <Route path={"/gracias"} component={Gracias} />
       <Route path={"/terminos-y-condiciones"} component={TerminosYCondiciones} />
+      <Route path={"/preguntas-frecuentes"} component={FAQ} />
       <Route path={"/explore-lab"} component={ExploreLab} />
       <Route path={"/solicitud/recordatorios"} component={SolicitudRecordatorios} />
       <Route path={"/solicitud/empresarial"} component={SolicitudEmpresarial} />
