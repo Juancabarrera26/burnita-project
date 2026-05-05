@@ -52,7 +52,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="contacto" className="py-20 md:py-28 bg-crema">
+    <section id="newsletter" className="py-12 md:py-16 bg-crema/50">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -62,12 +62,12 @@ export default function Newsletter() {
           className="max-w-2xl mx-auto text-center"
         >
           {/* Title - Manrope */}
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal tracking-brand-tight mb-4">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal tracking-brand-tight mb-3">
             Únete al Círculo
           </h2>
           
           {/* Description - Inter */}
-          <p className="font-body text-base md:text-lg text-charcoal/70 mb-8 max-w-lg mx-auto">
+          <p className="font-body text-sm md:text-base text-charcoal/60 mb-6 max-w-lg mx-auto">
             Suscríbete para conocer nuevos lanzamientos, promociones y novedades exclusivas de Burnita.
           </p>
 
