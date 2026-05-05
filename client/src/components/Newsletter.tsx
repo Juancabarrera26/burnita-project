@@ -52,7 +52,7 @@ export default function Newsletter() {
   };
 
   return (
-    <section id="newsletter" className="py-12 md:py-16 bg-crema/50">
+    <section id="newsletter" className="py-12 md:py-16 bg-charcoal">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -62,12 +62,12 @@ export default function Newsletter() {
           className="max-w-2xl mx-auto text-center"
         >
           {/* Title - Manrope */}
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal tracking-brand-tight mb-3">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-white tracking-brand-tight mb-3">
             Únete al Círculo
           </h2>
           
           {/* Description - Inter */}
-          <p className="font-body text-sm md:text-base text-charcoal/60 mb-6 max-w-lg mx-auto">
+          <p className="font-body text-sm md:text-base text-white/70 mb-6 max-w-lg mx-auto">
             Suscríbete para conocer nuevos lanzamientos, promociones y novedades exclusivas de Burnita.
           </p>
 
@@ -78,7 +78,7 @@ export default function Newsletter() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Tu correo electrónico"
-              className="flex-1 px-5 py-3 rounded-full border-2 border-charcoal/20 bg-white font-body text-charcoal placeholder:text-charcoal/40 focus:outline-none focus:border-guayaba transition-colors"
+              className="flex-1 px-5 py-3 rounded-full border-2 border-white/20 bg-charcoal/50 font-body text-white placeholder:text-white/40 focus:outline-none focus:border-guayaba transition-colors"
               required
               disabled={isLoading}
             />
@@ -94,13 +94,13 @@ export default function Newsletter() {
           </form>
 
           {/* Legal text - Inter */}
-          <p className="font-body text-xs text-charcoal/50">
+          <p className="font-body text-xs text-white/50">
             Al suscribirte aceptas nuestros{" "}
-            <a href="#" className="underline hover:text-charcoal transition-colors">
+            <a href="#" className="underline hover:text-white transition-colors">
               Términos y Condiciones
             </a>{" "}
             y{" "}
-            <a href="#" className="underline hover:text-charcoal transition-colors">
+            <a href="#" className="underline hover:text-white transition-colors">
               Política de Privacidad
             </a>
             .
