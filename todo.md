@@ -552,3 +552,7 @@
   - ✓ Carrusel navega correctamente
   - ✓ Tienda expandible funciona
   - ✓ Todas las imágenes cargan correctamente
+- [x] Corregir fondo del título en página Tienda - eliminar bloques independientes
+- [x] Hacer uniforme el fondo #fff6ea en toda la página Tienda
+- [x] Extender fondo #fff6ea en Burnita Lab a todo el ancho sin espacios blancos
+- [x] Validar consistencia visual en ambas secciones

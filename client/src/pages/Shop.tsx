@@ -385,7 +385,7 @@ export default function Shop() {
     <div className="min-h-screen" style={{ backgroundColor: '#FFF6EA' }}>
       <main className="pt-24 md:pt-32">
         {/* Hero de la tienda */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-guayaba/5 via-transparent to-mint/5">
+        <section className="py-16 md:py-24">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
