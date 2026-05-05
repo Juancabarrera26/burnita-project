@@ -204,6 +204,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
           scrollSnapType: "x mandatory",
           scrollbarWidth: "none",
           msOverflowStyle: "none",
+          overflowY: "hidden",
         }}
         onScroll={checkScroll}
         onMouseEnter={pauseAutoplay}

@@ -290,6 +290,7 @@ export default function Products() {
             scrollSnapType: 'x mandatory',
             scrollbarWidth: 'none', // Firefox
             msOverflowStyle: 'none', // IE and Edge
+            overflowY: 'hidden',
           }}
           onScroll={checkScroll}
           onMouseEnter={pauseAutoplay}
