@@ -243,6 +243,27 @@ const categories = [
         image: "/manus-storage/Oceanita_6ffb6b29.jpg",
         bgColor: "bg-transparent",
       },
+      {
+        id: 41,
+        name: "Matchita",
+        price: 50000,
+        image: "/manus-storage/Matchita_44f9446d.jpg",
+        bgColor: "bg-transparent",
+      },
+      {
+        id: 42,
+        name: "Spirulita",
+        price: 50000,
+        image: "/manus-storage/Spirulita_94680b20.jpg",
+        bgColor: "bg-transparent",
+      },
+      {
+        id: 43,
+        name: "Jamaquita",
+        price: 50000,
+        image: "/manus-storage/Jamaquita_2961626c.jpg",
+        bgColor: "bg-transparent",
+      },
     ],
   },
 ];

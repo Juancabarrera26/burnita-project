@@ -561,3 +561,8 @@
 - [x] Aplicar padding en lugar de margin en contenedor hero
 - [x] Asegurar que fondo #fff6ea cubra desde navbar hacia abajo
 - [x] Validar que no haya espacios blancos residuales
+- [x] Agregar 3 nuevas velas de temporada (Matchita, Spirulita, Jamaquita)
+  - [x] Subir imágenes a S3
+  - [x] Agregar velas a la base de datos
+  - [x] Crear páginas de detalle de producto
+  - [x] Validar en tienda y carrito

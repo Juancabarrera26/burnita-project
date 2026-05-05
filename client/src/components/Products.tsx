@@ -74,6 +74,27 @@ const products = [
     bgColor: "bg-guayaba/20",
     image: "/manus-storage/pinkice_d65d2436.png",
   },
+  {
+    id: 16,
+    name: "Matchita",
+    price: "50.000 COP",
+    bgColor: "bg-mint/25",
+    image: "/manus-storage/Matchita_44f9446d.jpg",
+  },
+  {
+    id: 17,
+    name: "Spirulita",
+    price: "50.000 COP",
+    bgColor: "bg-mint/20",
+    image: "/manus-storage/Spirulita_94680b20.jpg",
+  },
+  {
+    id: 18,
+    name: "Jamaquita",
+    price: "50.000 COP",
+    bgColor: "bg-guayaba/25",
+    image: "/manus-storage/Jamaquita_2961626c.jpg",
+  },
 ];
 
 export default function Products() {

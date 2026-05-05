@@ -54,6 +54,9 @@ const PRODUCTS: Product[] = [
   { id: 'tropicalita', name: 'Tropicalita', price: 55000, image: '/manus-storage/tropicalita_4cce5374.png' },
   { id: 'gomiblu', name: 'Gomiblu', price: 55000, image: '/manus-storage/Gomiblu_6241f980.jpg' },
   { id: 'oceanita', name: 'Oceanita', price: 55000, image: '/manus-storage/Oceanita_6ffb6b29.jpg' },
+  { id: 'matchita', name: 'Matchita', price: 50000, image: '/manus-storage/Matchita_44f9446d.jpg' },
+  { id: 'spirulita', name: 'Spirulita', price: 50000, image: '/manus-storage/Spirulita_94680b20.jpg' },
+  { id: 'jamaquita', name: 'Jamaquita', price: 50000, image: '/manus-storage/Jamaquita_2961626c.jpg' },
 ];
 
 const PRODUCT_DESCRIPTIONS: Record<string, string> = {
@@ -86,6 +89,9 @@ const PRODUCT_DESCRIPTIONS: Record<string, string> = {
   'Tropicalita': 'Paraíso tropical en temporada. Tropicalita es una vela que trae aromas exóticos y tropicales.',
   'Gomiblu': 'Diversión azul de gominolas. Gomiblu es una vela que evoca la dulzura de los caramelos gominola.',
   'Oceanita': 'Profundidad marina. Oceanita es una vela que captura la esencia del océano y la brisa marina.',
+  'Matchita': 'Serenidad verde en forma de vela. Matchita captura la esencia del té matcha frío: fresca, cremosa y naturalmente sofisticada. Sus notas suaves y relajantes transforman cualquier espacio en un santuario de calma y bienestar.',
+  'Spirulita': 'Energía vibrante en cada llama. Spirulita es una vela moderna que celebra la frescura exótica de bebidas revitalizantes. Con un perfil refrescante y energético, trae vitalidad y modernidad a tu hogar.',
+  'Jamaquita': 'Verano tropical en capas. Jamaquita es una vela que evoca la dulzura veraniega de bebidas jamaicanas, con capas visuales que representan frutas tropicales, leche cremosa y especias oscuras. Una experiencia sensorial que transporta a paraísos lejanos.',
 };
 
 export default function ProductDetail() {
