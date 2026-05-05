@@ -27,7 +27,7 @@ export default function TerminosYCondiciones() {
             <div>
               <h2 className="text-2xl font-bold text-charcoal-900 mb-4">Introducción</h2>
               <p>
-                Bienvenido a Burnita. Al acceder a nuestro sitio web y realizar una compra, aceptas los siguientes términos y condiciones. Te recomendamos leerlos con atención antes de comprar.
+                Bienvenido a Burnita. Al acceder a nuestro sitio web y realizar una compra, aceptas estos términos y condiciones. Te recomendamos leerlos con atención antes de comprar.
               </p>
             </div>
 
@@ -58,7 +58,9 @@ export default function TerminosYCondiciones() {
                 <li>Es responsabilidad del cliente ingresar correctamente los datos de envío. No nos hacemos responsables por retrasos o problemas derivados de información incorrecta.</li>
                 <li>La entrega podrá realizarse a: el comprador, un tercero autorizado, o portería/recepción del lugar.</li>
                 <li>Una vez entregado el producto, la responsabilidad pasa al cliente.</li>
+                <li>Se entiende que la persona que recibe el producto es mayor de edad y acepta el estado en el que se entrega.</li>
               </ul>
+              <p className="mt-3">Burnita no se hace responsable por retrasos ocasionados por la transportadora o situaciones externas como clima, logística o eventos fuera de nuestro control.</p>
             </div>
 
             <div>
@@ -73,8 +75,7 @@ export default function TerminosYCondiciones() {
               <p className="mb-3">Debes reportarlo dentro de las primeras 48 horas después de recibirlo, enviando evidencia (foto o video).</p>
               <p className="font-semibold mb-2">Si aplica:</p>
               <ul className="list-disc list-inside space-y-2 mb-3">
-                <li>Se realizará cambio del producto, o</li>
-                <li>Reembolso del dinero</li>
+                <li>Burnita evaluará cada caso y determinará si aplica cambio del producto o reembolso del dinero.</li>
               </ul>
               <p>El reembolso se procesa entre 5 y 7 días hábiles después de recibir el producto.</p>
             </div>
@@ -166,7 +167,7 @@ export default function TerminosYCondiciones() {
             <div>
               <h2 className="text-2xl font-bold text-charcoal-900 mb-4">5. Almacenamiento</h2>
               <p>
-                Los datos se almacenan únicamente para gestión de pedidos y control interno.
+                Los datos se almacenan únicamente para gestión de pedidos y control interno. Los datos se conservan únicamente durante el tiempo necesario para cumplir con la gestión del pedido y obligaciones legales.
               </p>
             </div>
 
