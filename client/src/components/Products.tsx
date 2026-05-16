@@ -79,21 +79,21 @@ const products = [
     name: "Matchita",
     price: "50.000 COP",
     bgColor: "bg-mint/25",
-    image: "/manus-storage/Matchita_44f9446d.jpg",
+    image: "/manus-storage/Matchita_8feeb1f1.png",
   },
   {
     id: 17,
     name: "Spirulita",
     price: "50.000 COP",
     bgColor: "bg-mint/20",
-    image: "/manus-storage/Spirulita_94680b20.jpg",
+    image: "/manus-storage/Spirulita_8a8f3775.png",
   },
   {
     id: 18,
     name: "Jamaquita",
     price: "50.000 COP",
     bgColor: "bg-guayaba/25",
-    image: "/manus-storage/Jamaquita_2961626c.jpg",
+    image: "/manus-storage/Jamaquita_032ed851.png",
   },
 ];
 

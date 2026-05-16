@@ -55,9 +55,9 @@ const PRODUCTS: Product[] = [
   { id: 'tropicalita', name: 'Tropicalita', price: 55000, image: '/manus-storage/tropicalita_4cce5374.png' },
   { id: 'gomiblu', name: 'Gomiblu', price: 55000, image: '/manus-storage/Gomiblu_6241f980.jpg' },
   { id: 'oceanita', name: 'Oceanita', price: 55000, image: '/manus-storage/Oceanita_6ffb6b29.jpg' },
-  { id: 'matchita', name: 'Matchita', price: 50000, image: '/manus-storage/Matchita_44f9446d.jpg' },
-  { id: 'spirulita', name: 'Spirulita', price: 50000, image: '/manus-storage/Spirulita_94680b20.jpg' },
-  { id: 'jamaquita', name: 'Jamaquita', price: 50000, image: '/manus-storage/Jamaquita_2961626c.jpg' },
+  { id: 'matchita', name: 'Matchita', price: 50000, image: '/manus-storage/Matchita_8feeb1f1.png' },
+  { id: 'spirulita', name: 'Spirulita', price: 50000, image: '/manus-storage/Spirulita_8a8f3775.png' },
+  { id: 'jamaquita', name: 'Jamaquita', price: 50000, image: '/manus-storage/Jamaquita_032ed851.png' },
 ];
 
 const PRODUCT_DESCRIPTIONS: Record<string, string> = {

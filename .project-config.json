@@ -1,0 +1,43 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [
+    "db",
+    "server",
+    "user"
+  ],
+  "dev_command": "pnpm run dev",
+  "env_vars": {
+    "DATABASE_URL": "mysql://4QuyVesGYADe3ch.root:R7GD70voc05hHkcHB1It@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/HN47as722N9RjKfuaYrPPg?ssl={\"rejectUnauthorized\":true}"
+  },
+  "experiments": null,
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663322164465/HN47as722N9RjKfuaYrPPg",
+    "access_key_id": "ASIAZV3A2ECZEA7TGXOO",
+    "secret_access_key": "6tgyT7GGRk/LpeA3OhWlR3GuVNBW1f6zRa5KWLpX",
+    "session_token": "IQoJb3JpZ2luX2VjEJn//////////wEaCXVzLWVhc3QtMSJIMEYCIQDlysFLWfpblJvV7YYj7KzMx4klYv8CaZa24YYvYPx/RAIhAOyuJ7QW5S4ESZSzFi7NXB+uG7rYCCgu/8dzZrzh5PrjKvYDCGEQBBoMNjY1Mzg2MDk4ODY2Igz2hFY0ES/KcNc5IRAq0wN6rozJ+CCMp+w4JVK3V3nHbG3Ccc2MAtLwM50lpLQABt0HzH8R9yyiuJTJke4jn8+1auSa0f2ns5c2JYyRop0h7XR9TxgUOyIEEbAZzACPRuNBrPOFa1tfe1skfVv9fzQGep3A4f1TmQkFaVTS5ojb4ZmxdtxaC/K5K/AqirmaURjZ4nt/W/EkhRhGMXyV2duCabw+s78vEkpHoaSiJ+76xGQmP/mEMpjVhWR+bFBymUkuUYvFk1+cJ2h8sA8wkfHbTFUjLQ1L+gJZrFV3bTJ4x9iGmNduoGFANLUjw2lgboPooBNoum14GqtBz6QdgmugzTSKvclfnylsk1VrhX9qunXiOItzdtPN2sbziKKg3A+nr/MqaX7QD/pPR5DQZtYmFxNBRMTSwezZDXehRH3/FnGFdIjDyKyqlI7tz9Gipz5HR0KbvFPBDILBMiVHJqVtiOkBmBp0mE/3dvYONr8jkoYLSvczKqjh9iRTJjH3xulLWmkI46nil7DDlRBFKqsVqiXnItmAL9o5lisYThLf4AH6ISEnV4NfQy4asUputkH1fTvvdN1BkLOVeUWgFcqT5R/N8H4+jrvLzujbEsCY2FN5JLZ29XgioW0NRiIQNV/HTzDP55fQBjqcAVqhd6jl9+YeaEPktu5j8vwYy4SYPWfHxC/IBNuobPpbHY+xY0gjJOXNhXcGcSj3VqCH6508fdgzHCzZaGp5Vv+hHhNw+YT3EVpCZ2Kj3Y8Hrs/lHOckfszwryMeiKdacLc1DECFTt6RS25Ssx4fYblU26iNtqSXwpCfCGzqcy/GnVHmpK3eExSfuGkWkFYfuaGMPEeouI44Ycqizw==",
+    "expiration": "2026-05-15T04:09:51.000Z"
+  },
+  "name": "burnita-shop",
+  "path": "/home/ubuntu/burnita-shop",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "37K3YrfMXTd6YuZXuC7XxU",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "mtMEohCYhD73aACVWpxMmC",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "JC Digital",
+    "OWNER_OPEN_ID": "STJ4nxEnK9uVwipyKRdxVV",
+    "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmdWFjcnZxeWN5aWxyY2ZpcmhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NjgyMDYsImV4cCI6MjA5MzM0NDIwNn0.B0vBPyeNC1JXXjXs3ga304Aq54SsU8oYdSIIzLowAJI",
+    "SUPABASE_URL": "https://pfuacrvqycyilrcfirhr.supabase.co",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "e1d08b86-62b5-4c08-845d-c4a1d2fc6067",
+    "VITE_APP_ID": "HN47as722N9RjKfuaYrPPg",
+    "VITE_APP_LOGO": "https://files.manuscdn.com/user_upload_by_module/web_dev_logo/310519663322164465/SKrACwNZUMPjlhvx.png",
+    "VITE_APP_TITLE": "Burnita - Tienda de Velas Artesanales",
+    "VITE_FRONTEND_FORGE_API_KEY": "JvSrPeZ7e7QukXNWNbn2ny",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-db-user",
+  "test_command": "pnpm test"
+}
