@@ -5,7 +5,7 @@
  * Tipografía: Manrope para logo, Inter para texto
  */
 
-import { Instagram, Facebook, Music } from "lucide-react";
+import { Instagram, Facebook, TrendingUp } from "lucide-react";
 
 const shopLinks = [
   { label: "Todas las Velas", href: "/#products" },
@@ -22,7 +22,7 @@ const companyLinks = [
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/burnitacandles/", label: "Instagram" },
   { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61589415022349", label: "Facebook" },
-  { icon: Music, href: "https://www.tiktok.com/@burnitacandles", label: "TikTok" },
+  { icon: TrendingUp, href: "https://www.tiktok.com/@burnitacandles", label: "TikTok" },
 ];
 
 export default function Footer() {
