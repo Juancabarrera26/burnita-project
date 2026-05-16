@@ -25,9 +25,19 @@ interface HeaderProps {
 
 export default function Header({ onCartClick }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [currentPath] = useLocation();
   const { getTotalItems } = useCart();
   const cartCount = getTotalItems();
+
+  // Detectar scroll para cambiar fondo del navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Bloquear scroll del body cuando el menú está abierto
   useEffect(() => {
@@ -69,8 +79,14 @@ export default function Header({ onCartClick }: HeaderProps) {
 
   return (
     <>
-      {/* Header - Siempre con fondo sólido */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-crema shadow-sm">
+      {/* Header - Transparente en top, con fondo en scroll */}
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out"
+        style={{
+          backgroundColor: isScrolled ? "#fff6ea" : "transparent",
+          boxShadow: isScrolled ? "0 1px 3px rgba(0, 0, 0, 0.1)" : "none"
+        }}
+      >
         <div className="container">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo - Imagen Burnita */}

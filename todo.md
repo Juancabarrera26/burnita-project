@@ -572,3 +572,9 @@
 - [x] Integrar en ProductDetail.tsx debajo de descripción
 - [x] Aplicar a todas las velas existentes y futuras
 - [x] Validar consistencia visual en todas las páginas
+
+## NAVBAR SCROLL BEHAVIOR - NUEVA FASE
+- [x] Restaurar navbar transparente en top de página
+- [x] Implementar transición a #fff6ea en scroll
+- [x] Agregar animación suave (300-500ms)
+- [x] Validar en desktop, tablet y móvil
