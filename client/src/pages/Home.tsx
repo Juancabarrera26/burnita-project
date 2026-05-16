@@ -30,15 +30,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ backgroundColor: '#fff6ea' }}>
       <main>
         <Hero />
-        <Products />
-        <BurnitaLab />
-        <About />
-        <Categories />
-        <Contact />
-        <Newsletter />
+        <div style={{ backgroundColor: '#fff6ea' }}>
+          <Products />
+          <BurnitaLab />
+          <About />
+          <Categories />
+          <Contact />
+          <Newsletter />
+        </div>
       </main>
       <Footer />
     </div>
