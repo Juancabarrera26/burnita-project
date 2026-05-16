@@ -5,7 +5,13 @@
  * Tipografía: Manrope para logo, Inter para texto
  */
 
-import { Instagram, Facebook, TrendingUp } from "lucide-react";
+import { Instagram, Facebook } from "lucide-react";
+
+const TikTokIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.68v13.67a2.4 2.4 0 1 1-2.4-2.4c.34 0 .67.03 1 .1V9.81a7.81 7.81 0 0 0-1-.08A4.3 4.3 0 0 0 5 14.53a4.3 4.3 0 0 0 4.3 4.3 4.3 4.3 0 0 0 4.3-4.3V10.88a6.04 6.04 0 0 0 3.7 1.2v-3.4a4.93 4.93 0 0 1-.6-.05z"/>
+  </svg>
+);
 
 const shopLinks = [
   { label: "Todas las Velas", href: "/#products" },
@@ -22,7 +28,7 @@ const companyLinks = [
 const socialLinks = [
   { icon: Instagram, href: "https://www.instagram.com/burnitacandles/", label: "Instagram" },
   { icon: Facebook, href: "https://www.facebook.com/profile.php?id=61589415022349", label: "Facebook" },
-  { icon: TrendingUp, href: "https://www.tiktok.com/@burnitacandles", label: "TikTok" },
+  { icon: TikTokIcon, href: "https://www.tiktok.com/@burnitacandles", label: "TikTok" },
 ];
 
 export default function Footer() {
