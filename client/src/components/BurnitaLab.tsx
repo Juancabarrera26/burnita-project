@@ -96,10 +96,12 @@ export default function BurnitaLab() {
               className="absolute -bottom-6 -right-6 md:bottom-8 md:-right-8"
             >
               <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-mint border-4 border-dashed border-charcoal/20 flex items-center justify-center shadow-lg">
-                <div className="text-center">
-                  <p className="font-display text-lg md:text-xl font-bold text-charcoal">100%</p>
-                  <p className="font-body text-xs md:text-sm text-charcoal/80 leading-tight">
-                    Diversión<br />Garantizada
+                <div className="text-center px-2">
+                  <p className="font-display text-sm md:text-base font-bold text-charcoal tracking-wide leading-tight">
+                    Crea tu<br />Experiencia
+                  </p>
+                  <p className="font-body text-xs md:text-xs text-charcoal/70 mt-1 font-medium tracking-widest uppercase">
+                    Vela Personalizada
                   </p>
                 </div>
               </div>
