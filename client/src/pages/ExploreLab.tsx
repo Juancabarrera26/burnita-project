@@ -131,13 +131,13 @@ export default function ExploreLab() {
 
   const getRecommendedPrice = () => {
     const basePrice: Record<CandleType, number> = {
-      "Cóctel": 45000,
-      "Postre": 50000,
-      "Temporada": 48000,
-      "Recordatorio": 55000,
-      "Corporativo": 60000,
+      "Cóctel": 60000,
+      "Postre": 55000,
+      "Temporada": 55000,
+      "Recordatorio": 60000,
+      "Corporativo": 65000,
     };
-    return customization.type ? basePrice[customization.type] : 45000;
+    return customization.type ? basePrice[customization.type] : 60000;
   };
 
   const isLoading = generateImageMutation.isPending;
