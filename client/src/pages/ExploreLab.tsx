@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { Loader2 } from "lucide-react";
 
-type CandleType = "Cóctel" | "Postre" | "Elegante" | "Corporativa";
+type CandleType = "Cóctel" | "Postre" | "Temporada" | "Recordatorio" | "Corporativo";
 type CandleAroma = "Frutal" | "Dulce" | "Cítrico" | "Especiado";
 type CandleColor = "Rojo" | "Azul" | "Amarillo" | "Verde" | "Naranja" | "Morado" | "Rosado" | "Negro" | "Blanco" | "Cafe" | "Beige" | "Dorado" | "Plateado";
 type CandleDecoration = "Frutas" | "Crema" | "Especias" | "Minimalista";
@@ -35,8 +35,9 @@ const CANDLE_OPTIONS = {
   type: [
     { label: "Cóctel", value: "Cóctel" as CandleType },
     { label: "Postre", value: "Postre" as CandleType },
-    { label: "Elegante", value: "Elegante" as CandleType },
-    { label: "Corporativa", value: "Corporativa" as CandleType },
+    { label: "Temporada", value: "Temporada" as CandleType },
+    { label: "Recordatorio", value: "Recordatorio" as CandleType },
+    { label: "Corporativo", value: "Corporativo" as CandleType },
   ],
   aroma: [
     { label: "Frutal", value: "Frutal" as CandleAroma },
@@ -132,8 +133,9 @@ export default function ExploreLab() {
     const basePrice: Record<CandleType, number> = {
       "Cóctel": 45000,
       "Postre": 50000,
-      "Elegante": 55000,
-      "Corporativa": 60000,
+      "Temporada": 48000,
+      "Recordatorio": 55000,
+      "Corporativo": 60000,
     };
     return customization.type ? basePrice[customization.type] : 45000;
   };
