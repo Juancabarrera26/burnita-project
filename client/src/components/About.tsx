@@ -62,13 +62,15 @@ export default function About() {
             {/* Description - Inter */}
             <div className="space-y-4 mb-8">
               <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
-                Todo empezó con una idea simple: reinventar la vela como un objeto que sorprende. Inspiradas en su historia... siempre presente en celebraciones y momentos especiales, decidimos darles un giro inesperado.
+                Todo comenzó en 2025 con una idea simple: crear velas que sorprendieran de verdad.
+
+Inspiradas en postres, cócteles y pequeños momentos especiales, empezamos a diseñar piezas hiperrealistas que juegan con la percepción y transforman cualquier ocasión en algo memorable.
               </p>
               <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
-                Creamos piezas que juegan con la percepción: parecen postres, pero están hechas para encenderse. Un guiño divertido, cuidado al detalle, que convierte cualquier ocasión en algo memorable.
+                Cada vela nace desde la artesanía, el detalle y la creatividad, mezclando color, textura y un guiño foodie imposible de ignorar. Lo que parece un postre o una bebida favorita, en realidad es una pieza hecha para decorar, regalar y dejar huella.
               </p>
               <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
-                Trabajamos desde la artesanía, con foco en la textura, el color y esos pequeños detalles que hacen toda la diferencia.
+                Con el tiempo, nuestra colección creció entre velas de temporada, diseños especiales y experiencias de personalización para recordatorios y detalles corporativos, pensadas para hacer que cada celebración, evento o marca se recuerde de una forma única.
               </p>
               <p className="font-body text-base md:text-lg text-charcoal/70 leading-relaxed">
                 Más que velas, son momentos que se quedan.

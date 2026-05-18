@@ -41,9 +41,7 @@ export default function BurnitaLab() {
             
             {/* Description - Inter */}
             <p className="font-body text-base md:text-lg text-charcoal/70 mb-8 max-w-md leading-relaxed">
-              Donde la creatividad se encuentra con la química. Descubre nuestros
-              aromas experimentales, colores audaces y lotes limitados que
-              desafían los límites de la fabricación tradicional de velas.
+              Donde la creatividad se convierte en algo personal. Explora nuestras velas inspiradas en postres, cócteles y temporadas especiales, o crea la tuya con nuestro generador de personalización para diseñar detalles únicos, recordatorios y experiencias corporativas hechas a tu manera.
             </p>
 
             {/* Color Tags */}

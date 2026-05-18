@@ -56,7 +56,7 @@ export default function Footer() {
             </a>
             {/* Description - Inter */}
             <p className="font-body text-sm text-crema/60 leading-relaxed max-w-xs">
-              Velas artesanales de cera de soya hechas para iluminar tu espacio y
+              Velas artesanales de cera de soya y gel hechas para iluminar tu espacio y
               elevar tu estado de ánimo.
             </p>
           </div>
