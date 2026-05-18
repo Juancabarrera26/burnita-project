@@ -19,14 +19,14 @@ type CandleDecoration = "Frutas" | "Crema" | "Especias" | "Minimalista";
 interface CandleCustomization {
   type: CandleType | "";
   aroma: CandleAroma | "";
-  color: CandleColor | "";
+  colors: CandleColor[];
   decoration: CandleDecoration | "";
 }
 
 interface GeneratedCandle {
   type: CandleType;
   aroma: CandleAroma;
-  color: CandleColor;
+  colors: CandleColor[];
   decoration: CandleDecoration;
   imageUrl: string;
 }
@@ -71,7 +71,7 @@ export default function ExploreLab() {
   const [customization, setCustomization] = useState<CandleCustomization>({
     type: "",
     aroma: "",
-    color: "",
+    colors: [],
     decoration: "",
   });
 
@@ -79,15 +79,30 @@ export default function ExploreLab() {
   const generateImageMutation = trpc.candles.generateImage.useMutation();
 
   const handleSelect = (category: keyof CandleCustomization, value: string) => {
-    setCustomization((prev) => ({
-      ...prev,
-      [category]: prev[category] === value ? "" : (value as any),
-    }));
+    if (category === "colors") {
+      // Multi-select for colors
+      setCustomization((prev) => {
+        const colorValue = value as CandleColor;
+        const isSelected = prev.colors.includes(colorValue);
+        return {
+          ...prev,
+          colors: isSelected
+            ? prev.colors.filter((c) => c !== colorValue)
+            : [...prev.colors, colorValue],
+        };
+      });
+    } else {
+      // Single select for other categories
+      setCustomization((prev) => ({
+        ...prev,
+        [category]: prev[category as keyof Omit<CandleCustomization, "colors">] === value ? "" : (value as any),
+      }));
+    }
   };
 
   const handleGenerate = async () => {
-    if (!customization.type || !customization.aroma || !customization.color || !customization.decoration) {
-      alert("Por favor selecciona una opción en cada categoría");
+    if (!customization.type || !customization.aroma || customization.colors.length === 0 || !customization.decoration) {
+      alert("Por favor selecciona una opción en cada categoría, incluyendo al menos un color");
       return;
     }
 
@@ -95,14 +110,14 @@ export default function ExploreLab() {
       const result = await generateImageMutation.mutateAsync({
         type: customization.type,
         aroma: customization.aroma,
-        color: customization.color,
+        colors: customization.colors,
         decoration: customization.decoration,
       });
 
       const candle: GeneratedCandle = {
         type: customization.type as CandleType,
         aroma: customization.aroma as CandleAroma,
-        color: customization.color as CandleColor,
+        colors: customization.colors,
         decoration: customization.decoration as CandleDecoration,
         imageUrl: result.imageUrl || "",
       };
@@ -187,35 +202,46 @@ export default function ExploreLab() {
                   </div>
                 </div>
 
-                {/* Color - Improved Visual Selector */}
+                {/* Color - Multi-select Visual Selector */}
                 <div>
-                  <h3 className="text-xl font-bold mb-4 text-black">Color</h3>
+                  <h3 className="text-xl font-bold mb-4 text-black">Colores (selecciona uno o más)</h3>
                   <div className="grid grid-cols-4 sm:grid-cols-5 gap-4">
-                    {CANDLE_OPTIONS.color.map((option: any) => (
-                      <button
-                        key={option.value}
-                        onClick={() => handleSelect("color", option.value)}
-                        className={`flex flex-col items-center gap-2 transition-all ${
-                          customization.color === option.value
-                            ? "scale-110"
-                            : "hover:scale-105"
-                        }`}
-                        title={option.label}
-                      >
-                        <div
-                          className="w-14 h-14 rounded-full shadow-md border-2 transition-all cursor-pointer"
-                          style={{
-                            backgroundColor: option.hex,
-                            borderColor: customization.color === option.value ? "#000" : "#ddd",
-                            borderWidth: customization.color === option.value ? "3px" : "2px",
-                          }}
-                        />
-                        <span className="text-xs font-semibold text-gray-700 text-center leading-tight">
-                          {option.label}
-                        </span>
-                      </button>
-                    ))}
+                    {CANDLE_OPTIONS.color.map((option: any) => {
+                      const isSelected = customization.colors.includes(option.value);
+                      return (
+                        <button
+                          key={option.value}
+                          onClick={() => handleSelect("colors", option.value)}
+                          className={`flex flex-col items-center gap-2 transition-all ${
+                            isSelected
+                              ? "scale-110"
+                              : "hover:scale-105"
+                          }`}
+                          title={option.label}
+                        >
+                          <div
+                            className="w-14 h-14 rounded-full shadow-md border-2 transition-all cursor-pointer"
+                            style={{
+                              backgroundColor: option.hex,
+                              borderColor: isSelected ? "#000" : "#ddd",
+                              borderWidth: isSelected ? "3px" : "2px",
+                              boxShadow: isSelected ? "0 0 12px rgba(0,0,0,0.3)" : "0 2px 4px rgba(0,0,0,0.1)",
+                            }}
+                          />
+                          <span className="text-xs font-semibold text-gray-700 text-center leading-tight">
+                            {option.label}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
+                  {customization.colors.length > 0 && (
+                    <div className="mt-4 p-3 bg-blue-50 rounded-lg">
+                      <p className="text-sm font-semibold text-blue-900">
+                        Colores seleccionados: {customization.colors.join(", ")}
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Decoración */}
@@ -280,8 +306,8 @@ export default function ExploreLab() {
                           <p className="text-black font-bold">{generatedCandle.aroma}</p>
                         </div>
                         <div>
-                          <p className="text-gray-600 font-semibold">Color</p>
-                          <p className="text-black font-bold">{generatedCandle.color}</p>
+                          <p className="text-gray-600 font-semibold">Colores</p>
+                          <p className="text-black font-bold text-xs">{generatedCandle.colors.join(", ")}</p>
                         </div>
                         <div>
                           <p className="text-gray-600 font-semibold">Decoración</p>

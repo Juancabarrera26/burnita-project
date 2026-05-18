@@ -154,48 +154,69 @@ export const appRouter = router({
         z.object({
           type: z.enum(["Cóctel", "Postre", "Elegante", "Corporativa"]),
           aroma: z.enum(["Frutal", "Dulce", "Cítrico", "Especiado"]),
-          color: z.enum(["Rojo", "Azul", "Amarillo", "Verde", "Naranja", "Morado", "Rosado", "Negro", "Blanco", "Cafe", "Beige", "Dorado", "Plateado"]),
+          colors: z.array(z.enum(["Rojo", "Azul", "Amarillo", "Verde", "Naranja", "Morado", "Rosado", "Negro", "Blanco", "Cafe", "Beige", "Dorado", "Plateado"])).min(1),
           decoration: z.enum(["Frutas", "Crema", "Especias", "Minimalista"]),
         })
       )
       .mutation(async ({ input }) => {
-        // Aroma-specific color hints for visual consistency
-        const aromaColorHints: Record<string, string> = {
-          "Frutal": "with fresh fruit tones",
-          "Dulce": "with warm dessert-inspired hues",
-          "Cítrico": "with bright citrus accents",
-          "Especiado": "with warm spice tones",
+        // Color to English translation for better AI understanding
+        const colorTranslations: Record<string, string> = {
+          "Rojo": "vibrant red",
+          "Azul": "sky blue",
+          "Amarillo": "golden yellow",
+          "Verde": "emerald green",
+          "Naranja": "bright orange",
+          "Morado": "deep purple",
+          "Rosado": "pastel pink",
+          "Negro": "charcoal black",
+          "Blanco": "pure white",
+          "Cafe": "rich coffee brown",
+          "Beige": "warm beige",
+          "Dorado": "luxurious gold",
+          "Plateado": "silver",
         };
 
-        // Decoration-specific details
+        // Aroma-specific descriptors for premium aesthetic
+        const aromaDescriptors: Record<string, string> = {
+          "Frutal": "fresh fruit-inspired",
+          "Dulce": "sweet dessert-inspired",
+          "Cítrico": "bright citrus-inspired",
+          "Especiado": "warm spice-inspired",
+        };
+
+        // Decoration-specific details for premium aesthetic
         const decorationDetails: Record<string, string> = {
-          "Frutas": "topped with fresh fruit pieces (strawberries, mango, or berries) as subtle decoration",
-          "Crema": "with whipped cream-like texture on top, smooth and elegant",
-          "Especias": "with dried spice elements (cinnamon sticks, star anise) as delicate garnish",
-          "Minimalista": "with clean, minimalist aesthetic, no decorations",
+          "Frutas": "artfully topped with fresh fruit pieces (strawberries, mango slices, berries) as delicate premium garnish",
+          "Crema": "crowned with luxurious whipped cream-like wax texture, smooth and elegantly layered",
+          "Especias": "delicately garnished with dried spice elements (cinnamon sticks, star anise, vanilla pods) as artisanal details",
+          "Minimalista": "with clean, sophisticated minimalist aesthetic, no extra decorations, pure elegance",
         };
 
-        // Type-specific layer descriptions
-        const typeLayerDescription: Record<string, string> = {
-          "Cóctel": "3-4 distinct colored layers like a cocktail drink",
-          "Postre": "2-3 layers with dessert-inspired color combinations",
-          "Elegante": "2 sophisticated layers with elegant color gradient",
-          "Corporativa": "single solid color with professional minimalist design",
+        // Type-specific descriptions
+        const typeDescriptions: Record<string, string> = {
+          "Cóctel": "cocktail-inspired with 3-4 distinct layered colors like a premium mixed drink",
+          "Postre": "dessert-inspired with 2-3 layers combining sweet color palettes",
+          "Elegante": "sophisticated with 2 elegant layers and refined color gradients",
+          "Corporativa": "professional with single solid color and minimalist luxury design",
         };
 
-        const prompt = `A realistic layered candle in a transparent glass, drink-style candle, soft studio lighting, clean minimal background, product photography, consistent glass shape, elegant and modern aesthetic.
+        // Build color description
+        const colorDescriptions = input.colors.map(c => colorTranslations[c]).join(", ");
+        const colorLayering = input.colors.length > 1 
+          ? `layered wax colors: ${colorDescriptions}`
+          : `primary color: ${colorDescriptions}`;
 
-Specifications:
-- Container: Transparent glass, cylindrical shape like a beverage glass (ALWAYS maintain this shape)
-- Layers: ${typeLayerDescription[input.type]}
-- Primary Color: ${input.color} ${aromaColorHints[input.aroma]}
-- Decoration: ${decorationDetails[input.decoration]}
-- Style: Professional product photography, studio lighting, neutral background
-- CRITICAL: ALWAYS maintain the same transparent glass container shape and realistic beverage-style candle format
-- Ensure the candle looks like a variation of the same product line, not a different product
-- No fantasy styles, no unusual shapes, no sculptural forms
+        const prompt = `Ultra realistic handcrafted Burnita candle, ${typeDescriptions[input.type]}, elegant soy wax candle in transparent glass, premium food-inspired candle design, hyperreal playful realism, studio product photography, soft premium lighting, vibrant ${colorLayering}, ${aromaDescriptors[input.aroma]}, ${decorationDetails[input.decoration]}, luxury handcrafted candle aesthetic, clean composition, premium pastel background, Burnita brand style, photorealistic, high detail, professional product shot.
+
+CRITICAL REQUIREMENTS:
+- ALWAYS use transparent glass container (cylindrical beverage-style glass)
+- Realistic wax textures with proper light refraction
+- Professional studio photography aesthetic
+- Premium, elegant, artisanal appearance
+- Burnita brand visual consistency
+- No fantasy elements, no unusual shapes
 - Realistic and fabricable design
-- The candle must look like it belongs to the same product family`;
+- Must look like premium artisan candle product`;
 
         try {
           const result = await generateImage({ prompt });
