@@ -176,8 +176,13 @@ export const appRouter = router({
           "Plateado": "silver",
         };
 
-        // Aroma is informative only - NOT used in visual generation
-        // It's stored for order/checkout purposes but doesn't affect image
+        // Aroma-specific descriptors for premium aesthetic
+        const aromaDescriptors: Record<string, string> = {
+          "Frutal": "fresh fruit-inspired",
+          "Dulce": "sweet dessert-inspired",
+          "Cítrico": "bright citrus-inspired",
+          "Especiado": "warm spice-inspired",
+        };
 
         // Decoration-specific details for premium aesthetic
         const decorationDetails: Record<string, string> = {
@@ -187,13 +192,13 @@ export const appRouter = router({
           "Minimalista": "with clean, sophisticated minimalist aesthetic, no extra decorations, pure elegance",
         };
 
-        // Type-specific descriptions for Burnita catalog - matching real products
+        // Type-specific descriptions for Burnita catalog
         const typeDescriptions: Record<string, string> = {
-          "Cóctel": "realistic cocktail candle with layered liquid appearance, ice cubes, citrus slices, mint leaves, realistic drink aesthetic matching Mojita and Melodita candles",
-          "Postre": "premium dessert candle with whipped cream-like wax, realistic toppings, candy decorations, sweet elegant appearance matching Nubecita and Tropica candles",
-          "Temporada": "seasonal specialty candle with matcha green, spirulina blue, jamaica red, or fresh fruit layers, vibrant refreshing aesthetic",
-          "Recordatorio": "elegant personalized candle with delicate artisanal design, subtle sophisticated details, refined emotional aesthetic",
-          "Corporativo": "professional luxury candle with clean minimalist design, sophisticated premium appearance, elegant gift-worthy aesthetic",
+          "Cóctel": "cocktail-inspired with realistic layered drink appearance, ice cubes, fruit garnish, premium beverage aesthetic similar to Mojita, Citrujito, Melodita",
+          "Postre": "dessert-inspired with whipped cream texture, toppings, candy elements, sweet indulgent appearance similar to Nubecita",
+          "Temporada": "seasonal fresh-inspired with matcha, spirulina, jamaica or seasonal fruit layers, refreshing premium look",
+          "Recordatorio": "delicate artisanal design with personalized elegant aesthetic, subtle sophisticated details",
+          "Corporativo": "professional sophisticated design with clean minimalist luxury, corporate premium appearance",
         };
 
         // Build color description
@@ -202,7 +207,20 @@ export const appRouter = router({
           ? `layered wax colors: ${colorDescriptions}`
           : `primary color: ${colorDescriptions}`;
 
-        const prompt = `ULTRA REALISTIC product photography of a handcrafted Burnita candle. ${typeDescriptions[input.type]}, ${decorationDetails[input.decoration]}, elegant layered wax composition using ${colorLayering}. CRITICAL REQUIREMENTS: (1) VERTICAL composition (4:5 aspect ratio minimum, portrait oriented). (2) TRANSPARENT GLASS CONTAINER - standard cylindrical beverage-style glass, consistent size and proportions with all Burnita candles (NOT tall, NOT thin, NOT oversized). (3) Photorealistic studio product photography with professional clean lighting. (4) Realistic wax textures with proper light refraction, depth, and artisanal details. (5) Premium elegant aesthetic matching Burnita's real catalog (Mojita, Melodita, Nubecita, Tropica style). (6) Hyperrealistic playful aesthetic (hiperrealismo ludico). (7) ABSOLUTELY NO text, NO branding, NO "Burnita" text, NO logos, NO watermarks inside or on the glass. (8) NO fantasy elements, NO unusual shapes, NO generic AI renders, NO 3D renders. (9) Must look like a REAL product that could be placed immediately in Burnita shop next to existing candles. (10) Realistic and fabricable design with artisanal handcrafted appearance.`;
+        const prompt = `Ultra realistic handcrafted Burnita-inspired candle in transparent glass, ${typeDescriptions[input.type]}, photorealistic artisanal soy wax candle, vertical premium product photography, realistic drink-inspired candle design, elegant layered wax composition using ${colorLayering}, ${aromaDescriptors[input.aroma]}, decorative elements of ${decorationDetails[input.decoration]}, clean premium studio lighting, luxury handcrafted aesthetic, vibrant but elegant colors, realistic textures, hyperreal playful realism, premium catalog photography, similar to artisanal cocktail candles, realistic glass proportions, no text, no branding, no logo, no watermark, realistic handcrafted details, Burnita catalog aesthetic, must look like a real candle from Burnita shop.
+
+CRITICAL REQUIREMENTS:
+- VERTICAL premium product photography (4:5 aspect ratio or taller)
+- ALWAYS transparent glass container (cylindrical beverage-style glass, realistic proportions)
+- Realistic wax textures with proper light refraction and depth
+- Professional studio photography with clean lighting
+- Premium, elegant, artisanal appearance matching Burnita catalog
+- Hyperrealistic playful aesthetic (hiperrealismo ludico)
+- NO fantasy elements, NO unusual shapes, NO generic AI renders
+- NO text, NO branding, NO "Burnita" text inside glass
+- NO watermarks or logos
+- Realistic and fabricable design that could exist in real catalog
+- Must match Burnita's real candle aesthetic and style`;
 
         try {
           const result = await generateImage({ prompt });
