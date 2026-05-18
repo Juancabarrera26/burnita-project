@@ -130,9 +130,9 @@ export default function ExploreLab() {
       
       <main>
         {/* Hero Section */}
-        <section className="px-4 overflow-hidden" style={{ backgroundColor: '#fff6ea', paddingTop: '3rem', paddingBottom: '3rem' }}>
+        <section className="px-4 overflow-hidden" style={{ backgroundColor: '#fff6ea', paddingTop: '7rem', paddingBottom: '4rem' }}>
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-black" style={{ marginTop: 0 }}>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-black" style={{ marginTop: 0 }}>
               Crea tu vela personalizada
             </h1>
             <p className="text-lg md:text-xl text-gray-700">
