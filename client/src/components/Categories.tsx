@@ -42,7 +42,7 @@ const secondRowCategories = [
   },
   {
     id: 5,
-    name: "EMPRESARIAL",
+    name: "CORPORATIVO",
     image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/empresarial_f2ba8815.jpeg",
     rotation: -3,
     link: "/solicitud/empresarial",

@@ -8,9 +8,9 @@
 import { motion } from "framer-motion";
 
 const stats = [
-  { value: "100%", label: "Diversión Garantizada" },
-  { value: "3", label: "Pasos para Personalizar" },
-  { value: "Hand", label: "Poured in Bogotá" },
+  { value: "100%", label: "Hiperrealismo Artesanal" },
+  { value: "Hechas", label: "a tu manera" },
+  { value: "Encendidas", label: "para recordar" },
 ];
 
 export default function About() {

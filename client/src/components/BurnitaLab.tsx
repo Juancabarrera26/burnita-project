@@ -11,10 +11,10 @@ import { motion } from "framer-motion";
 import { Link } from "wouter";
 
 const colorTags = [
-  { name: "Guayaba Pop", color: "bg-guayaba" },
-  { name: "Mango Fizz", color: "bg-mango" },
-  { name: "Mint Soda", color: "bg-mint" },
-  { name: "Lavanda Nube", color: "bg-lavanda" },
+  { name: "Una", color: "bg-guayaba" },
+  { name: "Vela", color: "bg-mango" },
+  { name: "Una", color: "bg-mint" },
+  { name: "Experiencia", color: "bg-lavanda" },
 ];
 
 export default function BurnitaLab() {
