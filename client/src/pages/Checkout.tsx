@@ -354,6 +354,21 @@ export default function Checkout() {
                     </div>
                   </div>
 
+                  {/* Consultar disponibilidad para ciudades no listadas */}
+                  {formData.department && availableCities.length === 0 && (
+                    <div className="p-4 bg-mint-50 rounded-lg border border-mint-200">
+                      <p className="text-sm text-charcoal-700 mb-3">¿Hacemos envíos a tu ciudad?</p>
+                      <a
+                        href="https://wa.me/573214175699?text=Hola%20Burnita%20✨%20Quiero%20saber%20si%20realizan%20envíos%20a%20mi%20ciudad."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-mint-600 hover:text-mint-700 font-semibold underline"
+                      >
+                        Consultar disponibilidad
+                      </a>
+                    </div>
+                  )}
+
                   {/* Notas adicionales */}
                   <div>
                     <label className="block text-sm font-semibold text-charcoal-700 mb-2">
@@ -367,6 +382,13 @@ export default function Checkout() {
                       rows={3}
                       className="w-full px-4 py-3 rounded-lg border border-cream-300 focus:outline-none focus:ring-2 focus:ring-guayaba-500 resize-none"
                     />
+                  </div>
+
+                  {/* Shipping disclaimer */}
+                  <div className="p-3 bg-charcoal-50 rounded-lg border border-charcoal-200">
+                    <p className="text-xs text-charcoal-600 text-center">
+                      La disponibilidad de envío depende de la cobertura logística de la transportadora.
+                    </p>
                   </div>
 
                   {/* Aceptar terminos */}
