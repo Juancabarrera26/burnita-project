@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 export default function TerminosYCondiciones() {
@@ -9,9 +8,8 @@ export default function TerminosYCondiciones() {
 
   return (
     <div className="min-h-screen flex flex-col bg-guayaba-50">
-      <Header />
       
-      <main className="flex-grow container mx-auto px-4 py-12 max-w-4xl">
+      <main className="flex-grow container mx-auto px-4 pt-24 pb-12 max-w-4xl">
         {/* Navegación interna */}
         <div className="mb-8 flex gap-4 justify-center">
           <a href="#terminos" className="text-guayaba hover:underline font-semibold">Términos y Condiciones</a>
