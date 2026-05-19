@@ -166,9 +166,10 @@ export default function Checkout() {
 
   return (
     <div className="min-h-screen bg-cream-50 flex flex-col">
-      {/* Header */}
-      <header className="bg-cream-100 border-b border-cream-200 py-4 px-4 sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto flex items-center gap-4">
+      {/* Main Content */}
+      <main className="flex-1 py-12 px-4 pt-32">
+        {/* Page Title */}
+        <div className="max-w-6xl mx-auto mb-8 flex items-center gap-4">
           <button
             onClick={() => setLocation('/cart')}
             className="p-2 hover:bg-cream-200 rounded-lg transition"
@@ -177,10 +178,6 @@ export default function Checkout() {
           </button>
           <h1 className="text-2xl font-bold text-charcoal-900">Finalizar compra</h1>
         </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="flex-1 py-8 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Error Messages */}
           {(errors.cart || errors.checkout || errors.wompi) && (
