@@ -46,9 +46,9 @@ export default function BurnitaLab() {
 
             {/* Color Tags */}
             <div className="flex flex-wrap gap-3 mb-8">
-              {colorTags.map((tag) => (
+              {colorTags.map((tag, index) => (
                 <span
-                  key={tag.name}
+                  key={index}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-charcoal/20 bg-white/50 font-body text-sm text-charcoal"
                 >
                   <span className={`w-3 h-3 rounded-full ${tag.color}`} />
