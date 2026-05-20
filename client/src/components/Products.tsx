@@ -68,13 +68,6 @@ const products = [
     image: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp",
   },
   {
-    id: 15,
-    name: "Pink Ice",
-    price: "50.000 COP",
-    bgColor: "bg-guayaba/20",
-    image: "/manus-storage/pinkice_d65d2436.png",
-  },
-  {
     id: 16,
     name: "Ambaria",
     price: "50.000 COP",
