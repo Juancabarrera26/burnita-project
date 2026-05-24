@@ -92,7 +92,7 @@ export default function Header({ onCartClick }: HeaderProps) {
             {/* Logo - Imagen Burnita */}
             <a href="/" className="hover:opacity-80 transition-opacity">
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/ZVHHNJjKALrylsDS.png"
+                src="/logos/burnita-logo.png"
                 alt="Burnita Logo"
                 className="h-12 md:h-16 w-auto"
               />

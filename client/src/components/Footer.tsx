@@ -48,7 +48,7 @@ export default function Footer() {
               className="inline-block mb-4 hover:opacity-80 transition-opacity cursor-pointer"
             >
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/ZVHHNJjKALrylsDS.png"
+                src="/logos/burnita-logo.png"
                 alt="Burnita Logo"
                 className="h-12 md:h-16 w-auto"
                 style={{ filter: "brightness(0) invert(1)" }}

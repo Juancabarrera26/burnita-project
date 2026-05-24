@@ -30,7 +30,7 @@ export default function About() {
               {/* Circular frame */}
               <div className="aspect-square rounded-full overflow-hidden border-8 border-white/50 shadow-2xl">
                 <img
-                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/yabhftobQjLntLUF.png"
+                  src="/manus-storage/burnita-icon_2a02c0e1.png"
                   alt="Persona disfrutando de cóctel con vela Burnita"
                   className="w-full h-full object-cover"
                   style={{ objectPosition: "center 60%" }}

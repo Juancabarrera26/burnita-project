@@ -22,19 +22,19 @@ const generateProductId = (name: string): string => {
 // TODOS los productos de la tienda - UNIFICADO CON SHOP.TSX
 const PRODUCTS: Product[] = [
   // CÓCTELES
-  { id: 'melodita', name: 'Melodita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/rMmHBSviZqJUEakl.webp' },
-  { id: 'mojita', name: 'Mojita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/CZamKEhNVDpNpvdU.webp' },
-  { id: 'tropica', name: 'Tropica', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/KtCXNCkEisgWrviL.webp' },
-  { id: 'ambaria', name: 'Ambaria', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/IPeSKSvvXNaAfAxq.webp' },
+  { id: 'melodita', name: 'Melodita', price: 50000, image: '/products/melodita.webp' },
+  { id: 'mojita', name: 'Mojita', price: 50000, image: '/products/mojita.webp' },
+  { id: 'tropica', name: 'Tropica', price: 50000, image: '/products/tropica.webp' },
+  { id: 'ambaria', name: 'Ambaria', price: 50000, image: '/products/ambaria.webp' },
   { id: 'limoncita', name: 'Limoncita', price: 50000, image: '/manus-storage/Limoncita_3d1ea23f.png' },
   { id: 'pink-ice', name: 'Pink Ice', price: 50000, image: '/manus-storage/pinkice_d65d2436.png' },
   { id: 'citrusita', name: 'Citrusita', price: 50000, image: '/manus-storage/Citrusita_96447f19.png' },
-  { id: 'mielita', name: 'Mielita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/jKdkhnkfHJcSkDfU.webp' },
-  { id: 'berrita', name: 'Berrita', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/lsfgucvuDBbOBRtl.webp' },
-  { id: 'nocturna', name: 'Nocturna', price: 50000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/cAdqkYKtZbuNJjwA.webp' },
+  { id: 'mielita', name: 'Mielita', price: 50000, image: '/products/mielita.webp' },
+  { id: 'berrita', name: 'Berrita', price: 50000, image: '/products/berrita.webp' },
+  { id: 'nocturna', name: 'Nocturna', price: 50000, image: '/products/nocturna.webp' },
   
   // POSTRES
-  { id: 'nubesita', name: 'Nubesita', price: 55000, image: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/eLfUhTdnLWLCwiNF.webp' },
+  { id: 'nubesita', name: 'Nubesita', price: 55000, image: '/products/nubesita.webp' },
   { id: 'berryita', name: 'Berryita', price: 55000, image: '/manus-storage/Berryita_488db945.png' },
   { id: 'blueberryta', name: 'Blueberryta', price: 55000, image: '/manus-storage/Blueberryta_cde230b4.png' },
   { id: 'bluedita', name: 'Bluedita', price: 55000, image: '/manus-storage/Bluedita_da4978fa.png' },

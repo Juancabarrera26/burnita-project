@@ -38,7 +38,7 @@ export default function Hero() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663322164465/yZqplQzWRIJNIWak.mp4" type="video/mp4" />
+        <source src="/manus-storage/burnita-hero_8e8bc8a7.mp4" type="video/mp4" />
       </video>
 
       {/* Content - Con z-index para estar encima del video */}
