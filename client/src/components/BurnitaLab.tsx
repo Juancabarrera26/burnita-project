@@ -79,7 +79,7 @@ export default function BurnitaLab() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/ChatGPTImage12mar2026,19_01_20_c2099287.png"
+                src="/manus-storage/burnita-lab_95a932da.png"
                 alt="BURNITA Lab - Experimentos coloridos"
                 className="w-full h-auto object-cover"
               />

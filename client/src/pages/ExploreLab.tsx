@@ -140,6 +140,31 @@ export default function ExploreLab() {
     return customization.type ? basePrice[customization.type] : 60000;
   };
 
+  const handleSendToWhatsApp = async () => {
+    if (!generatedCandle) return;
+
+    const price = getRecommendedPrice();
+    const colorsText = generatedCandle.colors.join(", ");
+    
+    // Crear mensaje dinámico con datos reales de la vela
+    const message = `✨ Hola Burnita\n\nHemos creado un diseño personalizado de vela y queremos cotizarlo.\n\n🕯️ Diseño de vela:\n\n• Tipo: ${generatedCandle.type}\n• Aroma preferido: ${generatedCandle.aroma}\n• Colores: ${colorsText}\n• Decoración: ${generatedCandle.decoration}\n• Precio estimado: $${price.toLocaleString()} COP\n\n💖 Queremos hacer esta vela realidad.\n\n📸 Imagen adjunta del diseño generado.`;
+    
+    // Codificar mensaje para URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Número de WhatsApp empresarial de Burnita
+    const whatsappNumber = "573214175699";
+    
+    // URL de WhatsApp Web
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    // Abrir WhatsApp en nueva pestaña
+    window.open(whatsappUrl, "_blank");
+    
+    // Nota: La imagen se debe compartir manualmente desde el preview
+    // El usuario puede descargar la imagen desde el navegador y adjuntarla
+  };
+
   const isLoading = generateImageMutation.isPending;
 
   return (
@@ -334,9 +359,10 @@ export default function ExploreLab() {
                           Crear otra
                         </Button>
                         <Button
-                          className="flex-1 py-3 bg-[#FF5CA8] text-white hover:bg-[#FF3D8F] rounded-lg font-semibold"
+                          onClick={handleSendToWhatsApp}
+                          className="flex-1 py-3 bg-[#FF5CA8] text-white hover:bg-[#FF3D8F] rounded-lg font-semibold transition-all"
                         >
-                          Agregar al carrito
+                          Enviar diseño de vela ✨
                         </Button>
                       </div>
                     </div>

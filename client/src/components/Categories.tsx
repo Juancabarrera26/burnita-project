@@ -19,14 +19,14 @@ const firstRowCategories = [
   {
     id: 2,
     name: "POSTRES",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/postres_2d9b2cab.jpeg",
+    image: "/sections/postres.jpeg",
     rotation: -2,
     link: "/shop#postres",
   },
   {
     id: 4,
     name: "TEMPORADA",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/temporada_aedf55be.jpeg",
+    image: "/sections/temporada.jpeg",
     rotation: 5,
     link: "/shop#temporada",
   },
@@ -36,14 +36,14 @@ const secondRowCategories = [
   {
     id: 3,
     name: "RECORDATORIOS",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/recordatorios_282e5b3c.jpeg",
+    image: "/sections/recordatorios.jpeg",
     rotation: 2,
     link: "/solicitud/recordatorios",
   },
   {
     id: 5,
     name: "CORPORATIVO",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663322164465/HN47as722N9RjKfuaYrPPg/empresarial_f2ba8815.jpeg",
+    image: "/sections/empresarial.jpeg",
     rotation: -3,
     link: "/solicitud/empresarial",
   },
