@@ -4,7 +4,8 @@
  * Interactive candle customization and generation with AI
  */
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import html2canvas from "html2canvas";
 
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -78,6 +79,7 @@ export default function ExploreLab() {
 
   const [generatedCandle, setGeneratedCandle] = useState<GeneratedCandle | null>(null);
   const generateImageMutation = trpc.candles.generateImage.useMutation();
+  const previewImageRef = useRef<HTMLImageElement>(null);
 
   const handleSelect = (category: keyof CandleCustomization, value: string) => {
     if (category === "colors") {
@@ -141,28 +143,76 @@ export default function ExploreLab() {
   };
 
   const handleSendToWhatsApp = async () => {
-    if (!generatedCandle) return;
+    if (!generatedCandle || !previewImageRef.current) return;
 
     const price = getRecommendedPrice();
     const colorsText = generatedCandle.colors.join(", ");
     
-    // Crear mensaje dinámico con datos reales de la vela
-    const message = `✨ Hola Burnita\n\nHemos creado un diseño personalizado de vela y queremos cotizarlo.\n\n🕯️ Diseño de vela:\n\n• Tipo: ${generatedCandle.type}\n• Aroma preferido: ${generatedCandle.aroma}\n• Colores: ${colorsText}\n• Decoración: ${generatedCandle.decoration}\n• Precio estimado: $${price.toLocaleString()} COP\n\n💖 Queremos hacer esta vela realidad.\n\n📸 Imagen adjunta del diseño generado.`;
-    
-    // Codificar mensaje para URL
-    const encodedMessage = encodeURIComponent(message);
+    // Crear mensaje LIMPIO sin emojis (solo ASCII/UTF-8 seguro)
+    const message = `Hola Burnita
+
+Hemos creado un diseno personalizado de vela y queremos cotizarlo.
+
+DISENO DE VELA
+
+- Tipo: ${generatedCandle.type}
+- Aroma preferido: ${generatedCandle.aroma}
+- Colores: ${colorsText}
+- Decoracion: ${generatedCandle.decoration}
+- Precio estimado: $${price.toLocaleString()} COP
+
+Queremos hacer esta vela realidad.
+
+La imagen del diseno se descargo automaticamente para adjuntarla a este chat.`;
     
     // Número de WhatsApp empresarial de Burnita
     const whatsappNumber = "573214175699";
     
-    // URL de WhatsApp Web
+    // Codificar mensaje para URL
+    const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     
-    // Abrir WhatsApp en nueva pestaña
-    window.open(whatsappUrl, "_blank");
-    
-    // Nota: La imagen se debe compartir manualmente desde el preview
-    // El usuario puede descargar la imagen desde el navegador y adjuntarla
+    // Capturar la imagen del preview usando html2canvas
+    try {
+      // Capturar el elemento img renderizado
+      const canvas = await html2canvas(previewImageRef.current, {
+        backgroundColor: null,
+        scale: 2,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+      });
+      
+      // Convertir canvas a blob y descargar
+      canvas.toBlob((blob) => {
+        if (blob) {
+          // Crear URL del blob
+          const url = window.URL.createObjectURL(blob);
+          
+          // Crear elemento de descarga
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "burnita-diseno-vela.png";
+          document.body.appendChild(link);
+          
+          // Descargar
+          link.click();
+          
+          // Limpiar
+          document.body.removeChild(link);
+          window.URL.revokeObjectURL(url);
+          
+          // Abrir WhatsApp después de descargar
+          setTimeout(() => {
+            window.open(whatsappUrl, "_blank");
+          }, 800);
+        }
+      }, "image/png");
+    } catch (error) {
+      console.error("Error capturando imagen:", error);
+      // Si falla, abrir WhatsApp igualmente
+      window.open(whatsappUrl, "_blank");
+    }
   };
 
   const isLoading = generateImageMutation.isPending;
@@ -315,6 +365,7 @@ export default function ExploreLab() {
                     {/* Generated Image */}
                     <div className="mb-6 rounded-xl overflow-hidden bg-gray-100 h-96 flex items-center justify-center">
                       <img
+                        ref={previewImageRef}
                         src={generatedCandle.imageUrl}
                         alt="Tu vela personalizada"
                         className="w-full h-full object-cover"
@@ -362,7 +413,7 @@ export default function ExploreLab() {
                           onClick={handleSendToWhatsApp}
                           className="flex-1 py-3 bg-[#FF5CA8] text-white hover:bg-[#FF3D8F] rounded-lg font-semibold transition-all"
                         >
-                          Enviar diseño de vela ✨
+                          Enviar diseño de vela
                         </Button>
                       </div>
                     </div>
