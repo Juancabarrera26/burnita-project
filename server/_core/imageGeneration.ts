@@ -1,20 +1,12 @@
 /**
- * Image generation helper using internal ImageService
+ * Image generation helper using Replicate + FLUX.1 SCHNELL
  *
  * Example usage:
  *   const { url: imageUrl } = await generateImage({
  *     prompt: "A serene landscape with mountains"
  *   });
- *
- * For editing:
- *   const { url: imageUrl } = await generateImage({
- *     prompt: "Add a rainbow to this landscape",
- *     originalImages: [{
- *       url: "https://example.com/original.jpg",
- *       mimeType: "image/jpeg"
- *     }]
- *   });
  */
+import Replicate from "replicate";
 import { storagePut } from "server/storage";
 import { ENV } from "./env";
 
@@ -34,59 +26,56 @@ export type GenerateImageResponse = {
 export async function generateImage(
   options: GenerateImageOptions
 ): Promise<GenerateImageResponse> {
-  if (!ENV.forgeApiUrl) {
-    throw new Error("BUILT_IN_FORGE_API_URL is not configured");
-  }
-  if (!ENV.forgeApiKey) {
-    throw new Error("BUILT_IN_FORGE_API_KEY is not configured");
+  if (!ENV.replicateApiToken) {
+    throw new Error("REPLICATE_API_TOKEN is not configured");
   }
 
-  // Build the full URL by appending the service path to the base URL
-  const baseUrl = ENV.forgeApiUrl.endsWith("/")
-    ? ENV.forgeApiUrl
-    : `${ENV.forgeApiUrl}/`;
-  const fullUrl = new URL(
-    "images.v1.ImageService/GenerateImage",
-    baseUrl
-  ).toString();
-
-  const response = await fetch(fullUrl, {
-    method: "POST",
-    headers: {
-      accept: "application/json",
-      "content-type": "application/json",
-      "connect-protocol-version": "1",
-      authorization: `Bearer ${ENV.forgeApiKey}`,
-    },
-    body: JSON.stringify({
-      prompt: options.prompt,
-      original_images: options.originalImages || [],
-    }),
+  const client = new Replicate({
+    auth: ENV.replicateApiToken,
   });
 
-  if (!response.ok) {
-    const detail = await response.text().catch(() => "");
+  try {
+    // Call FLUX.1 SCHNELL model
+    const output = await client.run(
+      "black-forest-labs/flux-schnell",
+      {
+        prompt: options.prompt,
+        aspect_ratio: "4:5", // Portrait orientation for product photography
+        num_outputs: 1,
+        output_format: "png",
+        output_quality: 90,
+      }
+    );
+
+    // Output is an array of URLs from Replicate
+    if (!Array.isArray(output) || output.length === 0) {
+      throw new Error("No image generated from Replicate");
+    }
+
+    const imageUrl = output[0] as string;
+
+    // Download the image from Replicate URL
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to download image from Replicate: ${response.statusText}`);
+    }
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    // Save to S3
+    const { url } = await storagePut(
+      `generated/${Date.now()}.png`,
+      buffer,
+      "image/png"
+    );
+
+    return {
+      url,
+    };
+  } catch (error) {
+    console.error("[Replicate Image Generation Error]", error);
     throw new Error(
-      `Image generation request failed (${response.status} ${response.statusText})${detail ? `: ${detail}` : ""}`
+      `Failed to generate image: ${error instanceof Error ? error.message : "Unknown error"}`
     );
   }
-
-  const result = (await response.json()) as {
-    image: {
-      b64Json: string;
-      mimeType: string;
-    };
-  };
-  const base64Data = result.image.b64Json;
-  const buffer = Buffer.from(base64Data, "base64");
-
-  // Save to S3
-  const { url } = await storagePut(
-    `generated/${Date.now()}.png`,
-    buffer,
-    result.image.mimeType
-  );
-  return {
-    url,
-  };
 }
