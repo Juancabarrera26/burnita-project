@@ -7,15 +7,16 @@
   ],
   "dev_command": "pnpm run dev",
   "env_vars": {
-    "DATABASE_URL": "mysql://4QuyVesGYADe3ch.root:R7GD70voc05hHkcHB1It@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/HN47as722N9RjKfuaYrPPg?ssl={\"rejectUnauthorized\":true}"
+    "DATABASE_URL": "mysql://4QuyVesGYADe3ch.root:R7GD70voc05hHkcHB1It@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/HN47as722N9RjKfuaYrPPg?ssl={\"rejectUnauthorized\":true}",
+    "DRIZZLE_DATABASE_URL": "mysql://4QuyVesGYADe3ch.root:R7GD70voc05hHkcHB1It@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/HN47as722N9RjKfuaYrPPg?ssl={\"rejectUnauthorized\":true}"
   },
   "experiments": null,
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663322164465/HN47as722N9RjKfuaYrPPg",
-    "access_key_id": "ASIAZV3A2ECZEA7TGXOO",
-    "secret_access_key": "6tgyT7GGRk/LpeA3OhWlR3GuVNBW1f6zRa5KWLpX",
-    "session_token": "IQoJb3JpZ2luX2VjEJn//////////wEaCXVzLWVhc3QtMSJIMEYCIQDlysFLWfpblJvV7YYj7KzMx4klYv8CaZa24YYvYPx/RAIhAOyuJ7QW5S4ESZSzFi7NXB+uG7rYCCgu/8dzZrzh5PrjKvYDCGEQBBoMNjY1Mzg2MDk4ODY2Igz2hFY0ES/KcNc5IRAq0wN6rozJ+CCMp+w4JVK3V3nHbG3Ccc2MAtLwM50lpLQABt0HzH8R9yyiuJTJke4jn8+1auSa0f2ns5c2JYyRop0h7XR9TxgUOyIEEbAZzACPRuNBrPOFa1tfe1skfVv9fzQGep3A4f1TmQkFaVTS5ojb4ZmxdtxaC/K5K/AqirmaURjZ4nt/W/EkhRhGMXyV2duCabw+s78vEkpHoaSiJ+76xGQmP/mEMpjVhWR+bFBymUkuUYvFk1+cJ2h8sA8wkfHbTFUjLQ1L+gJZrFV3bTJ4x9iGmNduoGFANLUjw2lgboPooBNoum14GqtBz6QdgmugzTSKvclfnylsk1VrhX9qunXiOItzdtPN2sbziKKg3A+nr/MqaX7QD/pPR5DQZtYmFxNBRMTSwezZDXehRH3/FnGFdIjDyKyqlI7tz9Gipz5HR0KbvFPBDILBMiVHJqVtiOkBmBp0mE/3dvYONr8jkoYLSvczKqjh9iRTJjH3xulLWmkI46nil7DDlRBFKqsVqiXnItmAL9o5lisYThLf4AH6ISEnV4NfQy4asUputkH1fTvvdN1BkLOVeUWgFcqT5R/N8H4+jrvLzujbEsCY2FN5JLZ29XgioW0NRiIQNV/HTzDP55fQBjqcAVqhd6jl9+YeaEPktu5j8vwYy4SYPWfHxC/IBNuobPpbHY+xY0gjJOXNhXcGcSj3VqCH6508fdgzHCzZaGp5Vv+hHhNw+YT3EVpCZ2Kj3Y8Hrs/lHOckfszwryMeiKdacLc1DECFTt6RS25Ssx4fYblU26iNtqSXwpCfCGzqcy/GnVHmpK3eExSfuGkWkFYfuaGMPEeouI44Ycqizw==",
-    "expiration": "2026-05-15T04:09:51.000Z"
+    "access_key_id": "ASIAZV3A2ECZFEV5RCFL",
+    "secret_access_key": "nsI7HeZJVDiuaDwSehYWvS0DTIpYRIR7OvWDCFh5",
+    "session_token": "IQoJb3JpZ2luX2VjEOT//////////wEaCXVzLWVhc3QtMSJHMEUCIQCFsdvlQY6MXcLqSLnFgVqaFt+JqMbsXMvpRsQOs5KqcQIgNMhav7ntLjBcUo7iv9mTkzmVxCCBCqzDlSXHLHZJE2Qq/wMIrf//////////ARAEGgw2NjUzODYwOTg4NjYiDL0Odw/dedgdMKDZ8irTA5ReRdHb0nxRjsRsamzDJJ61Kd+aw3/f/Xd+0H7VBQbiGt7/s9rzEkti+hs9EPnL5R60E1pLitrKy587Jc65DHeYcaUemTNKYZXdWPCUPoz4fpIlx7TAiBOD0mhE3+49mrapperSeouTMqxoVOuejeqA3lD9iSYfCtQ5BrRY3Tvdqt6Kokzggf1Jhy8sa+IrYkWmVF3Rpq9zIo4kvZcjNtu67jkc/7wkZKo2y7/9hKp+bUD6UEYPDUnn9HgfUG6QbLZC+4H3GjJ2WYtip2gowkk6S5ZTAThVTfTEd4YQvzYNg77sylUZr/DcVvAzFxhTWL22471Zcgad/DgGfTelOeJQRvq+hr3Se8fGm80GvQw0m1sRmODXDrVXMdmiHZVbRMjZdKJt/oIKfFvW1MVAmwsZWNKjaX/wvsuH9PCY4SmqGi002WZsj26gR/oicv/KAyEbqM0x1BsYpWFtBAU9djWHBrDvDhhyRoOvhluqFo8eAW+TXgz2tray3ipzytAoxgieG2ky/wnsqOqwoXJGvOcoF98V3wi4A4oKFtxnMWS4eUzFAW+Hsc2No3GkKjK8mDMPpOaNB038EmRjBN+pHkhJ97Grfz/ZIQHZPytmOlx6g2HhMJaM0dEGOp0BzdfknU1YZg2olZydmMYS45vedtVmU2zMtIFUDJUdN2FgQRcZGSbccc76cBUFWrNJFyncDz7gUGB4RiXBMGCoSX/U+TemHfjrMIvHWTxjEiOp61Fvh9GIJ30ILv6GCX5axO7NClsZ0TOl4WcyPqN9DeXvkXkplvRgFr+0rc8lgICrv9ADRVk269E1YxCCdEn6KUFED/LYJIqsq5dkWg==",
+    "expiration": "2026-06-19T07:25:10.000Z"
   },
   "name": "burnita-shop",
   "path": "/home/ubuntu/burnita-shop",
@@ -27,6 +28,7 @@
     "OAUTH_SERVER_URL": "https://api.manus.im",
     "OWNER_NAME": "JC Digital",
     "OWNER_OPEN_ID": "STJ4nxEnK9uVwipyKRdxVV",
+    "REPLICATE_API_TOKEN": "r8_4zYckrqHPN0PNvdLlX1Tn4VaFMS25Pj2xpJJV",
     "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmdWFjcnZxeWN5aWxyY2ZpcmhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NjgyMDYsImV4cCI6MjA5MzM0NDIwNn0.B0vBPyeNC1JXXjXs3ga304Aq54SsU8oYdSIIzLowAJI",
     "SUPABASE_URL": "https://pfuacrvqycyilrcfirhr.supabase.co",
     "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",

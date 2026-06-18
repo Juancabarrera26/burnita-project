@@ -39,11 +39,13 @@ export async function generateImage(
     const output = await client.run(
       "black-forest-labs/flux-schnell",
       {
-        prompt: options.prompt,
-        aspect_ratio: "4:5", // Portrait orientation for product photography
-        num_outputs: 1,
-        output_format: "png",
-        output_quality: 90,
+        input: {
+          prompt: options.prompt,
+          aspect_ratio: "4:5", // Portrait orientation for product photography
+          num_outputs: 1,
+          output_format: "png",
+          output_quality: 90,
+        },
       }
     );
 
