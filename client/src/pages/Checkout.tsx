@@ -95,37 +95,68 @@ export default function Checkout() {
     setIsLoading(true);
 
     try {
+      // Validar que el carrito no esté vacío
+      if (!items || items.length === 0) {
+        throw new Error('El carrito está vacío. Por favor agrega productos antes de continuar.');
+      }
+
       // Crear orden en backend
+      const orderPayload = {
+        nombre: formData.firstName.trim(),
+        apellido: formData.lastName.trim(),
+        email: formData.email.trim(),
+        telefono: formData.phone.trim(),
+        direccion: formData.address.trim(),
+        ciudad: formData.city.trim(),
+        departamento: formData.department.trim(),
+        productos: items.map(item => ({
+          id: item.id,
+          nombre: item.name,
+          precio: item.price,
+          cantidad: item.quantity,
+        })),
+        subtotal,
+        envio: shippingCost,
+        total,
+      };
+
+      console.log('[Checkout] Enviando orden:', orderPayload);
+
       const orderResponse = await fetch('/api/orders/crear', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          nombre: formData.firstName,
-          apellido: formData.lastName,
-          email: formData.email,
-          telefono: formData.phone,
-          direccion: formData.address,
-          ciudad: formData.city,
-          departamento: formData.department,
-                  productos: items.map(item => ({
-            id: item.id,
-            nombre: item.name,
-            precio: item.price,
-            cantidad: item.quantity,
-          })),
-          subtotal,
-          envio: shippingCost,
-          total,
-        }),
+        body: JSON.stringify(orderPayload),
       });
 
+      console.log('[Checkout] Respuesta del servidor:', orderResponse.status, orderResponse.statusText);
+
       if (!orderResponse.ok) {
-        throw new Error('Error al crear la orden');
+        const errorData = await orderResponse.json().catch(() => ({}));
+        console.error('[Checkout] Error response:', errorData);
+        let errorMessage = 'Error al crear la orden';
+        
+        if (errorData?.details) {
+          // Si hay detalles de validación Zod
+          errorMessage = errorData.details.map((d: any) => d.message).join(', ');
+        } else if (errorData?.error) {
+          errorMessage = errorData.error;
+        } else if (errorData?.message) {
+          errorMessage = errorData.message;
+        }
+        
+        console.error('[Checkout] Mensaje de error final:', errorMessage);
+        throw new Error(errorMessage);
       }
 
       const orderData = await orderResponse.json();
+      console.log('[Checkout] Orden creada exitosamente:', orderData);
+      
+      if (!orderData.referencia) {
+        throw new Error('No se recibió referencia de orden del servidor');
+      }
+
       const referencia = orderData.referencia;
 
       // Guardar referencia en localStorage para la página de gracias
@@ -157,8 +188,9 @@ export default function Checkout() {
         setErrors({ wompi: 'Error al cargar el sistema de pago' });
       }
     } catch (error) {
-      console.error('Error:', error);
-      setErrors({ checkout: error instanceof Error ? error.message : 'Error desconocido' });
+      console.error('[Checkout] Error completo:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido al procesar la orden';
+      setErrors({ checkout: errorMessage });
     } finally {
       setIsLoading(false);
     }

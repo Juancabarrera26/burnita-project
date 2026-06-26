@@ -1,0 +1,21 @@
+CREATE TABLE `ordenes` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`referencia` varchar(255) NOT NULL,
+	`nombre` varchar(255) NOT NULL,
+	`apellido` varchar(255) NOT NULL,
+	`email` varchar(320) NOT NULL,
+	`telefono` varchar(20) NOT NULL,
+	`direccion` varchar(255) NOT NULL,
+	`ciudad` varchar(255) NOT NULL,
+	`departamento` varchar(255) NOT NULL,
+	`productos` text NOT NULL,
+	`subtotal` int NOT NULL,
+	`envio` int NOT NULL,
+	`total` int NOT NULL,
+	`estado` enum('pendiente','pagado','cancelado','entregado') NOT NULL DEFAULT 'pendiente',
+	`fecha` varchar(255) NOT NULL,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `ordenes_id` PRIMARY KEY(`id`),
+	CONSTRAINT `ordenes_referencia_unique` UNIQUE(`referencia`)
+);

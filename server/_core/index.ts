@@ -39,9 +39,11 @@ async function startServer() {
   registerOAuthRoutes(app);
   // Wompi webhook for payment updates
   app.post("/api/webhooks/wompi", handleWompiWebhook);
-  // Orders REST API
+  // Orders REST API - MUST be before tRPC middleware
+  console.log('[Server] Registering orders API at /api/orders');
   app.use("/api/orders", ordersAPI);
-  // tRPC API
+  console.log('[Server] Orders API registered successfully');
+  // tRPC API - MUST be after REST APIs
   app.use(
     "/api/trpc",
     createExpressMiddleware({

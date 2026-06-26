@@ -70,3 +70,33 @@ export const customRequests = mysqlTable("customRequests", {
 
 export type CustomRequest = typeof customRequests.$inferSelect;
 export type InsertCustomRequest = typeof customRequests.$inferInsert;
+
+// Tabla para órdenes de compra
+export const ordenes = mysqlTable("ordenes", {
+  id: int("id").autoincrement().primaryKey(),
+  referencia: varchar("referencia", { length: 255 }).notNull().unique(),
+  
+  // Datos del cliente
+  nombre: varchar("nombre", { length: 255 }).notNull(),
+  apellido: varchar("apellido", { length: 255 }).notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  telefono: varchar("telefono", { length: 20 }).notNull(),
+  direccion: varchar("direccion", { length: 255 }).notNull(),
+  ciudad: varchar("ciudad", { length: 255 }).notNull(),
+  departamento: varchar("departamento", { length: 255 }).notNull(),
+  
+  // Productos y totales
+  productos: text("productos").notNull(), // JSON string
+  subtotal: int("subtotal").notNull(),
+  envio: int("envio").notNull(),
+  total: int("total").notNull(),
+  
+  // Metadata
+  estado: mysqlEnum("estado", ["pendiente", "pagado", "cancelado", "entregado"]).default("pendiente").notNull(),
+  fecha: varchar("fecha", { length: 255 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Orden = typeof ordenes.$inferSelect;
+export type InsertOrden = typeof ordenes.$inferInsert;

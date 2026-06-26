@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, customRequests, InsertCustomRequest } from "../drizzle/schema";
+import { InsertUser, users, customRequests, InsertCustomRequest, ordenes, InsertOrden } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -101,6 +101,96 @@ export async function createCustomRequest(request: InsertCustomRequest) {
     return result;
   } catch (error) {
     console.error("[Database] Failed to create custom request:", error);
+    throw error;
+  }
+}
+
+export async function createOrder(orderData: any) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const referencia = `BURNITA-${Date.now()}`;
+    const fecha = new Date().toISOString();
+
+    const insertData: InsertOrden = {
+      referencia,
+      nombre: orderData.nombre,
+      apellido: orderData.apellido,
+      email: orderData.email,
+      telefono: orderData.telefono,
+      direccion: orderData.direccion,
+      ciudad: orderData.ciudad,
+      departamento: orderData.departamento,
+      productos: JSON.stringify(orderData.productos),
+      subtotal: orderData.subtotal,
+      envio: orderData.envio,
+      total: orderData.total,
+      estado: "pendiente",
+      fecha,
+    };
+
+    await db.insert(ordenes).values(insertData);
+    console.log('[Database] Order created successfully:', referencia);
+    
+    return {
+      referencia,
+      ...orderData,
+      estado: "pendiente",
+      fecha,
+    };
+  } catch (error) {
+    console.error("[Database] Failed to create order:", error);
+    throw error;
+  }
+}
+
+export async function getOrderByReference(referencia: string) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    const result = await db
+      .select()
+      .from(ordenes)
+      .where(eq(ordenes.referencia, referencia))
+      .limit(1);
+
+    if (result.length === 0) {
+      throw new Error("Order not found");
+    }
+
+    const order = result[0];
+    return {
+      ...order,
+      productos: typeof order.productos === 'string' ? JSON.parse(order.productos) : order.productos,
+    };
+  } catch (error) {
+    console.error("[Database] Failed to get order:", error);
+    throw error;
+  }
+}
+
+export async function updateOrderStatus(referencia: string, estado: string) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database not available");
+  }
+
+  try {
+    await db
+      .update(ordenes)
+      .set({ estado: estado as any, updatedAt: new Date() })
+      .where(eq(ordenes.referencia, referencia));
+
+    console.log('[Database] Order status updated:', referencia, estado);
+    return { success: true };
+  } catch (error) {
+    console.error("[Database] Failed to update order status:", error);
     throw error;
   }
 }

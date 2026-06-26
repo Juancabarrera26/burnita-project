@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { createOrder, updateOrderStatus, getOrderByReference } from '../_core/supabase';
+import { createOrder, updateOrderStatus, getOrderByReference } from '../db';
 import { z } from 'zod';
 
 const router = Router();
@@ -19,17 +19,32 @@ const CreateOrderSchema = z.object({
     z.object({
       id: z.string(),
       nombre: z.string(),
-      precio: z.number().positive(),
-      cantidad: z.number().positive(),
+      precio: z.coerce.number().positive(),
+      cantidad: z.coerce.number().positive(),
       imagen: z.string().optional(),
     })
   ).min(1, 'Al menos un producto es requerido'),
-  subtotal: z.number().positive(),
-  envio: z.number().nonnegative(),
-  total: z.number().positive(),
+  subtotal: z.coerce.number().positive(),
+  envio: z.coerce.number().nonnegative(),
+  total: z.coerce.number().positive(),
 });
 
 type CreateOrderInput = z.infer<typeof CreateOrderSchema>;
+
+// Helper function to coerce the order payload
+const coerceOrderPayload = (data: any) => {
+  return {
+    ...data,
+    subtotal: typeof data.subtotal === 'string' ? parseFloat(data.subtotal) : data.subtotal,
+    envio: typeof data.envio === 'string' ? parseFloat(data.envio) : data.envio,
+    total: typeof data.total === 'string' ? parseFloat(data.total) : data.total,
+    productos: data.productos?.map((p: any) => ({
+      ...p,
+      precio: typeof p.precio === 'string' ? parseFloat(p.precio) : p.precio,
+      cantidad: typeof p.cantidad === 'string' ? parseInt(p.cantidad, 10) : p.cantidad,
+    })) || [],
+  };
+};
 
 /**
  * POST /api/orders/crear
@@ -37,7 +52,12 @@ type CreateOrderInput = z.infer<typeof CreateOrderSchema>;
  */
 router.post('/crear', async (req: Request, res: Response) => {
   try {
-    const input = CreateOrderSchema.parse(req.body);
+    console.log('[Order API] Recibiendo solicitud con body:', JSON.stringify(req.body, null, 2));
+    
+    // Coerce the payload to ensure numbers are properly typed
+    const coercedPayload = coerceOrderPayload(req.body);
+    const input = CreateOrderSchema.parse(coercedPayload);
+    console.log('[Order API] Validacion Zod exitosa:', input);
 
     const orderData = {
       nombre: input.nombre.trim(),
@@ -53,7 +73,9 @@ router.post('/crear', async (req: Request, res: Response) => {
       total: input.total,
     };
 
+    console.log('[Order API] Creando orden en MySQL...');
     const order = await createOrder(orderData);
+    console.log('[Order API] Orden creada exitosamente:', order.referencia);
 
     return res.status(201).json({
       success: true,
@@ -66,17 +88,20 @@ router.post('/crear', async (req: Request, res: Response) => {
     console.error('[Order Creation Error]', error);
 
     if (error instanceof z.ZodError) {
+      console.error('[Order API] Error de validacion Zod:', error.issues);
       return res.status(400).json({
         success: false,
-        error: 'Validación fallida',
-        details: (error as any).errors,
+        error: 'Validacion fallida',
+        details: error.issues,
       });
     }
 
     const message = error instanceof Error ? error.message : 'Error al crear la orden';
+    console.error('[Order API] Error final:', message);
     return res.status(500).json({
       success: false,
       error: message,
+      details: error instanceof Error ? error.stack : undefined,
     });
   }
 });
