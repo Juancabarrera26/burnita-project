@@ -15,6 +15,7 @@ import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // Mapeo de imágenes reales del carrusel de productos
 const products = [
@@ -84,6 +85,7 @@ const products = [
 ];
 
 export default function Products() {
+  const { ref: sectionRef, isVisible } = useScrollAnimation({ threshold: 0.2 });
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -246,10 +248,10 @@ export default function Products() {
   ];
 
   return (
-    <section id="products" className="py-20 md:py-28 bg-white" style={{backgroundColor: '#fff6ea'}}>
+    <section ref={sectionRef} id="products" className="py-20 md:py-28 bg-white" style={{backgroundColor: '#fff6ea'}}>
       <div className="container">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12">
+        <div className={`flex flex-col md:flex-row md:items-end md:justify-between mb-12 ${isVisible ? 'fade-in-up' : 'opacity-0'}`}>
           <div>
             {/* Badge - Mango Fizz */}
             <span className="inline-block px-3 py-1 bg-mango/20 text-charcoal font-body text-xs font-semibold tracking-widest uppercase rounded-full mb-3">
@@ -318,7 +320,7 @@ export default function Products() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: (index % products.length) * 0.1 }}
-              className="flex-shrink-0 group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+              className="flex-shrink-0 group cursor-pointer w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] product-card-hover"
               style={{
                 scrollSnapAlign: 'center',
                 scrollSnapStop: 'always',
@@ -326,7 +328,7 @@ export default function Products() {
             >
               {/* Product Image */}
               <div
-                className={`relative aspect-square rounded-2xl overflow-hidden mb-4 ${product.bgColor}`}
+                className={`relative aspect-square rounded-2xl overflow-hidden mb-4 ${product.bgColor} product-image-hover`}
               >
                 <img
                   src={product.image}
@@ -361,12 +363,12 @@ export default function Products() {
         </div>
 
         {/* View All Button - Outline style */}
-        <div className="flex justify-center mt-12">
+        <div className={`flex justify-center mt-12 ${isVisible ? 'fade-in-up' : 'opacity-0'}`}>
           <a href="/shop">
             <Button
               variant="outline"
               size="lg"
-              className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-crema font-body font-medium rounded-full px-8 bg-transparent"
+              className="border-2 border-charcoal text-charcoal hover:bg-charcoal hover:text-crema font-body font-medium rounded-full px-8 bg-transparent btn-hover-animate"
             >
               Ver Todos los Productos
               <ArrowUpRight className="ml-2 w-4 h-4" />

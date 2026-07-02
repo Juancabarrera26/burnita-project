@@ -80,8 +80,8 @@ export default function Header({ onCartClick }: HeaderProps) {
   return (
     <>
       {/* Header - Transparente en top, con fondo en scroll */}
-      <header 
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out w-full"
+          <header 
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out w-full safe-animate"
         style={{
           backgroundColor: isScrolled ? "#fff6ea" : "transparent",
           boxShadow: isScrolled ? "0 1px 3px rgba(0, 0, 0, 0.1)" : "none"
@@ -90,21 +90,21 @@ export default function Header({ onCartClick }: HeaderProps) {
         <div className="w-full px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo - Imagen Burnita */}
-            <a href="/" className="hover:opacity-80 transition-opacity">
+            <a href="/" className="hover:opacity-80 transition-all duration-300 hover:scale-105 block">
               <img
                 src="/logos/burnita-logo.png"
                 alt="Burnita Logo"
-                className="h-12 md:h-16 w-auto"
+                className="h-12 md:h-16 w-auto transition-all duration-300"
               />
             </a>
 
             {/* Desktop Navigation - Inter 500 */}
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-8 transition-all duration-300">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="font-body text-sm font-medium text-charcoal/80 hover:text-charcoal transition-colors"
+                  className="font-body text-sm font-medium text-charcoal/80 hover:text-charcoal transition-all duration-300 hover:scale-105 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-guayaba after:transition-all after:duration-300 hover:after:w-full"
                 >
                   {link.label}
                 </a>
@@ -115,7 +115,7 @@ export default function Header({ onCartClick }: HeaderProps) {
             <div className="flex items-center gap-4">
               <button
                 onClick={onCartClick}
-                className="relative p-2 text-charcoal/80 hover:text-guayaba transition-colors"
+                className="relative p-2 text-charcoal/80 hover:text-guayaba transition-all duration-300 hover:scale-110"
                 aria-label="Abrir carrito"
               >
                 <ShoppingCart className="w-5 h-5" />
@@ -128,7 +128,7 @@ export default function Header({ onCartClick }: HeaderProps) {
 
               {/* Mobile Menu Button */}
               <button
-                className="md:hidden p-2 text-charcoal"
+                className="md:hidden p-2 text-charcoal transition-all duration-300 hover:scale-110"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Abrir menú"
               >
