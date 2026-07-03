@@ -124,17 +124,17 @@ export default function Footer() {
           <p className="font-body text-xs text-crema/40">
             © 2026 BURNITA. Todos los derechos reservados.
           </p>
-          <div className="flex gap-6">
+          <div className="flex flex-wrap gap-3 md:gap-6 justify-center md:justify-end">
             <a
               href="/terminos-y-condiciones"
-              className="font-body text-xs text-crema/40 hover:text-guayaba transition-colors"
+              className="font-body text-xs text-crema/40 hover:text-guayaba transition-colors whitespace-nowrap"
               title="Consulta nuestra política de privacidad"
             >
               Política de Privacidad
             </a>
             <a
               href="/terminos-y-condiciones"
-              className="font-body text-xs text-crema/40 hover:text-guayaba transition-colors"
+              className="font-body text-xs text-crema/40 hover:text-guayaba transition-colors whitespace-nowrap"
               title="Consulta nuestros términos y condiciones de servicio"
             >
               Términos de Servicio

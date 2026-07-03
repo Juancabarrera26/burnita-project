@@ -75,7 +75,7 @@ export default function BurnitaLab() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
+            className="relative overflow-hidden"
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
@@ -91,7 +91,7 @@ export default function BurnitaLab() {
               whileInView={{ rotate: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="absolute -bottom-6 -right-6 md:bottom-8 md:-right-8"
+              className="absolute -bottom-6 -right-6 md:bottom-8 md:-right-8 pointer-events-none"
             >
               <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-mint border-4 border-dashed border-charcoal/20 flex items-center justify-center shadow-lg">
                 <div className="text-center px-2">

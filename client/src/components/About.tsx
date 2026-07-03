@@ -26,7 +26,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="relative order-2 lg:order-1"
           >
-            <div className="relative w-full max-w-md mx-auto">
+            <div className="relative w-full max-w-md mx-auto overflow-hidden">
               {/* Circular frame */}
               <div className="aspect-square rounded-full overflow-hidden border-8 border-white/50 shadow-2xl">
                 <img
