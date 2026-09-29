@@ -1,5 +1,9 @@
 import { Router, Request, Response } from 'express';
-import { createOrder, updateOrderStatus, getOrderByReference } from '../db';
+import {
+  createOrder,
+  updateOrderStatus,
+  getOrderByReference,
+} from '../_core/supabase';
 import { z } from 'zod';
 
 const router = Router();

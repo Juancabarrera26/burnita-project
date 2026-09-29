@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { updateOrderStatus } from './db';
+import { updateOrderStatus } from './_core/supabase';
 import crypto from 'crypto';
 
 /**

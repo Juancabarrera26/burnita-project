@@ -2,25 +2,28 @@
   "build_command": "pnpm run build",
   "capabilities": [
     "db",
-    "server",
-    "user"
+    "server"
   ],
   "dev_command": "pnpm run dev",
   "env_vars": {
     "DATABASE_URL": "mysql://4QuyVesGYADe3ch.root:R7GD70voc05hHkcHB1It@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/HN47as722N9RjKfuaYrPPg?ssl={\"rejectUnauthorized\":true}",
     "DRIZZLE_DATABASE_URL": "mysql://4QuyVesGYADe3ch.root:R7GD70voc05hHkcHB1It@gateway04.us-east-1.prod.aws.tidbcloud.com:4000/HN47as722N9RjKfuaYrPPg?ssl={\"rejectUnauthorized\":true}"
   },
-  "experiments": null,
+  "experiments": [
+    "no_db_push"
+  ],
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663322164465/HN47as722N9RjKfuaYrPPg",
-    "access_key_id": "ASIAZV3A2ECZFEV5RCFL",
-    "secret_access_key": "nsI7HeZJVDiuaDwSehYWvS0DTIpYRIR7OvWDCFh5",
-    "session_token": "IQoJb3JpZ2luX2VjEOT//////////wEaCXVzLWVhc3QtMSJHMEUCIQCFsdvlQY6MXcLqSLnFgVqaFt+JqMbsXMvpRsQOs5KqcQIgNMhav7ntLjBcUo7iv9mTkzmVxCCBCqzDlSXHLHZJE2Qq/wMIrf//////////ARAEGgw2NjUzODYwOTg4NjYiDL0Odw/dedgdMKDZ8irTA5ReRdHb0nxRjsRsamzDJJ61Kd+aw3/f/Xd+0H7VBQbiGt7/s9rzEkti+hs9EPnL5R60E1pLitrKy587Jc65DHeYcaUemTNKYZXdWPCUPoz4fpIlx7TAiBOD0mhE3+49mrapperSeouTMqxoVOuejeqA3lD9iSYfCtQ5BrRY3Tvdqt6Kokzggf1Jhy8sa+IrYkWmVF3Rpq9zIo4kvZcjNtu67jkc/7wkZKo2y7/9hKp+bUD6UEYPDUnn9HgfUG6QbLZC+4H3GjJ2WYtip2gowkk6S5ZTAThVTfTEd4YQvzYNg77sylUZr/DcVvAzFxhTWL22471Zcgad/DgGfTelOeJQRvq+hr3Se8fGm80GvQw0m1sRmODXDrVXMdmiHZVbRMjZdKJt/oIKfFvW1MVAmwsZWNKjaX/wvsuH9PCY4SmqGi002WZsj26gR/oicv/KAyEbqM0x1BsYpWFtBAU9djWHBrDvDhhyRoOvhluqFo8eAW+TXgz2tray3ipzytAoxgieG2ky/wnsqOqwoXJGvOcoF98V3wi4A4oKFtxnMWS4eUzFAW+Hsc2No3GkKjK8mDMPpOaNB038EmRjBN+pHkhJ97Grfz/ZIQHZPytmOlx6g2HhMJaM0dEGOp0BzdfknU1YZg2olZydmMYS45vedtVmU2zMtIFUDJUdN2FgQRcZGSbccc76cBUFWrNJFyncDz7gUGB4RiXBMGCoSX/U+TemHfjrMIvHWTxjEiOp61Fvh9GIJ30ILv6GCX5axO7NClsZ0TOl4WcyPqN9DeXvkXkplvRgFr+0rc8lgICrv9ADRVk269E1YxCCdEn6KUFED/LYJIqsq5dkWg==",
-    "expiration": "2026-06-19T07:25:10.000Z"
+    "access_key_id": "ASIAZV3A2ECZEV7HE5KV",
+    "secret_access_key": "9xvT0ODJz2wbxiHHW9Mw6o750HuKb9o+aD0qDGjJ",
+    "session_token": "IQoJb3JpZ2luX2VjEIj//////////wEaCXVzLWVhc3QtMSJIMEYCIQCRxKjvuyRCePEYZgUYCKPXD9plqu5S+OeQgoQKVdK/cAIhAPyfhcJJJMGYt9u5jczuziRQM8VZ9g+PqAbBfiaHjI7dKvYDCFAQBBoMNjY1Mzg2MDk4ODY2IgzOOA2x3tEcIajb0l0q0wP0al9N1sJC6Q1xeMPh4U8xFPaHN+R06tkYY3k24DzTEQruUWsq3TYzV/JrXgBuXGmGFFDyzCuGkp8PnFG+uzlxgcqK5MZ2agN85UfI0xKduAfrmivq4g3AEp4xUnZgp53MnXhYBcC1M+q4RVJg6LwiHK2wGUGWRNbuQ2+jbpHuBMtuEuXdvjeli5BmnJNc3eHXYp+P/V/JqOgcNfyGohiRR4iBNi0pIxpIJkKqwf8g+dUpo8GAwjp36cwSZwFwMkvO6a7GhTX/SqGsnRYYBvMPzqrAkhZe6S9ulyg962+k50CfiXHdXyuZBP8mesb1wGBJsLf59xCa64ReY7QcE4q1heF3l+gRpm3kmZReMGxp95u2XUUxr+YYgKVOZNB+BG+iWC04rWwmKkWOsLdrTcydaE2ErPBpAD+b//O2rodE86+N0WeaGiq9t7Wb4LzbyzQa4g9zSe49WL1hBSQsKZkj4Rn/h86itvOdtDaorF45suaqjU6aQeqXXcYe4ykCFBtf8JzVtlCIe4/uyUrWqjuDSfRA3PIo2ZhWLxhTt4xwc620IC3JjW380OaeojjMeYhgibljkvRE1uB1TZ9aMfrVCfAjRS95N/AANEYKOyIQSqeHwzDqp+/VBjqcAYMR/ZWuqZ4lmCXEXNTYzv1YMMu/69LxDWNYzxSgZOLXkAWNJCCIF4ItrZI6aZtebHBHrgraDfXUPrz+thIOXdxHMtMcbugvqsAae0sCljNbC7XSl0qxzHgLX6z5zbt3S4jMbJsUaOxuoofUAn2tKC6rCOOFE5NYWnrFzW5KBzt8L6qaVksvVjwS4qWP31yCTDzLFozQnYVOvGg29w==",
+    "expiration": "2026-09-30T03:06:18.000Z",
+    "backend": "GIT_BACKEND_S3"
   },
   "name": "burnita-shop",
   "path": "/home/ubuntu/burnita-shop",
   "port": 3000,
+  "runtime_endpoints": null,
   "secrets": {
     "BUILT_IN_FORGE_API_KEY": "37K3YrfMXTd6YuZXuC7XxU",
     "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
@@ -28,7 +31,7 @@
     "OAUTH_SERVER_URL": "https://api.manus.im",
     "OWNER_NAME": "JC Digital",
     "OWNER_OPEN_ID": "STJ4nxEnK9uVwipyKRdxVV",
-    "REPLICATE_API_TOKEN": "r8_4zYckrqHPN0PNvdLlX1Tn4VaFMS25Pj2xpJJV",
+    "REPLICATE_API_TOKEN": "r8_eTeCLeUAvuq4LjFcA1dyYj6ePWTfZlE2LxD24",
     "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBmdWFjcnZxeWN5aWxyY2ZpcmhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc3NjgyMDYsImV4cCI6MjA5MzM0NDIwNn0.B0vBPyeNC1JXXjXs3ga304Aq54SsU8oYdSIIzLowAJI",
     "SUPABASE_URL": "https://pfuacrvqycyilrcfirhr.supabase.co",
     "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
