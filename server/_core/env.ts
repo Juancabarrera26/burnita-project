@@ -7,5 +7,7 @@ export const ENV = {
   isProduction: process.env.NODE_ENV === "production",
   forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
   forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
-  replicateApiToken: process.env.REPLICATE_API_TOKEN ?? "",
+  // BURNITA_API is the current server-side token for image generation.
+  // Keep the old name only as a backwards-compatible fallback for existing environments.
+  replicateApiToken: process.env.BURNITA_API ?? process.env.REPLICATE_API_TOKEN ?? "",
 };

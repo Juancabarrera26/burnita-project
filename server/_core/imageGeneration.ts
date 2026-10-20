@@ -27,7 +27,7 @@ export async function generateImage(
   options: GenerateImageOptions
 ): Promise<GenerateImageResponse> {
   if (!ENV.replicateApiToken) {
-    throw new Error("REPLICATE_API_TOKEN is not configured");
+    throw new Error("BURNITA_API is not configured");
   }
 
   const client = new Replicate({

@@ -3,11 +3,12 @@ import Replicate from "replicate";
 
 describe("Replicate API Integration", () => {
   let replicate: Replicate;
+  let token: string;
 
   beforeAll(() => {
-    const token = process.env.REPLICATE_API_TOKEN;
+    token = process.env.BURNITA_API ?? process.env.REPLICATE_API_TOKEN ?? "";
     if (!token) {
-      throw new Error("REPLICATE_API_TOKEN is not set");
+      throw new Error("BURNITA_API is not set");
     }
     replicate = new Replicate({ auth: token });
   });
@@ -17,7 +18,7 @@ describe("Replicate API Integration", () => {
       // Test API connection by fetching account info
       const response = await fetch("https://api.replicate.com/v1/account", {
         headers: {
-          Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+          Authorization: `Token ${token}`,
         },
       });
 
@@ -37,7 +38,7 @@ describe("Replicate API Integration", () => {
         "https://api.replicate.com/v1/models?query=flux",
         {
           headers: {
-            Authorization: `Token ${process.env.REPLICATE_API_TOKEN}`,
+            Authorization: `Token ${token}`,
           },
         }
       );
