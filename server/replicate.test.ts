@@ -30,7 +30,7 @@ describe("Replicate API Integration", () => {
     } catch (error) {
       throw new Error(`Failed to validate Replicate API token: ${error}`);
     }
-  });
+  }, 15_000);
 
   it("should be able to list available models", async () => {
     try {
@@ -50,5 +50,5 @@ describe("Replicate API Integration", () => {
     } catch (error) {
       throw new Error(`Failed to list models: ${error}`);
     }
-  });
+  }, 15_000);
 });
